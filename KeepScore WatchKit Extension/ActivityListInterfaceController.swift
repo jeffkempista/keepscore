@@ -10,7 +10,6 @@ import HealthKit
 import WatchKit
 import Foundation
 
-
 class ActivityListInterfaceController: WKInterfaceController {
     
     let supportedActivities: [HKWorkoutActivityType] = [.Baseball, .Basketball, .Hockey, .Soccer, .TableTennis, .Volleyball]
