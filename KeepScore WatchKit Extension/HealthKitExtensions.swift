@@ -1,5 +1,5 @@
 //
-//  Utils.swift
+//  Extensions.swift
 //  KeepScore
 //
 //  Created by Jeff Kempista on 8/17/15.
@@ -7,6 +7,7 @@
 //
 
 import HealthKit
+import Foundation
 
 extension HKWorkoutActivityType {
     

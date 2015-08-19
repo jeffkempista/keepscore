@@ -10,7 +10,7 @@
             <objects>
                 <controller id="AgC-eL-Hgc" customClass="ActivityListInterfaceController" customModule="KeepScore_WatchKit_Extension">
                     <items>
-                        <table alignment="left" id="qKk-me-yiM">
+                        <table alignment="center" id="qKk-me-yiM">
                             <items>
                                 <tableRow identifier="ActivityTableRowController" id="8Za-FF-SMb" customClass="ActivityTableRowController" customModule="KeepScore_WatchKit_Extension">
                                     <group key="rootItem" width="1" alignment="left" id="yFQ-vx-iTy">
@@ -39,21 +39,81 @@
             </objects>
             <point key="canvasLocation" x="273" y="267"/>
         </scene>
-        <!--Match Interface Controller-->
+        <!--Match Setup Interface Controller-->
         <scene sceneID="iNc-WZ-bKL">
             <objects>
-                <controller hidesWhenLoading="NO" id="bLm-cb-mBu" customClass="MatchInterfaceController" customModule="KeepScore_WatchKit_Extension">
+                <controller hidesWhenLoading="NO" id="bLm-cb-mBu" customClass="MatchSetupInterfaceController" customModule="KeepScore_WatchKit_Extension">
                     <items>
                         <label alignment="center" text="Teams" textAlignment="center" id="odl-H3-bpZ"/>
-                        <button width="1" alignment="center" title="Start" id="CZS-f0-luS">
+                        <group width="1" alignment="left" id="Do7-et-E3i">
+                            <items>
+                                <picker width="0.45000000000000001" height="44" alignment="left" focusStyle="stack" id="0iC-CC-Q3t">
+                                    <connections>
+                                        <action selector="homeTeamSelected:" destination="bLm-cb-mBu" id="tAE-OW-7Ur"/>
+                                    </connections>
+                                </picker>
+                                <label alignment="center" verticalAlignment="center" text="-" textAlignment="center" id="MrL-F4-79V"/>
+                                <picker width="0.45000000000000001" height="44" alignment="right" focusStyle="stack" id="1FD-Th-ohW">
+                                    <connections>
+                                        <action selector="awayTeamSelected:" destination="bLm-cb-mBu" id="Vpl-vL-6t3"/>
+                                    </connections>
+                                </picker>
+                            </items>
+                        </group>
+                        <button width="1" alignment="center" verticalAlignment="bottom" title="Start" id="CZS-f0-luS">
                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                            <connections>
+                                <action selector="startButtonTapped" destination="bLm-cb-mBu" id="Lhz-kX-IeW"/>
+                                <segue destination="byt-Kn-zfn" kind="modal" id="8nO-aK-RAX"/>
+                            </connections>
                         </button>
                     </items>
+                    <connections>
+                        <outlet property="awayTeamPicker" destination="1FD-Th-ohW" id="QeA-Dc-BDw"/>
+                        <outlet property="homeTeamPicker" destination="0iC-CC-Q3t" id="uFG-V2-hzz"/>
+                    </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="548" y="267"/>
+            <point key="canvasLocation" x="537" y="267"/>
+        </scene>
+        <!--Live Match Interface Controller-->
+        <scene sceneID="s3w-lH-vst">
+            <objects>
+                <controller hidesWhenLoading="NO" id="byt-Kn-zfn" customClass="LiveMatchInterfaceController" customModule="KeepScore_WatchKit_Extension">
+                    <items>
+                        <group width="1" alignment="center" id="HPx-tp-Asq">
+                            <items>
+                                <label width="59.5" height="19.5" alignment="left" text="Home" textAlignment="center" id="LPK-65-ob3"/>
+                                <label width="0.45000000000000001" alignment="right" text="Away" textAlignment="center" id="Wty-VW-eqi"/>
+                            </items>
+                        </group>
+                        <group width="1" alignment="center" verticalAlignment="center" id="1sk-rD-JLP">
+                            <items>
+                                <button width="0.45000000000000001" height="64" alignment="left" title="0" id="fJV-hA-6ny">
+                                    <connections>
+                                        <action selector="homeButtonTapped" destination="byt-Kn-zfn" id="xbB-Qa-rOx"/>
+                                    </connections>
+                                </button>
+                                <label alignment="center" verticalAlignment="center" text="-" id="xkh-wH-65a"/>
+                                <button width="0.45000000000000001" height="64" alignment="right" title="0" id="Fnu-z2-KD7">
+                                    <connections>
+                                        <action selector="awayButtonTapped" destination="byt-Kn-zfn" id="38w-f7-B3x"/>
+                                    </connections>
+                                </button>
+                            </items>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="awayButton" destination="Fnu-z2-KD7" id="XDD-EN-2xu"/>
+                        <outlet property="awayTeamLabel" destination="Wty-VW-eqi" id="bZw-tj-hkL"/>
+                        <outlet property="homeButton" destination="fJV-hA-6ny" id="Kv2-r8-r0e"/>
+                        <outlet property="homeTeamLabel" destination="LPK-65-ob3" id="pKl-87-Qyg"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="794" y="267"/>
         </scene>
     </scenes>
 </document>

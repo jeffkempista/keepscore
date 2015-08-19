@@ -12,6 +12,8 @@ import Foundation
 class WorkoutSessionContext {
     
     let activityType: HKWorkoutActivityType
+    var homeTeam: String?
+    var awayTeam: String?
     
     init(activityType: HKWorkoutActivityType) {
         self.activityType = activityType
