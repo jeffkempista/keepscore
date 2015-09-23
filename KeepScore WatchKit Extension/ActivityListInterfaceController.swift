@@ -1,11 +1,3 @@
-//
-//  ActivityListInterfaceController.swift
-//  KeepScore
-//
-//  Created by Jeff Kempista on 8/17/15.
-//  Copyright © 2015 Jeff Kempista. All rights reserved.
-//
-
 import HealthKit
 import WatchKit
 import Foundation
@@ -13,23 +5,34 @@ import Foundation
 class ActivityListInterfaceController: WKInterfaceController {
     
     let supportedActivities: [HKWorkoutActivityType] = [.Baseball, .Basketball, .Hockey, .Soccer, .TableTennis, .Volleyball]
+    let healthStore = HKHealthStore()
+    
+    var setupDelegate: WorkoutSessionContextSetupDelegate?
     
     @IBOutlet var activityTable: WKInterfaceTable!
     
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
-        
+        if let context = context as? WorkoutSessionContextSetupDelegate {
+            setupDelegate = context
+        }
+        setTitle("Cancel")
         loadSupportedActivities()
     }
 
     override func willActivate() {
-        // This method is called when watch view controller is about to be visible to user
         super.willActivate()
-    }
-
-    override func didDeactivate() {
-        // This method is called when watch view controller is no longer visible
-        super.didDeactivate()
+        
+        let typesToShare = Set([HKObjectType.workoutType()])
+        let typesToRead = Set([
+            HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierActiveEnergyBurned)!,
+            HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDistanceWalkingRunning)!,
+            HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierHeartRate)!
+            ])
+        
+        self.healthStore.requestAuthorizationToShareTypes(typesToShare, readTypes: typesToRead) { success, error in
+            
+        }
     }
 
     private func loadSupportedActivities() {
@@ -45,7 +48,7 @@ class ActivityListInterfaceController: WKInterfaceController {
         
         let selectedActitity = supportedActivities[rowIndex]
         
-        return WorkoutSessionContext(activityType: selectedActitity)
+        return WorkoutSessionContext(healthStore: healthStore, activityType: selectedActitity, setupDelegate: setupDelegate)
     }
     
 }

@@ -1,17 +1,14 @@
-//
-//  ExtensionDelegate.swift
-//  KeepScore WatchKit Extension
-//
-//  Created by Jeff Kempista on 8/17/15.
-//  Copyright © 2015 Jeff Kempista. All rights reserved.
-//
-
 import WatchKit
+import WatchConnectivity
 
-class ExtensionDelegate: NSObject, WKExtensionDelegate {
+class ExtensionDelegate: NSObject, WKExtensionDelegate, WCSessionDelegate {
 
     func applicationDidFinishLaunching() {
-        // Perform any final initialization of your application.
+        if (WCSession.isSupported()) {
+            let session = WCSession.defaultSession()
+            session.delegate = self
+            session.activateSession()
+        }
     }
 
     func applicationDidBecomeActive() {

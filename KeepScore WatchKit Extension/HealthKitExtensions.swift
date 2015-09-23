@@ -1,13 +1,18 @@
-//
-//  Extensions.swift
-//  KeepScore
-//
-//  Created by Jeff Kempista on 8/17/15.
-//  Copyright © 2015 Jeff Kempista. All rights reserved.
-//
-
 import HealthKit
 import Foundation
+
+extension HKQuantity {
+    
+    func addQuantitiesFromSamples(samples: [HKQuantitySample], unit: HKUnit) -> HKQuantity {
+        
+        var total = 0.0
+        for (_, sample) in samples.enumerate() {
+            total += sample.quantity.doubleValueForUnit(unit)
+        }
+        return HKQuantity(unit: unit, doubleValue: total)
+    }
+    
+}
 
 extension HKWorkoutActivityType {
     

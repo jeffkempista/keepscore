@@ -1,17 +1,11 @@
-//
-//  MatchSetupInterfaceController.swift
-//  KeepScore WatchKit Extension
-//
-//  Created by Jeff Kempista on 8/17/15.
-//  Copyright © 2015 Jeff Kempista. All rights reserved.
-//
-
+import HealthKit
 import WatchKit
 import Foundation
 
 class MatchSetupInterfaceController: WKInterfaceController {
 
-    let teams: [WKPickerItem] = [WKPickerItem(title: "Home"), WKPickerItem(title: "Away"), WKPickerItem(title: "Shirts"), WKPickerItem(title: "Skins"), WKPickerItem(title: "LIV"), WKPickerItem(title: "MUN")]
+    let homeTeams: [WKPickerItem] = [WKPickerItem(title: "Home"), WKPickerItem(title: "Light Shirts"), WKPickerItem(title: "Shirts"), WKPickerItem(title: "LIV")]
+    let awayTeams: [WKPickerItem] = [WKPickerItem(title: "Away"), WKPickerItem(title: "Dark Shirts"), WKPickerItem(title: "Skins"), WKPickerItem(title: "MUN")]
     
     @IBOutlet var homeTeamPicker: WKInterfacePicker!
     @IBOutlet var awayTeamPicker: WKInterfacePicker!
@@ -29,8 +23,11 @@ class MatchSetupInterfaceController: WKInterfaceController {
             self.setTitle(workoutSession.activityType.getTitle())
         }
         
-        self.homeTeamPicker.setItems(teams)
-        self.awayTeamPicker.setItems(teams)
+        self.homeTeamPicker.setItems(homeTeams)
+        self.awayTeamPicker.setItems(awayTeams)
+        
+        self.homeTeamSelected(0)
+        self.awayTeamSelected(0)
     }
 
     override func willActivate() {
@@ -44,22 +41,19 @@ class MatchSetupInterfaceController: WKInterfaceController {
     }
 
     @IBAction func homeTeamSelected(value: Int) {
-        self.selectedHomeTeam = teams[value].title
+        self.selectedHomeTeam = homeTeams[value].title
     }
     
     @IBAction func awayTeamSelected(value: Int) {
-        self.selectedAwayTeam = teams[value].title
+        self.selectedAwayTeam = awayTeams[value].title
     }
     
     @IBAction func startButtonTapped() {
-        WKInterfaceDevice.currentDevice().playHaptic(.Start)
-    }
-    
-    override func contextForSegueWithIdentifier(segueIdentifier: String) -> AnyObject? {
         self.workoutSession.homeTeam = self.selectedHomeTeam
         self.workoutSession.awayTeam = self.selectedAwayTeam
         
-        return self.workoutSession
+        self.workoutSession.setupDelegate?.workoutSessionContextSetupComplete(self.workoutSession)
+        self.popToRootController()
     }
     
 }
