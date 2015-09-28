@@ -16,7 +16,7 @@ class LiveMatchInterfaceController: WKInterfaceController, WorkoutSessionManager
     var workoutSessionManager: WorkoutSessionManager?
     var match = Match(homeTeamName: "Home", awayTeamName: "Away")
     
-    var resetScoreInfo = false
+    var shouldResetScoreInfo = false
     var matchIsInProgress = false
     
     override func awakeWithContext(context: AnyObject?) {
@@ -28,21 +28,25 @@ class LiveMatchInterfaceController: WKInterfaceController, WorkoutSessionManager
         super.willActivate()
         updateMenu()
         
-        if (resetScoreInfo) {
-            resetScoreInfo = false
-            homeButton.setTitle("-")
-            awayButton.setTitle("-")
-            workoutTimer.setDate(NSDate())
-            distanceTravelledLabel.setText("")
-            distanceTravelledLabel.setHidden(true)
-            heartRateLabel.setText("")
-            heartRateLabel.setHidden(true)
+        if (shouldResetScoreInfo) {
+            resetScoreInfo()
         }
     }
 
     override func didDeactivate() {
         // This method is called when watch view controller is no longer visible
         super.didDeactivate()
+    }
+    
+    func resetScoreInfo() {
+        shouldResetScoreInfo = false
+        homeButton.setTitle("-")
+        awayButton.setTitle("-")
+        workoutTimer.setDate(NSDate())
+        distanceTravelledLabel.setText("")
+        distanceTravelledLabel.setHidden(true)
+        heartRateLabel.setText("")
+        heartRateLabel.setHidden(true)
     }
     
     func updateMenu() {
@@ -58,13 +62,21 @@ class LiveMatchInterfaceController: WKInterfaceController, WorkoutSessionManager
         WKInterfaceDevice.currentDevice().playHaptic(.Success)
         match.incrementHomeTeamScore()
         homeButton.setTitle("\(match.homeTeamScore)")
-        sendScoreUpdateInfo()
+        matchScoreDidChange()
     }
 
     @IBAction func awayButtonTapped() {
         WKInterfaceDevice.currentDevice().playHaptic(.Success)
         match.incrementAwayTeamScore()
         awayButton.setTitle("\(match.awayTeamScore)")
+        matchScoreDidChange()
+    }
+    
+    func matchScoreDidChange() {
+        if (!matchIsInProgress) {
+            self.addMenuItemWithItemIcon(.Repeat, title: "Reset", action: "resetMenuItemTapped")
+        }
+        matchIsInProgress = true
         sendScoreUpdateInfo()
     }
     
@@ -78,11 +90,17 @@ class LiveMatchInterfaceController: WKInterfaceController, WorkoutSessionManager
         self.workoutSessionManager?.stopWorkoutAndSave()
     }
     
+    @IBAction func resetMenuItemTapped() {
+        matchIsInProgress = false
+        match.reset()
+        resetScoreInfo()
+    }
+    
     // MARK: WorkoutSessionContextSetupDelegate
     
     func workoutSessionContextSetupComplete(context: WorkoutSessionContext) {
         if let homeTeamName = context.homeTeam, let awayTeamName = context.awayTeam {
-            resetScoreInfo = true
+            shouldResetScoreInfo = true
             matchIsInProgress = true
             match = Match(homeTeamName: homeTeamName, awayTeamName: awayTeamName)
             self.setTitle("")

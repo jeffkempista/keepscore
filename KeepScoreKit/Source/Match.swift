@@ -53,6 +53,10 @@ public class Match {
         }
     }
     
+    public func reset() {
+        matchScores.append(MatchScore(homeTeamScore: 0, awayTeamScore: 0, createdAt: NSDate()))
+    }
+    
 }
 
 struct MatchScore {
