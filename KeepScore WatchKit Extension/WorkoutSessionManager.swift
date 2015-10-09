@@ -14,7 +14,7 @@ protocol WorkoutSessionManagerDelegate: class {
 class WorkoutSessionManager: NSObject, HKWorkoutSessionDelegate {
 
     let healthStore: HKHealthStore
-    let workoutSession: HKWorkoutSession
+    var workoutSession: HKWorkoutSession
     
     var workoutActivityType: HKWorkoutActivityType = .Other
     var workoutStartDate: NSDate?
@@ -40,23 +40,24 @@ class WorkoutSessionManager: NSObject, HKWorkoutSessionDelegate {
     
     weak var delegate: WorkoutSessionManagerDelegate?
     
-    init(context: WorkoutSessionContext) {
-        self.healthStore = context.healthStore
-        self.workoutActivityType = context.activityType
-        self.workoutSession = HKWorkoutSession(activityType: workoutActivityType, locationType: context.locationType)
+    init(healthStore: HKHealthStore, workoutActivityType: HKWorkoutActivityType, locationType: HKWorkoutSessionLocationType) {
+        
+        self.healthStore = healthStore
+        self.workoutActivityType = workoutActivityType
+        self.workoutSession = HKWorkoutSession(activityType: workoutActivityType, locationType: locationType)
         self.currentActiveEnergyQuantity = HKQuantity(unit: self.energyUnit, doubleValue: 0.0)
         self.currentDistanceQuantity = HKQuantity(unit: self.distanceUnit, doubleValue: 0.0)
         
         super.init()
-        
-        self.workoutSession.delegate = self
     }
     
     func startWorkout() {
+        self.workoutSession.delegate = self
+        
         healthStore.startWorkoutSession(workoutSession)
     }
     
-    func stopWorkoutAndSave() {
+    func stopWorkout() {
         healthStore.endWorkoutSession(workoutSession)
     }
     
@@ -107,8 +108,6 @@ class WorkoutSessionManager: NSObject, HKWorkoutSessionDelegate {
         self.queries.removeAll()
         
         self.delegate?.workoutSessionManager(self, didStopWorkoutWithDate: date)
-        
-        self.saveWorkout()
     }
     
     func saveWorkout() {
@@ -126,9 +125,15 @@ class WorkoutSessionManager: NSObject, HKWorkoutSessionDelegate {
         // Save the workout
         self.healthStore.saveObject(workout) { success, error in
             
+            if (!success) {
+                debugPrint(error?.localizedDescription)
+            }
+            
             if success && allSamples.count > 0 {
                 self.healthStore.saveObjects(allSamples, withCompletion: { (success, error) -> Void in
-                    
+                    if let error = error as NSError? {
+                        debugPrint(error.localizedDescription)
+                    }
                 })
             }
             
@@ -145,7 +150,7 @@ class WorkoutSessionManager: NSObject, HKWorkoutSessionDelegate {
             self.addDistanceSamples(samples)
         }
         
-        distanceQuery.updateHandler = {(query, samples, deletedObjects, anchor, error) -> Void in
+        distanceQuery.updateHandler = { (query, samples, deletedObjects, anchor, error) -> Void in
             self.addDistanceSamples(samples)
         }
         
@@ -171,7 +176,7 @@ class WorkoutSessionManager: NSObject, HKWorkoutSessionDelegate {
             self.addActiveEnergySamples(samples)
         }
         
-        activeEnergyQuery.updateHandler = {(query, samples, deletedObjects, anchor, error) -> Void in
+        activeEnergyQuery.updateHandler = { (query, samples, deletedObjects, anchor, error) -> Void in
             self.addActiveEnergySamples(samples)
         }
         
@@ -194,12 +199,11 @@ class WorkoutSessionManager: NSObject, HKWorkoutSessionDelegate {
     func createStreamingHeartRateQuery(workoutStartDate: NSDate) -> HKQuery {
         let predicate = HKQuery.predicateForSamplesWithStartDate(workoutStartDate, endDate: nil, options: .None)
         
-        let heartRateQuery = HKAnchoredObjectQuery(type: self.heartRateType, predicate: predicate, anchor: HKQueryAnchor(fromValue: 0), limit: 0) {
-            (query, samples, deletedObjects, anchor, error) -> Void in
+        let heartRateQuery = HKAnchoredObjectQuery(type: self.heartRateType, predicate: predicate, anchor: HKQueryAnchor(fromValue: 0), limit: 0) { (query, samples, deletedObjects, anchor, error) -> Void in
             self.addHeartRateSamples(samples)
         }
         
-        heartRateQuery.updateHandler = {(query, samples, deletedObjects, anchor, error) -> Void in
+        heartRateQuery.updateHandler = { (query, samples, deletedObjects, anchor, error) -> Void in
             self.addHeartRateSamples(samples)
         }
         

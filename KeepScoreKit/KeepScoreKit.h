@@ -1,11 +1,3 @@
-//
-//  KeepScoreKit.h
-//  KeepScoreKit
-//
-//  Created by Jeff Kempista on 9/14/15.
-//  Copyright © 2015 Jeff Kempista. All rights reserved.
-//
-
 #import <UIKit/UIKit.h>
 
 //! Project version number for KeepScoreKit.

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="8191" systemVersion="15A282b" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="byt-Kn-zfn">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="byt-Kn-zfn">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="8092"/>
@@ -10,6 +10,7 @@
             <objects>
                 <controller identifier="ActivityListInterfaceController" id="AgC-eL-Hgc" customClass="ActivityListInterfaceController" customModule="KeepScore_WatchKit_Extension">
                     <items>
+                        <label alignment="center" text="Select Sport" textAlignment="center" id="ByW-Ga-wvI"/>
                         <table alignment="center" id="qKk-me-yiM">
                             <items>
                                 <tableRow identifier="ActivityTableRowController" id="8Za-FF-SMb" customClass="ActivityTableRowController" customModule="KeepScore_WatchKit_Extension">
@@ -21,7 +22,7 @@
                                         </items>
                                         <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
-                                            <segue destination="bLm-cb-mBu" kind="push" id="pdI-9J-OKP"/>
+                                            <segue destination="bLm-cb-mBu" kind="push" id="bJD-bO-D3b"/>
                                         </connections>
                                     </group>
                                     <connections>
@@ -36,7 +37,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="273" y="267"/>
+            <point key="canvasLocation" x="350" y="267"/>
         </scene>
         <!--Match Setup Interface Controller-->
         <scene sceneID="iNc-WZ-bKL">
@@ -59,6 +60,12 @@
                                 </picker>
                             </items>
                         </group>
+                        <switch width="1" alignment="left" title="Use HealthKit" id="MS6-3G-49s">
+                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="useHealthKitSwitchChanged:" destination="bLm-cb-mBu" id="EU1-v2-C3R"/>
+                            </connections>
+                        </switch>
                         <group height="55" alignment="center" verticalAlignment="bottom" id="Uxd-eT-OM3">
                             <items>
                                 <button width="1" alignment="center" title="Start" id="CZS-f0-luS">
@@ -74,59 +81,132 @@
                     <connections>
                         <outlet property="awayTeamPicker" destination="1FD-Th-ohW" id="QeA-Dc-BDw"/>
                         <outlet property="homeTeamPicker" destination="0iC-CC-Q3t" id="uFG-V2-hzz"/>
+                        <outlet property="useHealthKitSwitch" destination="MS6-3G-49s" id="IPM-LG-OJa"/>
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="537" y="267"/>
+            <point key="canvasLocation" x="606" y="267"/>
         </scene>
-        <!--Live Match Interface Controller-->
+        <!--MatchInterfaceController-->
         <scene sceneID="s3w-lH-vst">
             <objects>
-                <controller hidesWhenLoading="NO" id="byt-Kn-zfn" customClass="LiveMatchInterfaceController" customModule="KeepScore_WatchKit_Extension">
+                <controller identifier="MatchInterfaceController" hidesWhenLoading="NO" id="byt-Kn-zfn" customClass="MatchInterfaceController" customModule="KeepScore_WatchKit_Extension">
                     <items>
-                        <group width="1" alignment="center" id="HPx-tp-Asq">
+                        <group width="1" height="1" alignment="left" hidden="YES" id="ls7-AW-Nfx">
                             <items>
-                                <label width="59.5" height="19.5" alignment="left" text="Home" textAlignment="center" id="LPK-65-ob3"/>
-                                <label width="0.45000000000000001" alignment="right" text="Away" textAlignment="center" id="Wty-VW-eqi"/>
-                            </items>
-                        </group>
-                        <group width="1" alignment="center" verticalAlignment="center" id="1sk-rD-JLP">
-                            <items>
-                                <button width="0.45000000000000001" height="64" alignment="left" title="-" id="fJV-hA-6ny">
-                                    <fontDescription key="font" type="system" weight="semibold" pointSize="36"/>
+                                <button width="1" alignment="left" verticalAlignment="center" title="Start Match" id="Xjn-x3-a5K">
+                                    <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
                                     <connections>
-                                        <action selector="homeButtonTapped" destination="byt-Kn-zfn" id="xbB-Qa-rOx"/>
-                                    </connections>
-                                </button>
-                                <label alignment="center" verticalAlignment="center" text="-" id="xkh-wH-65a"/>
-                                <button width="0.45000000000000001" height="64" alignment="right" title="-" id="Fnu-z2-KD7">
-                                    <fontDescription key="font" type="system" weight="semibold" pointSize="36"/>
-                                    <connections>
-                                        <action selector="awayButtonTapped" destination="byt-Kn-zfn" id="38w-f7-B3x"/>
+                                        <action selector="startMatchButtonTapped" destination="byt-Kn-zfn" id="vJG-gi-hIK"/>
                                     </connections>
                                 </button>
                             </items>
                         </group>
-                        <group width="1" alignment="center" verticalAlignment="center" layout="vertical" id="qyF-Tg-icQ">
+                        <group width="1" alignment="left" layout="vertical" id="G3o-Vf-37V">
                             <items>
-                                <timer alignment="center" verticalAlignment="center" hidden="YES" format="abbreviated" id="2pL-kb-byJ"/>
-                                <label alignment="center" verticalAlignment="center" hidden="YES" text="HeartRate" id="IU0-oo-Fdy"/>
-                                <label alignment="center" verticalAlignment="center" hidden="YES" text="Distance Travelled Label" textAlignment="center" id="4Fm-Tv-6Iv"/>
+                                <group width="1" alignment="center" id="HPx-tp-Asq">
+                                    <items>
+                                        <label width="0.45000000000000001" alignment="left" text="Home" textAlignment="center" id="LPK-65-ob3"/>
+                                        <label width="0.45000000000000001" alignment="right" text="Away" textAlignment="center" id="Wty-VW-eqi"/>
+                                    </items>
+                                </group>
+                                <group width="1" alignment="center" verticalAlignment="center" id="1sk-rD-JLP">
+                                    <items>
+                                        <button width="0.45000000000000001" height="64" alignment="left" title="-" id="fJV-hA-6ny">
+                                            <fontDescription key="font" type="system" weight="semibold" pointSize="36"/>
+                                            <connections>
+                                                <action selector="homeTeamScoreButtonTapped" destination="byt-Kn-zfn" id="3iE-er-ig6"/>
+                                            </connections>
+                                        </button>
+                                        <label alignment="center" verticalAlignment="center" text="-" id="xkh-wH-65a"/>
+                                        <button width="0.45000000000000001" height="64" alignment="right" title="-" id="Fnu-z2-KD7">
+                                            <fontDescription key="font" type="system" weight="semibold" pointSize="36"/>
+                                            <connections>
+                                                <action selector="awayTeamScoreButtonTapped" destination="byt-Kn-zfn" id="dyB-5s-u9X"/>
+                                            </connections>
+                                        </button>
+                                    </items>
+                                </group>
+                                <group width="1" alignment="center" verticalAlignment="center" layout="vertical" id="qyF-Tg-icQ">
+                                    <items>
+                                        <timer alignment="center" verticalAlignment="center" hidden="YES" format="abbreviated" id="2pL-kb-byJ"/>
+                                        <label alignment="center" verticalAlignment="center" hidden="YES" text="HeartRate" id="IU0-oo-Fdy"/>
+                                        <label alignment="center" verticalAlignment="center" hidden="YES" text="Distance Travelled Label" textAlignment="center" id="4Fm-Tv-6Iv"/>
+                                    </items>
+                                </group>
                             </items>
                         </group>
                     </items>
                     <connections>
-                        <outlet property="awayButton" destination="Fnu-z2-KD7" id="XDD-EN-2xu"/>
-                        <outlet property="awayTeamLabel" destination="Wty-VW-eqi" id="bZw-tj-hkL"/>
-                        <outlet property="distanceTravelledLabel" destination="4Fm-Tv-6Iv" id="KLm-Iq-cLx"/>
-                        <outlet property="heartRateLabel" destination="IU0-oo-Fdy" id="9g7-K7-qtL"/>
-                        <outlet property="homeButton" destination="fJV-hA-6ny" id="Kv2-r8-r0e"/>
-                        <outlet property="homeTeamLabel" destination="LPK-65-ob3" id="pKl-87-Qyg"/>
-                        <outlet property="workoutTimer" destination="2pL-kb-byJ" id="1BO-zC-rYk"/>
+                        <outlet property="awayTeamScoreButton" destination="Fnu-z2-KD7" id="vIc-gM-4Ep"/>
+                        <outlet property="distanceTravelledLabel" destination="4Fm-Tv-6Iv" id="Boy-9E-gZ5"/>
+                        <outlet property="heartRateLabel" destination="IU0-oo-Fdy" id="v4I-dK-XyL"/>
+                        <outlet property="homeTeamScoreButton" destination="fJV-hA-6ny" id="4kQ-kc-FgF"/>
+                        <outlet property="matchRunningTimeTimer" destination="2pL-kb-byJ" id="cyr-sN-HGv"/>
+                        <outlet property="scoreMatchGroup" destination="G3o-Vf-37V" id="uQq-8M-LT4"/>
+                        <outlet property="startMatchGroup" destination="ls7-AW-Nfx" id="sCb-td-TnW"/>
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="266" y="567"/>
+            <point key="canvasLocation" x="350" y="561.5"/>
+        </scene>
+        <!--ReviewMatchInterfaceController-->
+        <scene sceneID="KWe-pR-ocw">
+            <objects>
+                <controller identifier="ReviewMatchInterfaceController" hidesWhenLoading="NO" id="ea0-b5-JPH" customClass="ReviewMatchInterfaceController" customModule="KeepScore_WatchKit_Extension">
+                    <items>
+                        <group width="1" alignment="left" layout="vertical" id="YPj-Pr-euf">
+                            <items>
+                                <group width="1" alignment="center" id="UjB-x8-EIX">
+                                    <items>
+                                        <label width="0.45000000000000001" alignment="left" text="Home" textAlignment="center" id="v3t-Mh-YrC"/>
+                                        <label width="0.45000000000000001" alignment="right" text="Away" textAlignment="center" id="rf8-EK-OKo"/>
+                                    </items>
+                                </group>
+                                <group width="1" alignment="center" verticalAlignment="center" id="r4u-YB-poV">
+                                    <items>
+                                        <label width="0.45000000000000001" height="64" alignment="left" verticalAlignment="center" text="-" textAlignment="center" id="28M-cD-eih">
+                                            <fontDescription key="font" type="system" weight="semibold" pointSize="36"/>
+                                        </label>
+                                        <label height="64" alignment="center" verticalAlignment="center" text="-" id="iZX-Xo-w37"/>
+                                        <label width="0.45000000000000001" height="64" alignment="right" verticalAlignment="center" text="-" textAlignment="center" id="ZMg-eT-6cf">
+                                            <fontDescription key="font" type="system" weight="semibold" pointSize="36"/>
+                                        </label>
+                                    </items>
+                                </group>
+                                <group width="1" alignment="center" verticalAlignment="center" layout="vertical" id="XC4-nv-uPf">
+                                    <items>
+                                        <timer alignment="center" verticalAlignment="center" hidden="YES" format="abbreviated" id="fOZ-bO-LCP"/>
+                                        <label alignment="center" verticalAlignment="center" hidden="YES" text="HeartRate" id="Y7k-Ba-f2Y"/>
+                                        <label alignment="center" verticalAlignment="center" hidden="YES" text="Distance Travelled Label" textAlignment="center" id="4dY-ax-4cf"/>
+                                    </items>
+                                </group>
+                            </items>
+                        </group>
+                        <button width="1" alignment="center" title="Save" id="ntK-X6-OiG">
+                            <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                            <connections>
+                                <action selector="saveButtonTapped" destination="ea0-b5-JPH" id="HRv-24-pwP"/>
+                            </connections>
+                        </button>
+                        <button width="1" alignment="center" title="Discard" id="krl-Hc-yTb">
+                            <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="0.69552801724137936" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="discardButtonTapped" destination="ea0-b5-JPH" id="QSV-gO-hZT"/>
+                            </connections>
+                        </button>
+                    </items>
+                    <connections>
+                        <outlet property="awayTeamNameLabel" destination="rf8-EK-OKo" id="915-Lt-cYZ"/>
+                        <outlet property="awayTeamScoreLabel" destination="ZMg-eT-6cf" id="WiD-eQ-mDs"/>
+                        <outlet property="homeTeamNameLabel" destination="v3t-Mh-YrC" id="m01-3f-knf"/>
+                        <outlet property="homeTeamScoreLabel" destination="28M-cD-eih" id="R09-OD-l8S"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="609" y="558"/>
         </scene>
     </scenes>
 </document>

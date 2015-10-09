@@ -1,8 +1,8 @@
-
 import Foundation
 
 public class Match {
     
+    public var activityType = ActivityType.Other
     public var homeTeamName = "Home"
     public var homeTeamScore: Int {
         get {
@@ -25,7 +25,8 @@ public class Match {
     
     private var matchScores = [MatchScore]()
     
-    public init(homeTeamName: String, awayTeamName: String) {
+    public init(activityType: ActivityType, homeTeamName: String, awayTeamName: String) {
+        self.activityType = activityType
         self.homeTeamName = homeTeamName
         self.awayTeamName = awayTeamName
         matchScores.append(MatchScore(homeTeamScore: 0, awayTeamScore: 0, createdAt: NSDate()))

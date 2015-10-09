@@ -1,12 +1,12 @@
 import HealthKit
 import Foundation
 
-
 protocol WorkoutSessionContextSetupDelegate {
     
     func workoutSessionContextSetupComplete(context: WorkoutSessionContext);
     
 }
+
 class WorkoutSessionContext : NSObject {
     
     let healthStore: HKHealthStore

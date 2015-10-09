@@ -3,7 +3,7 @@ import WatchKit
 import WatchConnectivity
 import Foundation
 
-class LiveMatchInterfaceController: WKInterfaceController, WorkoutSessionManagerDelegate, WorkoutSessionContextSetupDelegate {
+class LiveMatchInterface: WKInterfaceController, WorkoutSessionManagerDelegate, WorkoutSessionContextSetupDelegate {
 
     @IBOutlet var homeTeamLabel: WKInterfaceLabel!
     @IBOutlet var awayTeamLabel: WKInterfaceLabel!
@@ -14,7 +14,7 @@ class LiveMatchInterfaceController: WKInterfaceController, WorkoutSessionManager
     @IBOutlet var distanceTravelledLabel: WKInterfaceLabel!
     
     var workoutSessionManager: WorkoutSessionManager?
-    var match = Match(homeTeamName: "Home", awayTeamName: "Away")
+    var match = Match(activityType: .Other, homeTeamName: "Home", awayTeamName: "Away")
     
     var shouldResetScoreInfo = false
     var matchIsInProgress = false
@@ -87,7 +87,7 @@ class LiveMatchInterfaceController: WKInterfaceController, WorkoutSessionManager
     }
     
     @IBAction func stopMenuItemTapped() {
-        self.workoutSessionManager?.stopWorkoutAndSave()
+        self.workoutSessionManager?.stopWorkout()
     }
     
     @IBAction func resetMenuItemTapped() {
@@ -102,10 +102,10 @@ class LiveMatchInterfaceController: WKInterfaceController, WorkoutSessionManager
         if let homeTeamName = context.homeTeam, let awayTeamName = context.awayTeam {
             shouldResetScoreInfo = true
             matchIsInProgress = true
-            match = Match(homeTeamName: homeTeamName, awayTeamName: awayTeamName)
+            match = Match(activityType: .Other, homeTeamName: homeTeamName, awayTeamName: awayTeamName)
             self.setTitle("")
             
-            self.workoutSessionManager = WorkoutSessionManager(context: context)
+//            self.workoutSessionManager = WorkoutSessionManager(context: context)
             self.workoutSessionManager?.delegate = self
             self.workoutSessionManager?.startWorkout()
         }

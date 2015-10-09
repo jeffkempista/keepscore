@@ -33,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
     func applicationShouldRequestHealthAuthorization(application: UIApplication) {
         healthStore.handleAuthorizationForExtensionWithCompletion { success, error in
             if let error = error {
-                NSLog(error.debugDescription)
+                debugPrint(error.debugDescription)
             }
         }
     }
