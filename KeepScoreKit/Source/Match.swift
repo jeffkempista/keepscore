@@ -58,6 +58,10 @@ public class Match {
         matchScores.append(MatchScore(homeTeamScore: 0, awayTeamScore: 0, createdAt: NSDate()))
     }
     
+    public func description() -> String {
+        return "\(homeTeamName) \(homeTeamScore) : \(awayTeamName) \(awayTeamScore)"
+    }
+    
 }
 
 struct MatchScore {

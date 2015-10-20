@@ -1,106 +1,40 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="byt-Kn-zfn">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="8092"/>
     </dependencies>
     <scenes>
-        <!--ActivityListInterfaceController-->
+        <!--ScoreOrActivitySelectionInterfaceController-->
         <scene sceneID="aou-V4-d1y">
             <objects>
-                <controller identifier="ActivityListInterfaceController" id="AgC-eL-Hgc" customClass="ActivityListInterfaceController" customModule="KeepScore_WatchKit_Extension">
+                <controller identifier="ScoreOrActivitySelectionInterfaceController" id="AgC-eL-Hgc" customClass="ScoreOrActivitySelectionInterfaceController" customModule="KeepScore_WatchKit_Extension">
                     <items>
-                        <label alignment="center" text="Select Sport" textAlignment="center" id="ByW-Ga-wvI"/>
-                        <table alignment="center" id="qKk-me-yiM">
+                        <group width="1" alignment="center" layout="vertical" id="axK-aG-umu" userLabel="Activity Group">
                             <items>
-                                <tableRow identifier="ActivityTableRowController" id="8Za-FF-SMb" customClass="ActivityTableRowController" customModule="KeepScore_WatchKit_Extension">
-                                    <group key="rootItem" width="1" alignment="left" id="yFQ-vx-iTy">
-                                        <items>
-                                            <label alignment="left" verticalAlignment="center" text="Soccer" textAlignment="left" id="Wmy-nI-3QC">
-                                                <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
-                                            </label>
-                                        </items>
-                                        <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <connections>
-                                            <segue destination="bLm-cb-mBu" kind="push" id="bJD-bO-D3b"/>
-                                        </connections>
-                                    </group>
-                                    <connections>
-                                        <outlet property="titleLabel" destination="Wmy-nI-3QC" id="gr3-Tk-PTU"/>
-                                    </connections>
-                                </tableRow>
-                            </items>
-                        </table>
-                    </items>
-                    <connections>
-                        <outlet property="activityTable" destination="qKk-me-yiM" id="eVH-eb-K0U"/>
-                    </connections>
-                </controller>
-            </objects>
-            <point key="canvasLocation" x="350" y="267"/>
-        </scene>
-        <!--Match Setup Interface Controller-->
-        <scene sceneID="iNc-WZ-bKL">
-            <objects>
-                <controller hidesWhenLoading="NO" id="bLm-cb-mBu" customClass="MatchSetupInterfaceController" customModule="KeepScore_WatchKit_Extension">
-                    <items>
-                        <label alignment="center" text="Teams" textAlignment="center" id="odl-H3-bpZ"/>
-                        <group width="1" alignment="left" id="Do7-et-E3i">
-                            <items>
-                                <picker width="0.45000000000000001" height="44" alignment="left" focusStyle="stack" id="0iC-CC-Q3t">
-                                    <connections>
-                                        <action selector="homeTeamSelected:" destination="bLm-cb-mBu" id="tAE-OW-7Ur"/>
-                                    </connections>
-                                </picker>
-                                <label alignment="center" verticalAlignment="center" text="-" textAlignment="center" id="MrL-F4-79V"/>
-                                <picker width="0.45000000000000001" height="44" alignment="right" focusStyle="stack" id="1FD-Th-ohW">
-                                    <connections>
-                                        <action selector="awayTeamSelected:" destination="bLm-cb-mBu" id="Vpl-vL-6t3"/>
-                                    </connections>
-                                </picker>
-                            </items>
-                        </group>
-                        <switch width="1" alignment="left" title="Use HealthKit" id="MS6-3G-49s">
-                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            <connections>
-                                <action selector="useHealthKitSwitchChanged:" destination="bLm-cb-mBu" id="EU1-v2-C3R"/>
-                            </connections>
-                        </switch>
-                        <group height="55" alignment="center" verticalAlignment="bottom" id="Uxd-eT-OM3">
-                            <items>
-                                <button width="1" alignment="center" title="Start" id="CZS-f0-luS">
-                                    <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
-                                    <connections>
-                                        <action selector="startButtonTapped" destination="bLm-cb-mBu" id="Lhz-kX-IeW"/>
-                                    </connections>
-                                </button>
-                            </items>
-                        </group>
-                    </items>
-                    <connections>
-                        <outlet property="awayTeamPicker" destination="1FD-Th-ohW" id="QeA-Dc-BDw"/>
-                        <outlet property="homeTeamPicker" destination="0iC-CC-Q3t" id="uFG-V2-hzz"/>
-                        <outlet property="useHealthKitSwitch" destination="MS6-3G-49s" id="IPM-LG-OJa"/>
-                    </connections>
-                </controller>
-            </objects>
-            <point key="canvasLocation" x="606" y="267"/>
-        </scene>
-        <!--MatchInterfaceController-->
-        <scene sceneID="s3w-lH-vst">
-            <objects>
-                <controller identifier="MatchInterfaceController" hidesWhenLoading="NO" id="byt-Kn-zfn" customClass="MatchInterfaceController" customModule="KeepScore_WatchKit_Extension">
-                    <items>
-                        <group width="1" height="1" alignment="left" hidden="YES" id="ls7-AW-Nfx">
-                            <items>
-                                <button width="1" alignment="left" verticalAlignment="center" title="Start Match" id="Xjn-x3-a5K">
-                                    <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
-                                    <connections>
-                                        <action selector="startMatchButtonTapped" destination="byt-Kn-zfn" id="vJG-gi-hIK"/>
-                                    </connections>
-                                </button>
+                                <label alignment="center" text="Select Sport" textAlignment="center" id="ByW-Ga-wvI">
+                                    <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                </label>
+                                <table alignment="center" id="qKk-me-yiM">
+                                    <items>
+                                        <tableRow identifier="ActivityTableRowController" id="8Za-FF-SMb" customClass="ActivityTableRowController" customModule="KeepScore_WatchKit_Extension">
+                                            <group key="rootItem" width="1" alignment="left" id="yFQ-vx-iTy">
+                                                <items>
+                                                    <label alignment="left" verticalAlignment="center" text="Soccer" textAlignment="left" id="Wmy-nI-3QC">
+                                                        <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                                                    </label>
+                                                </items>
+                                                <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <connections>
+                                                    <segue destination="bLm-cb-mBu" kind="push" id="bJD-bO-D3b"/>
+                                                </connections>
+                                            </group>
+                                            <connections>
+                                                <outlet property="titleLabel" destination="Wmy-nI-3QC" id="gr3-Tk-PTU"/>
+                                            </connections>
+                                        </tableRow>
+                                    </items>
+                                </table>
                             </items>
                         </group>
                         <group width="1" alignment="left" layout="vertical" id="G3o-Vf-37V">
@@ -116,14 +50,14 @@
                                         <button width="0.45000000000000001" height="64" alignment="left" title="-" id="fJV-hA-6ny">
                                             <fontDescription key="font" type="system" weight="semibold" pointSize="36"/>
                                             <connections>
-                                                <action selector="homeTeamScoreButtonTapped" destination="byt-Kn-zfn" id="3iE-er-ig6"/>
+                                                <action selector="homeTeamScoreButtonTapped" destination="AgC-eL-Hgc" id="XTd-Am-Twj"/>
                                             </connections>
                                         </button>
                                         <label alignment="center" verticalAlignment="center" text="-" id="xkh-wH-65a"/>
                                         <button width="0.45000000000000001" height="64" alignment="right" title="-" id="Fnu-z2-KD7">
                                             <fontDescription key="font" type="system" weight="semibold" pointSize="36"/>
                                             <connections>
-                                                <action selector="awayTeamScoreButtonTapped" destination="byt-Kn-zfn" id="dyB-5s-u9X"/>
+                                                <action selector="awayTeamScoreButtonTapped" destination="AgC-eL-Hgc" id="XmY-jw-UEz"/>
                                             </connections>
                                         </button>
                                     </items>
@@ -139,17 +73,51 @@
                         </group>
                     </items>
                     <connections>
-                        <outlet property="awayTeamScoreButton" destination="Fnu-z2-KD7" id="vIc-gM-4Ep"/>
-                        <outlet property="distanceTravelledLabel" destination="4Fm-Tv-6Iv" id="Boy-9E-gZ5"/>
-                        <outlet property="heartRateLabel" destination="IU0-oo-Fdy" id="v4I-dK-XyL"/>
-                        <outlet property="homeTeamScoreButton" destination="fJV-hA-6ny" id="4kQ-kc-FgF"/>
-                        <outlet property="matchRunningTimeTimer" destination="2pL-kb-byJ" id="cyr-sN-HGv"/>
-                        <outlet property="scoreMatchGroup" destination="G3o-Vf-37V" id="uQq-8M-LT4"/>
-                        <outlet property="startMatchGroup" destination="ls7-AW-Nfx" id="sCb-td-TnW"/>
+                        <outlet property="activityGroup" destination="axK-aG-umu" id="CxQ-gE-Jtp"/>
+                        <outlet property="activityTable" destination="qKk-me-yiM" id="eVH-eb-K0U"/>
+                        <outlet property="awayTeamScoreButton" destination="Fnu-z2-KD7" id="NXA-1N-plT"/>
+                        <outlet property="distanceTravelledLabel" destination="4Fm-Tv-6Iv" id="GDj-qM-HDh"/>
+                        <outlet property="heartRateLabel" destination="IU0-oo-Fdy" id="ueA-aa-gu0"/>
+                        <outlet property="homeTeamScoreButton" destination="fJV-hA-6ny" id="qXc-v1-BmN"/>
+                        <outlet property="matchRunningTimeTimer" destination="2pL-kb-byJ" id="fJO-nc-1GE"/>
+                        <outlet property="scoreGroup" destination="G3o-Vf-37V" id="ISS-2F-2FB"/>
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="350" y="561.5"/>
+            <point key="canvasLocation" x="350" y="267"/>
+        </scene>
+        <!--Match Setup Interface Controller-->
+        <scene sceneID="iNc-WZ-bKL">
+            <objects>
+                <controller hidesWhenLoading="NO" id="bLm-cb-mBu" customClass="MatchSetupInterfaceController" customModule="KeepScore_WatchKit_Extension">
+                    <items>
+                        <switch width="1" alignment="center" verticalAlignment="center" title="Use HealthKit" id="MS6-3G-49s">
+                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="useHealthKitSwitchChanged:" destination="bLm-cb-mBu" id="EU1-v2-C3R"/>
+                            </connections>
+                        </switch>
+                        <button width="1" alignment="center" verticalAlignment="center" title="Start" id="CZS-f0-luS">
+                            <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                            <connections>
+                                <action selector="startButtonTapped" destination="bLm-cb-mBu" id="Lhz-kX-IeW"/>
+                            </connections>
+                        </button>
+                    </items>
+                    <connections>
+                        <outlet property="useHealthKitSwitch" destination="MS6-3G-49s" id="IPM-LG-OJa"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="606" y="267"/>
+        </scene>
+        <!--MatchInterfaceController-->
+        <scene sceneID="s3w-lH-vst">
+            <objects>
+                <controller identifier="MatchInterfaceController" hidesWhenLoading="NO" id="byt-Kn-zfn" customClass="MatchInterfaceController" customModule="KeepScore_WatchKit_Extension"/>
+            </objects>
+            <point key="canvasLocation" x="350" y="561"/>
         </scene>
         <!--ReviewMatchInterfaceController-->
         <scene sceneID="KWe-pR-ocw">
@@ -206,7 +174,8 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="609" y="558"/>
+            <point key="canvasLocation" x="606" y="570.75"/>
         </scene>
     </scenes>
+    <color key="tintColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
 </document>

@@ -30,14 +30,9 @@
 		1F3A16C31B82C1D700120F80 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F3A16C21B82C1D700120F80 /* HealthKit.framework */; };
 		1F3A16C61B82C1F200120F80 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F3A16C51B82C1F200120F80 /* HealthKit.framework */; };
 		1F65748D1B8407BD008D4B50 /* WatchKitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F65748C1B8407BD008D4B50 /* WatchKitExtensions.swift */; };
-		1F6CE01A1B840D68007CB1E3 /* LiveMatchInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6CE0191B840D68007CB1E3 /* LiveMatchInterface.swift */; };
-		1F9B18241BC2EC9400331FC6 /* TestMatchInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9B18231BC2EC9400331FC6 /* TestMatchInterfaceController.swift */; settings = {ASSET_TAGS = (); }; };
-		1FA419351BC2BE5500095BCA /* MatchInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA419341BC2BE5500095BCA /* MatchInterfaceController.swift */; settings = {ASSET_TAGS = (); }; };
-		1FA419371BC2BE6700095BCA /* MatchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA419361BC2BE6700095BCA /* MatchViewModel.swift */; settings = {ASSET_TAGS = (); }; };
 		1FB156FC1B855CD900E53002 /* WorkoutSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB156FB1B855CD900E53002 /* WorkoutSessionManager.swift */; };
 		1FB8354E1BC2C72D00FF86D1 /* ActivityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB8354D1BC2C72D00FF86D1 /* ActivityType.swift */; settings = {ASSET_TAGS = (); }; };
 		1FB835521BC2C88500FF86D1 /* ActivityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB8354D1BC2C72D00FF86D1 /* ActivityType.swift */; };
-		1FB835551BC2C9C900FF86D1 /* ActivityListInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB835541BC2C9C900FF86D1 /* ActivityListInterfaceController.swift */; settings = {ASSET_TAGS = (); }; };
 		1FB835571BC2C9E900FF86D1 /* MatchSetupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB835561BC2C9E900FF86D1 /* MatchSetupViewModel.swift */; settings = {ASSET_TAGS = (); }; };
 		1FB835591BC2CA6A00FF86D1 /* ActivityTableRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB835581BC2CA6A00FF86D1 /* ActivityTableRowController.swift */; settings = {ASSET_TAGS = (); }; };
 		1FB8355B1BC2CA8600FF86D1 /* MatchSetupInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB8355A1BC2CA8600FF86D1 /* MatchSetupInterfaceController.swift */; settings = {ASSET_TAGS = (); }; };
@@ -45,6 +40,10 @@
 		1FBABC731BC4AF96002A090D /* ReviewMatchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FBABC721BC4AF96002A090D /* ReviewMatchViewModel.swift */; settings = {ASSET_TAGS = (); }; };
 		1FF340381B82CC3F0071CC46 /* WorkoutSessionContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF340371B82CC3F0071CC46 /* WorkoutSessionContext.swift */; };
 		1FF3403A1B82CE650071CC46 /* HealthKitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF340391B82CE650071CC46 /* HealthKitExtensions.swift */; };
+		1FF4D95A1BD3EF2F0042DFC4 /* ScoreOrActivitySelectionInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF4D9591BD3EF2F0042DFC4 /* ScoreOrActivitySelectionInterfaceController.swift */; settings = {ASSET_TAGS = (); }; };
+		1FF4D95C1BD3EFF40042DFC4 /* ActivitySelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF4D95B1BD3EFF40042DFC4 /* ActivitySelectionViewModel.swift */; settings = {ASSET_TAGS = (); }; };
+		1FF4D95E1BD3F2B80042DFC4 /* MatchSetupContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF4D95D1BD3F2B80042DFC4 /* MatchSetupContext.swift */; settings = {ASSET_TAGS = (); }; };
+		1FF4D9601BD46F910042DFC4 /* MatchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF4D95F1BD46F910042DFC4 /* MatchViewModel.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -158,15 +157,10 @@
 		1F3A16C21B82C1D700120F80 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS2.0.sdk/System/Library/Frameworks/HealthKit.framework; sourceTree = DEVELOPER_DIR; };
 		1F3A16C51B82C1F200120F80 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		1F65748C1B8407BD008D4B50 /* WatchKitExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchKitExtensions.swift; sourceTree = "<group>"; };
-		1F6CE0191B840D68007CB1E3 /* LiveMatchInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveMatchInterface.swift; sourceTree = "<group>"; };
-		1F9B18231BC2EC9400331FC6 /* TestMatchInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestMatchInterfaceController.swift; sourceTree = "<group>"; };
-		1FA419341BC2BE5500095BCA /* MatchInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchInterfaceController.swift; sourceTree = "<group>"; };
-		1FA419361BC2BE6700095BCA /* MatchViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchViewModel.swift; sourceTree = "<group>"; };
 		1FADC5441B86A672001BE8E3 /* KeepScore.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = KeepScore.entitlements; sourceTree = "<group>"; };
 		1FADC5451B86A67F001BE8E3 /* KeepScore WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "KeepScore WatchKit Extension.entitlements"; sourceTree = "<group>"; };
 		1FB156FB1B855CD900E53002 /* WorkoutSessionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutSessionManager.swift; sourceTree = "<group>"; };
 		1FB8354D1BC2C72D00FF86D1 /* ActivityType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityType.swift; sourceTree = "<group>"; };
-		1FB835541BC2C9C900FF86D1 /* ActivityListInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityListInterfaceController.swift; sourceTree = "<group>"; };
 		1FB835561BC2C9E900FF86D1 /* MatchSetupViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchSetupViewModel.swift; sourceTree = "<group>"; };
 		1FB835581BC2CA6A00FF86D1 /* ActivityTableRowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityTableRowController.swift; sourceTree = "<group>"; };
 		1FB8355A1BC2CA8600FF86D1 /* MatchSetupInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchSetupInterfaceController.swift; sourceTree = "<group>"; };
@@ -175,6 +169,10 @@
 		1FE432B01B8742FC00231DEC /* KeepScore WatchKit App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "KeepScore WatchKit App.entitlements"; sourceTree = "<group>"; };
 		1FF340371B82CC3F0071CC46 /* WorkoutSessionContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutSessionContext.swift; sourceTree = "<group>"; };
 		1FF340391B82CE650071CC46 /* HealthKitExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthKitExtensions.swift; sourceTree = "<group>"; };
+		1FF4D9591BD3EF2F0042DFC4 /* ScoreOrActivitySelectionInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreOrActivitySelectionInterfaceController.swift; sourceTree = "<group>"; };
+		1FF4D95B1BD3EFF40042DFC4 /* ActivitySelectionViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivitySelectionViewModel.swift; sourceTree = "<group>"; };
+		1FF4D95D1BD3F2B80042DFC4 /* MatchSetupContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchSetupContext.swift; sourceTree = "<group>"; };
+		1FF4D95F1BD46F910042DFC4 /* MatchViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -322,13 +320,13 @@
 				1FA419331BC2BE3500095BCA /* StartMatch */,
 				1F3A16C41B82C1DB00120F80 /* Frameworks */,
 				1F3A16C91B82C22A00120F80 /* Resources */,
-				1F6CE0191B840D68007CB1E3 /* LiveMatchInterface.swift */,
-				1FF340371B82CC3F0071CC46 /* WorkoutSessionContext.swift */,
-				1FB156FB1B855CD900E53002 /* WorkoutSessionManager.swift */,
 				1F3A16A71B82B9AA00120F80 /* ExtensionDelegate.swift */,
 				1FF340391B82CE650071CC46 /* HealthKitExtensions.swift */,
+				1FF4D95F1BD46F910042DFC4 /* MatchViewModel.swift */,
+				1FF4D9591BD3EF2F0042DFC4 /* ScoreOrActivitySelectionInterfaceController.swift */,
 				1F65748C1B8407BD008D4B50 /* WatchKitExtensions.swift */,
-				1F9B18231BC2EC9400331FC6 /* TestMatchInterfaceController.swift */,
+				1FF340371B82CC3F0071CC46 /* WorkoutSessionContext.swift */,
+				1FB156FB1B855CD900E53002 /* WorkoutSessionManager.swift */,
 			);
 			path = "KeepScore WatchKit Extension";
 			sourceTree = "<group>";
@@ -382,8 +380,6 @@
 		1FA419331BC2BE3500095BCA /* StartMatch */ = {
 			isa = PBXGroup;
 			children = (
-				1FA419341BC2BE5500095BCA /* MatchInterfaceController.swift */,
-				1FA419361BC2BE6700095BCA /* MatchViewModel.swift */,
 			);
 			path = StartMatch;
 			sourceTree = "<group>";
@@ -391,10 +387,11 @@
 		1FB835531BC2C99300FF86D1 /* SetupMatch */ = {
 			isa = PBXGroup;
 			children = (
-				1FB835541BC2C9C900FF86D1 /* ActivityListInterfaceController.swift */,
+				1FF4D95B1BD3EFF40042DFC4 /* ActivitySelectionViewModel.swift */,
 				1FB835581BC2CA6A00FF86D1 /* ActivityTableRowController.swift */,
-				1FB835561BC2C9E900FF86D1 /* MatchSetupViewModel.swift */,
+				1FF4D95D1BD3F2B80042DFC4 /* MatchSetupContext.swift */,
 				1FB8355A1BC2CA8600FF86D1 /* MatchSetupInterfaceController.swift */,
+				1FB835561BC2C9E900FF86D1 /* MatchSetupViewModel.swift */,
 			);
 			path = SetupMatch;
 			sourceTree = "<group>";
@@ -703,23 +700,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FF4D95E1BD3F2B80042DFC4 /* MatchSetupContext.swift in Sources */,
 				1FB835521BC2C88500FF86D1 /* ActivityType.swift in Sources */,
 				1F16C7671BA75D2200D65436 /* Match.swift in Sources */,
+				1FF4D95C1BD3EFF40042DFC4 /* ActivitySelectionViewModel.swift in Sources */,
 				1FF340381B82CC3F0071CC46 /* WorkoutSessionContext.swift in Sources */,
 				1FBABC711BC4AEF7002A090D /* ReviewMatchInterfaceController.swift in Sources */,
 				1F65748D1B8407BD008D4B50 /* WatchKitExtensions.swift in Sources */,
-				1F6CE01A1B840D68007CB1E3 /* LiveMatchInterface.swift in Sources */,
 				1FB8355B1BC2CA8600FF86D1 /* MatchSetupInterfaceController.swift in Sources */,
+				1FF4D9601BD46F910042DFC4 /* MatchViewModel.swift in Sources */,
 				1F3A16A81B82B9AA00120F80 /* ExtensionDelegate.swift in Sources */,
 				1FB835591BC2CA6A00FF86D1 /* ActivityTableRowController.swift in Sources */,
-				1FB835551BC2C9C900FF86D1 /* ActivityListInterfaceController.swift in Sources */,
 				1FB835571BC2C9E900FF86D1 /* MatchSetupViewModel.swift in Sources */,
 				1FBABC731BC4AF96002A090D /* ReviewMatchViewModel.swift in Sources */,
-				1F9B18241BC2EC9400331FC6 /* TestMatchInterfaceController.swift in Sources */,
 				1FB156FC1B855CD900E53002 /* WorkoutSessionManager.swift in Sources */,
-				1FA419351BC2BE5500095BCA /* MatchInterfaceController.swift in Sources */,
 				1FF3403A1B82CE650071CC46 /* HealthKitExtensions.swift in Sources */,
-				1FA419371BC2BE6700095BCA /* MatchViewModel.swift in Sources */,
+				1FF4D95A1BD3EF2F0042DFC4 /* ScoreOrActivitySelectionInterfaceController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

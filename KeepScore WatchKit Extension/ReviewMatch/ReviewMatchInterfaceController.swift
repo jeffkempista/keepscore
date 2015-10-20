@@ -34,18 +34,19 @@ class ReviewMatchInterfaceController: WKInterfaceController {
     override func didDeactivate() {
         // This method is called when watch view controller is no longer visible
         super.didDeactivate()
+        
+        self.reviewMatchViewModel = nil
     }
 
     @IBAction func saveButtonTapped() {
         debugPrint("saveButtonTapped")
         self.reviewMatchViewModel?.saveMatch()
-        self.reviewMatchViewModel = nil
         dismissController()
     }
     
     @IBAction func discardButtonTapped() {
         debugPrint("discardButtonTapped")
-        self.reviewMatchViewModel = nil
+        self.reviewMatchViewModel?.discardMatch()
         dismissController()
     }
     

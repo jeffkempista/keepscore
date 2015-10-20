@@ -1,8 +1,8 @@
 import Foundation
 import HealthKit
 
-protocol MatchSetupDelegate {
-    func matchSetupDidComplete(matchSetupViewModel: MatchSetupViewModel)
+protocol MatchSetupDelegate: class {
+    func matchSetupDidComplete(match: Match, useHealthKit: Bool)
 }
 
 class MatchSetupViewModel: NSObject {
@@ -11,9 +11,7 @@ class MatchSetupViewModel: NSObject {
     let healthStore: HKHealthStore
     
     var activityType = ActivityType.Other
-    var homeTeamName = "Home"
-    var awayTeamName = "Away"
-    var delegate: MatchSetupDelegate?
+    weak var delegate: MatchSetupDelegate?
     
     init(healthStore: HKHealthStore) {
         self.healthStore = healthStore
@@ -58,7 +56,8 @@ class MatchSetupViewModel: NSObject {
     
     func createMatch() {
         if let delegate = delegate {
-            delegate.matchSetupDidComplete(self)
+            let match = Match(activityType: self.activityType, homeTeamName: "Home", awayTeamName: "Away")
+            delegate.matchSetupDidComplete(match, useHealthKit: self.useHealthKit)
         }
     }
     

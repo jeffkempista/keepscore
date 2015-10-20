@@ -1,6 +1,6 @@
 import HealthKit
 
-protocol WorkoutSessionManagerDelegate: class {
+protocol WorkoutSessionManagerDelegate : HKWorkoutSessionDelegate {
     
     func workoutSessionManager(workoutSessionManager: WorkoutSessionManager, didStartWorkoutWithDate startDate: NSDate)
     func workoutSessionManager(workoutSessionManager: WorkoutSessionManager, didStopWorkoutWithDate endDate: NSDate)
@@ -11,12 +11,12 @@ protocol WorkoutSessionManagerDelegate: class {
     
 }
 
-class WorkoutSessionManager: NSObject, HKWorkoutSessionDelegate {
+class WorkoutSessionManager: NSObject {
 
-    let healthStore: HKHealthStore
-    var workoutSession: HKWorkoutSession
-    
+    var healthStore: HKHealthStore
+    weak var workoutSession: HKWorkoutSession!
     var workoutActivityType: HKWorkoutActivityType = .Other
+    
     var workoutStartDate: NSDate?
     var workoutEndDate: NSDate?
 
@@ -34,52 +34,28 @@ class WorkoutSessionManager: NSObject, HKWorkoutSessionDelegate {
     let heartRateType = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierHeartRate)!
     let distanceType = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDistanceWalkingRunning)!
     
-    var currentActiveEnergyQuantity: HKQuantity
-    var currentDistanceQuantity: HKQuantity
+    var currentActiveEnergyQuantity: HKQuantity = HKQuantity(unit: HKUnit.calorieUnit(), doubleValue: 0.0)
+    var currentDistanceQuantity: HKQuantity = HKQuantity(unit: HKUnit.meterUnit(), doubleValue: 0.0)
     var currentHeartRateSample: HKQuantitySample?
     
     weak var delegate: WorkoutSessionManagerDelegate?
     
-    init(healthStore: HKHealthStore, workoutActivityType: HKWorkoutActivityType, locationType: HKWorkoutSessionLocationType) {
-        
+    init(healthStore: HKHealthStore, workoutActivityType: HKWorkoutActivityType, workoutSession: HKWorkoutSession) {
         self.healthStore = healthStore
         self.workoutActivityType = workoutActivityType
-        self.workoutSession = HKWorkoutSession(activityType: workoutActivityType, locationType: locationType)
-        self.currentActiveEnergyQuantity = HKQuantity(unit: self.energyUnit, doubleValue: 0.0)
-        self.currentDistanceQuantity = HKQuantity(unit: self.distanceUnit, doubleValue: 0.0)
+        self.workoutSession = workoutSession
         
         super.init()
     }
     
     func startWorkout() {
-        self.workoutSession.delegate = self
-        
         healthStore.startWorkoutSession(workoutSession)
     }
     
     func stopWorkout() {
         healthStore.endWorkoutSession(workoutSession)
     }
-    
-    // MARK: HKWorkoutSessionDelegate
-    
-    func workoutSession(workoutSession: HKWorkoutSession, didChangeToState toState: HKWorkoutSessionState, fromState: HKWorkoutSessionState, date: NSDate) {
-        dispatch_async(dispatch_get_main_queue()) {
-            switch toState {
-            case .Running:
-                self.workoutDidStart(date)
-            case .Ended:
-                self.workoutDidEnd(date)
-            default:
-                NSLog("Unexpected workout session state \(toState)")
-            }
-        }
-    }
-    
-    func workoutSession(workoutSession: HKWorkoutSession, didFailWithError error: NSError) {
-
-    }
-    
+        
     // MARK: Internal
     
     func workoutDidStart(date: NSDate) {
@@ -98,14 +74,6 @@ class WorkoutSessionManager: NSObject, HKWorkoutSessionDelegate {
     }
     
     func workoutDidEnd(date: NSDate) {
-        self.workoutEndDate = date
-        
-        // Stop all data queries
-        for query in queries {
-            self.healthStore.stopQuery(query)
-        }
-        
-        self.queries.removeAll()
         
         self.delegate?.workoutSessionManager(self, didStopWorkoutWithDate: date)
     }
@@ -123,14 +91,13 @@ class WorkoutSessionManager: NSObject, HKWorkoutSessionDelegate {
         allSamples += self.heartRateSamples
         
         // Save the workout
-        self.healthStore.saveObject(workout) { success, error in
-            
+        self.healthStore.saveObject(workout) { [weak self] success, error in
             if (!success) {
                 debugPrint(error?.localizedDescription)
             }
             
             if success && allSamples.count > 0 {
-                self.healthStore.saveObjects(allSamples, withCompletion: { (success, error) -> Void in
+                self?.healthStore.saveObjects(allSamples, withCompletion: { (success, error) -> Void in
                     if let error = error as NSError? {
                         debugPrint(error.localizedDescription)
                     }
@@ -146,12 +113,12 @@ class WorkoutSessionManager: NSObject, HKWorkoutSessionDelegate {
         // Match samples with the start date after the workout start
         let predicate = HKQuery.predicateForSamplesWithStartDate(workoutStartDate, endDate: nil, options: .None)
         
-        let distanceQuery = HKAnchoredObjectQuery(type: self.distanceType, predicate: predicate, anchor: HKQueryAnchor(fromValue: 0), limit: 0) { (query, samples, deletedSamples, anchor, error) -> Void in
-            self.addDistanceSamples(samples)
+        let distanceQuery = HKAnchoredObjectQuery(type: self.distanceType, predicate: predicate, anchor: HKQueryAnchor(fromValue: 0), limit: 0) { [weak self] (query, samples, deletedSamples, anchor, error) -> Void in
+            self?.addDistanceSamples(samples)
         }
         
-        distanceQuery.updateHandler = { (query, samples, deletedObjects, anchor, error) -> Void in
-            self.addDistanceSamples(samples)
+        distanceQuery.updateHandler = { [weak self] (query, samples, deletedObjects, anchor, error) -> Void in
+            self?.addDistanceSamples(samples)
         }
         
         return distanceQuery
@@ -160,24 +127,26 @@ class WorkoutSessionManager: NSObject, HKWorkoutSessionDelegate {
     func addDistanceSamples(samples: [HKSample]?) {
         guard let distanceSamples = samples as? [HKQuantitySample] else { return }
         
-        dispatch_async(dispatch_get_main_queue()) {
+        dispatch_async(dispatch_get_main_queue()) { [weak self] in
             
-            self.currentDistanceQuantity = self.currentDistanceQuantity.addQuantitiesFromSamples(distanceSamples, unit: self.distanceUnit)
-            self.distanceSamples += distanceSamples
-            
-            self.delegate?.workoutSessionManager(self, didUpdateDistanceQuantity: self.currentDistanceQuantity)
+            if let weakSelf = self {
+                weakSelf.currentDistanceQuantity = weakSelf.currentDistanceQuantity.addQuantitiesFromSamples(distanceSamples, unit: weakSelf.distanceUnit)
+                weakSelf.distanceSamples += distanceSamples
+                
+                weakSelf.delegate?.workoutSessionManager(weakSelf, didUpdateDistanceQuantity: weakSelf.currentDistanceQuantity)
+            }
         }
     }
     
     func createStreamingActiveEnergyQuery(workoutStartDate: NSDate) -> HKQuery {
         let predicate = HKQuery.predicateForSamplesWithStartDate(workoutStartDate, endDate: nil, options: .None)
         
-        let activeEnergyQuery = HKAnchoredObjectQuery(type: self.activeEnergyType, predicate: predicate, anchor: HKQueryAnchor(fromValue: 0), limit: 0) { (query, samples, deletedObjects, anchor, error) -> Void in
-            self.addActiveEnergySamples(samples)
+        let activeEnergyQuery = HKAnchoredObjectQuery(type: self.activeEnergyType, predicate: predicate, anchor: HKQueryAnchor(fromValue: 0), limit: 0) { [weak self] (query, samples, deletedObjects, anchor, error) -> Void in
+            self?.addActiveEnergySamples(samples)
         }
         
-        activeEnergyQuery.updateHandler = { (query, samples, deletedObjects, anchor, error) -> Void in
-            self.addActiveEnergySamples(samples)
+        activeEnergyQuery.updateHandler = { [weak self] (query, samples, deletedObjects, anchor, error) -> Void in
+            self?.addActiveEnergySamples(samples)
         }
         
         return activeEnergyQuery
@@ -187,24 +156,26 @@ class WorkoutSessionManager: NSObject, HKWorkoutSessionDelegate {
     func addActiveEnergySamples(samples: [HKSample]?) {
         guard let activeEnergySamples = samples as? [HKQuantitySample] else { return }
         
-        dispatch_async(dispatch_get_main_queue()) {
+        dispatch_async(dispatch_get_main_queue()) { [weak self] in
             
-            self.currentActiveEnergyQuantity = self.currentActiveEnergyQuantity.addQuantitiesFromSamples(activeEnergySamples, unit: self.energyUnit)
-            self.activeEnergySamples += activeEnergySamples
-            
-            self.delegate?.workoutSessionManager(self, didUpdateActiveEnergyQuantity: self.currentActiveEnergyQuantity)
+            if let weakSelf = self {
+                weakSelf.currentActiveEnergyQuantity = weakSelf.currentActiveEnergyQuantity.addQuantitiesFromSamples(activeEnergySamples, unit: weakSelf.energyUnit)
+                weakSelf.activeEnergySamples += activeEnergySamples
+                
+                weakSelf.delegate?.workoutSessionManager(weakSelf, didUpdateActiveEnergyQuantity: weakSelf.currentActiveEnergyQuantity)
+            }
         }
     }
     
     func createStreamingHeartRateQuery(workoutStartDate: NSDate) -> HKQuery {
         let predicate = HKQuery.predicateForSamplesWithStartDate(workoutStartDate, endDate: nil, options: .None)
         
-        let heartRateQuery = HKAnchoredObjectQuery(type: self.heartRateType, predicate: predicate, anchor: HKQueryAnchor(fromValue: 0), limit: 0) { (query, samples, deletedObjects, anchor, error) -> Void in
-            self.addHeartRateSamples(samples)
+        let heartRateQuery = HKAnchoredObjectQuery(type: self.heartRateType, predicate: predicate, anchor: HKQueryAnchor(fromValue: 0), limit: 0) { [weak self] (query, samples, deletedObjects, anchor, error) -> Void in
+            self?.addHeartRateSamples(samples)
         }
         
-        heartRateQuery.updateHandler = { (query, samples, deletedObjects, anchor, error) -> Void in
-            self.addHeartRateSamples(samples)
+        heartRateQuery.updateHandler = { [weak self] (query, samples, deletedObjects, anchor, error) -> Void in
+            self?.addHeartRateSamples(samples)
         }
         
         return heartRateQuery
@@ -213,14 +184,17 @@ class WorkoutSessionManager: NSObject, HKWorkoutSessionDelegate {
     func addHeartRateSamples(samples: [HKSample]?) {
         guard let heartRateSamples = samples as? [HKQuantitySample] else { return }
         
-        dispatch_async(dispatch_get_main_queue()) {
+        dispatch_async(dispatch_get_main_queue()) { [weak self] in
             
-            self.heartRateSamples += heartRateSamples
-            
-            if let currentHeartRateSample = self.heartRateSamples.last {
-                self.currentHeartRateSample = currentHeartRateSample
-                self.delegate?.workoutSessionManager(self, didUpdateHeartRateSample: currentHeartRateSample)
+            if let weakSelf = self {
+                weakSelf.heartRateSamples += heartRateSamples
+                
+                if let currentHeartRateSample = weakSelf.heartRateSamples.last {
+                    weakSelf.currentHeartRateSample = currentHeartRateSample
+                    weakSelf.delegate?.workoutSessionManager(weakSelf, didUpdateHeartRateSample: currentHeartRateSample)
+                }
             }
         }
     }
+    
 }

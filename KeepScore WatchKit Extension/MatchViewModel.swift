@@ -2,20 +2,23 @@ import Foundation
 import HealthKit
 import WatchConnectivity
 
-class MatchViewModel: NSObject, MatchSetupDelegate, WorkoutSessionManagerDelegate {
+class MatchViewModel: NSObject, WorkoutSessionManagerDelegate {
 
-    var healthStore = HKHealthStore()
-    var workoutSessionManager: WorkoutSessionManager?
-    dynamic var matchInProgress = false
     var match: Match?
-    var startDate: NSDate?
     var useHealthKit = false
+    weak var workoutSessionManager: WorkoutSessionManager?
+    dynamic var startDate: NSDate?
     dynamic var distanceTravelled: Double = 0.0
     dynamic var caloriesBurned: Double = 0.0
     dynamic var heartRate: Double = 0.0
     
-    var matchSetupRequired: Bool {
-        return match == nil
+    init(match: Match, useHealthKit: Bool, workoutSessionManager: WorkoutSessionManager?) {
+        
+        self.match = match
+        self.useHealthKit = useHealthKit
+        self.workoutSessionManager = workoutSessionManager
+
+        super.init()
     }
     
     var distanceTravelledForDisplay: String {
@@ -29,30 +32,6 @@ class MatchViewModel: NSObject, MatchSetupDelegate, WorkoutSessionManagerDelegat
     
     var caloriesBurnedForDisplay: String {
         return "\(caloriesBurned) cal"
-    }
-
-    func setupMatch() -> MatchSetupViewModel {
-        let matchSetupViewModel = MatchSetupViewModel(healthStore: healthStore)
-        matchSetupViewModel.delegate = self
-        return matchSetupViewModel
-    }
-
-    func matchSetupDidComplete(matchSetupViewModel: MatchSetupViewModel) {
-        self.matchInProgress = true
-
-        let match = Match(activityType: matchSetupViewModel.activityType, homeTeamName: matchSetupViewModel.homeTeamName, awayTeamName: matchSetupViewModel.awayTeamName)
-        self.match = match
-        self.useHealthKit = matchSetupViewModel.useHealthKit
-        
-        if (self.useHealthKit) {
-            let workoutSessionManager = WorkoutSessionManager(healthStore: self.healthStore, workoutActivityType: match.activityType.getWorkoutActivityType(), locationType: .Unknown)
-            self.workoutSessionManager = workoutSessionManager
-            workoutSessionManager.delegate = self
-            workoutSessionManager.startWorkout()
-        } else {
-            self.startDate = NSDate()
-        }
-        sendScoreUpdateInfo()
     }
     
     func incrementHomeTeamScore() -> Int {
@@ -73,32 +52,42 @@ class MatchViewModel: NSObject, MatchSetupDelegate, WorkoutSessionManagerDelegat
         return match.awayTeamScore
     }
     
-    func endMatch() -> ReviewMatchViewModel? {
-        self.matchInProgress = false
-        workoutSessionManager?.stopWorkout()
-        guard let match = match else {
-            return nil
+    func startMatch() {
+        if let workoutSessionManager = workoutSessionManager {
+            workoutSessionManager.startWorkout()
+        } else {
+            startDate = NSDate()
         }
-        
-        let reviewMatchViewModel = ReviewMatchViewModel(match: match, workoutSessionManager: workoutSessionManager)
         
         sendScoreUpdateInfo()
-        
-        return reviewMatchViewModel
     }
     
-    // MARK: WCSession Stuff
-    
-    func sendScoreUpdateInfo() {
-        if let match = self.match where WCSession.defaultSession().reachable {
-            let requestValues = ["type": "ScoreUpdate", "homeTeamScore" : match.homeTeamScore, "awayTeamScore": match.awayTeamScore] as [String: AnyObject]
-            let session = WCSession.defaultSession()
-            
-            session.sendMessage(requestValues, replyHandler: nil, errorHandler: nil)
+    func endMatch() {
+        if let workoutSessionManager = workoutSessionManager {
+            workoutSessionManager.stopWorkout()
         }
+        sendScoreUpdateInfo()
     }
     
     // MARK: Workout Session Manager Delegate
+    
+    func workoutSession(workoutSession: HKWorkoutSession, didChangeToState toState: HKWorkoutSessionState, fromState: HKWorkoutSessionState, date: NSDate) {
+        
+        dispatch_async(dispatch_get_main_queue()) { [weak self] in
+            switch toState {
+            case .Running:
+                self?.workoutSessionManager?.workoutDidStart(date)
+            case .Ended:
+                self?.workoutSessionManager?.workoutDidEnd(date)
+            default:
+                NSLog("Unexpected workout session state \(toState)")
+            }
+        }
+    }
+    
+    func workoutSession(workoutSession: HKWorkoutSession, didFailWithError error: NSError) {
+        
+    }
     
     func workoutSessionManager(workoutSessionManager: WorkoutSessionManager, didStartWorkoutWithDate startDate: NSDate) {
         debugPrint("workoutSessionManager-didStartWorkoutWithDate \(startDate)")
@@ -110,15 +99,29 @@ class MatchViewModel: NSObject, MatchSetupDelegate, WorkoutSessionManagerDelegat
     }
     
     func workoutSessionManager(workoutSessionManager: WorkoutSessionManager, didUpdateActiveEnergyQuantity activeEnergyQuantity: HKQuantity) {
+        debugPrint("didUpdateActiveEnergyQuantity")
         caloriesBurned = activeEnergyQuantity.doubleValueForUnit(workoutSessionManager.energyUnit)
     }
     
     func workoutSessionManager(workoutSessionManager: WorkoutSessionManager, didUpdateDistanceQuantity distanceQuantity: HKQuantity) {
+        debugPrint("didUpdateDistanceQuantity")
         distanceTravelled = distanceQuantity.doubleValueForUnit(workoutSessionManager.distanceUnit)
     }
     
     func workoutSessionManager(workoutSessionManager: WorkoutSessionManager, didUpdateHeartRateSample heartRateSample: HKQuantitySample) {
+        debugPrint("didUpdateHeartRateSample")
         heartRate = heartRateSample.quantity.doubleValueForUnit(workoutSessionManager.countPerMinuteUnit)
+    }
+    
+    // MARK: WCSession Stuff
+    
+    func sendScoreUpdateInfo() {
+        if let match = self.match where WCSession.defaultSession().reachable {
+            let requestValues = ["type": "ScoreUpdate", "homeTeamScore" : match.homeTeamScore, "awayTeamScore": match.awayTeamScore] as [String: AnyObject]
+            let session = WCSession.defaultSession()
+            
+            session.sendMessage(requestValues, replyHandler: nil, errorHandler: nil)
+        }
     }
     
 }
