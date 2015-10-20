@@ -14,12 +14,8 @@ class MatchSetupInterfaceController: WKInterfaceController {
         super.awakeWithContext(context)
         
         // Configure interface objects here.
-        if let matchSetupContext = context as? MatchSetupContext {
-            let matchSetupViewModel = MatchSetupViewModel(healthStore: HKHealthStore())
-            matchSetupViewModel.activityType = matchSetupContext.activityType
-            matchSetupViewModel.delegate = matchSetupContext.delegate
+        if let matchSetupViewModel = context as? MatchSetupViewModel {
             self.matchSetupViewModel = matchSetupViewModel
-            
             self.setTitle(matchSetupViewModel.activityType.getTitle())
             self.useHealthKitSwitch.setOn(matchSetupViewModel.useHealthKit)
             self.useHealthKitSwitch.setEnabled(matchSetupViewModel.canSelectHealthKit)

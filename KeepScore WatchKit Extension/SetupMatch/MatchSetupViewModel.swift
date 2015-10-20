@@ -7,20 +7,20 @@ protocol MatchSetupDelegate: class {
 
 class MatchSetupViewModel: NSObject {
 
-    let supportedActivities: [ActivityType] = [.Baseball, .Basketball, .Hockey, .Soccer, .TableTennis, .Volleyball]
-    let healthStore: HKHealthStore
+    var healthStore: HKHealthStore?
+    var activityType: ActivityType
     
-    var activityType = ActivityType.Other
     weak var delegate: MatchSetupDelegate?
     
-    init(healthStore: HKHealthStore) {
+    init(activityType: ActivityType, healthStore: HKHealthStore?) {
+        self.activityType = activityType
         self.healthStore = healthStore
     }
     
     dynamic var useHealthKit = false {
         didSet {
             if (useHealthKit) {
-                let hkAuthorizationStatus = healthStore.authorizationStatusForType(HKObjectType.workoutType())
+                let hkAuthorizationStatus = healthStore?.authorizationStatusForType(HKObjectType.workoutType())
                 if (hkAuthorizationStatus == .SharingDenied) {
                     useHealthKit = false
                 } else if (hkAuthorizationStatus == .NotDetermined) {
@@ -32,9 +32,9 @@ class MatchSetupViewModel: NSObject {
                         HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierHeartRate)!
                         ])
                     
-                    self.healthStore.requestAuthorizationToShareTypes(typesToShare, readTypes: typesToRead) { success, error in
+                    self.healthStore?.requestAuthorizationToShareTypes(typesToShare, readTypes: typesToRead) { success, error in
                         if (success) {
-                            let newAuthorizationStatus = self.healthStore.authorizationStatusForType(HKObjectType.workoutType())
+                            let newAuthorizationStatus = self.healthStore?.authorizationStatusForType(HKObjectType.workoutType())
                             if (newAuthorizationStatus == HKAuthorizationStatus.SharingDenied) {
                                 self.useHealthKit = false
                             }
@@ -50,7 +50,7 @@ class MatchSetupViewModel: NSObject {
     
     dynamic var canSelectHealthKit: Bool {
         get {
-            return healthStore.authorizationStatusForType(HKObjectType.workoutType()) != .SharingDenied
+            return healthStore?.authorizationStatusForType(HKObjectType.workoutType()) != .SharingDenied
         }
     }
     

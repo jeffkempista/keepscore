@@ -41,7 +41,11 @@ class ReviewMatchInterfaceController: WKInterfaceController {
     @IBAction func saveButtonTapped() {
         debugPrint("saveButtonTapped")
         self.reviewMatchViewModel?.saveMatch()
-        dismissController()
+        
+        let alert = WKAlertAction(title: "OK", style: .Default) {
+            self.dismissController()
+        }
+        presentAlertControllerWithTitle("Match Saved", message: "Huzzah!", preferredStyle: .Alert, actions: [alert])
     }
     
     @IBAction func discardButtonTapped() {

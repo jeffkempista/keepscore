@@ -11,7 +11,7 @@ import XCTest
 
 class MatchTests: XCTestCase {
     
-    var sut = Match(homeTeamName: "Home", awayTeamName: "Away")
+    var sut = Match(activityType: .Soccer, homeTeamName: "Home", awayTeamName: "Away")
     
     override func setUp() {
         super.setUp()

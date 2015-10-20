@@ -101,11 +101,10 @@ class ScoreOrActivitySelectionInterfaceController: WKInterfaceController, MatchS
         let supportedActivities = activitySelectionViewModel.supportedActivities
         let selectedActitity = supportedActivities[rowIndex]
         debugPrint("Selected Activity = \(selectedActitity)")
-        let matchSetupContext = MatchSetupContext()
-        matchSetupContext.activityType = selectedActitity
-        matchSetupContext.delegate = self
+        let matchSetupViewModel = MatchSetupViewModel(activityType: selectedActitity, healthStore: self.healthStore)
+        matchSetupViewModel.delegate = self
 
-        return matchSetupContext
+        return matchSetupViewModel
     }
     
     func resetMatchInfo() {
