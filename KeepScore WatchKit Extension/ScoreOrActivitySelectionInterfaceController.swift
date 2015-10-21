@@ -2,7 +2,7 @@ import HealthKit
 import WatchKit
 import Foundation
 
-class ScoreOrActivitySelectionInterfaceController: WKInterfaceController, MatchSetupDelegate, ReviewMatchDelegate {
+class ScoreOrActivitySelectionInterfaceController: WKInterfaceController, MatchSetupDelegate, RewindScoreDelegate, ReviewMatchDelegate {
     
     @IBOutlet var activityGroup: WKInterfaceGroup!
     @IBOutlet var activityTable: WKInterfaceTable!
@@ -22,6 +22,7 @@ class ScoreOrActivitySelectionInterfaceController: WKInterfaceController, MatchS
     var healthStore: HKHealthStore?
     var workoutSession: HKWorkoutSession?
     var workoutSessionManager: WorkoutSessionManager?
+    var matchScoreWasRewound = false
     
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
@@ -33,8 +34,13 @@ class ScoreOrActivitySelectionInterfaceController: WKInterfaceController, MatchS
         super.willActivate()
         
         setGroupVisibility()
-        if let _ = matchViewModel {
+        if let matchViewModel = matchViewModel {
             addObservers()
+            
+            if let homeTeamScore = matchViewModel.match?.homeTeamScore, let awayTeamScore = matchViewModel.match?.awayTeamScore where matchScoreWasRewound {
+                self.homeTeamScoreButton.setTitle("\(homeTeamScore)")
+                self.awayTeamScoreButton.setTitle("\(awayTeamScore)")
+            }
         }
     }
     
@@ -90,6 +96,7 @@ class ScoreOrActivitySelectionInterfaceController: WKInterfaceController, MatchS
     private func updateMenu() {
         self.clearAllMenuItems()
         if let _ = matchViewModel {
+            self.addMenuItemWithItemIcon(.Repeat, title: "Rewind Score", action: "rewindScoreItemTapped")
             self.addMenuItemWithItemIcon(.Decline, title: "End", action: "endMenuItemTapped")
         }
     }
@@ -170,7 +177,17 @@ class ScoreOrActivitySelectionInterfaceController: WKInterfaceController, MatchS
         matchViewModel?.startMatch()
     }
     
+    // MARK: Rewind Score Delegate {
+    
+    func matchScoreWasRewound(rewindScoreViewModel: RewindScoreViewModel) {
+        if let matchViewModel = matchViewModel {
+            matchViewModel.match = rewindScoreViewModel.match
+            matchScoreWasRewound = true
+        }
+    }
+    
     // MARK: Review Match Delegate
+    
     func matchReviewDidSave(match: Match) {
         self.matchViewModel = nil
         self.workoutSessionManager = nil
@@ -199,6 +216,15 @@ class ScoreOrActivitySelectionInterfaceController: WKInterfaceController, MatchS
         WKInterfaceDevice.currentDevice().playHaptic(.DirectionDown)
         let newScore = matchViewModel!.incrementAwayTeamScore()
         awayTeamScoreButton.setTitle("\(newScore)")
+    }
+    
+    @IBAction func rewindScoreItemTapped() {
+        
+        if let matchViewModel = matchViewModel, let match = matchViewModel.match {
+            let rewindScoreViewModel = RewindScoreViewModel(match: match)
+            rewindScoreViewModel.delegate = self
+            presentControllerWithName("RewindScoreInterfaceController", context: rewindScoreViewModel)
+        }
     }
     
     @IBAction func endMenuItemTapped() {

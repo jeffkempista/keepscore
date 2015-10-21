@@ -38,6 +38,8 @@
 		1FB8355B1BC2CA8600FF86D1 /* MatchSetupInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB8355A1BC2CA8600FF86D1 /* MatchSetupInterfaceController.swift */; settings = {ASSET_TAGS = (); }; };
 		1FBABC711BC4AEF7002A090D /* ReviewMatchInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FBABC701BC4AEF7002A090D /* ReviewMatchInterfaceController.swift */; settings = {ASSET_TAGS = (); }; };
 		1FBABC731BC4AF96002A090D /* ReviewMatchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FBABC721BC4AF96002A090D /* ReviewMatchViewModel.swift */; settings = {ASSET_TAGS = (); }; };
+		1FD2B02E1BD70DC200759122 /* RewindScoreInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD2B02D1BD70DC200759122 /* RewindScoreInterfaceController.swift */; settings = {ASSET_TAGS = (); }; };
+		1FD2B0301BD70DEA00759122 /* RewindScoreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD2B02F1BD70DEA00759122 /* RewindScoreViewModel.swift */; settings = {ASSET_TAGS = (); }; };
 		1FF3403A1B82CE650071CC46 /* HealthKitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF340391B82CE650071CC46 /* HealthKitExtensions.swift */; };
 		1FF4D95A1BD3EF2F0042DFC4 /* ScoreOrActivitySelectionInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF4D9591BD3EF2F0042DFC4 /* ScoreOrActivitySelectionInterfaceController.swift */; settings = {ASSET_TAGS = (); }; };
 		1FF4D95C1BD3EFF40042DFC4 /* ActivitySelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF4D95B1BD3EFF40042DFC4 /* ActivitySelectionViewModel.swift */; settings = {ASSET_TAGS = (); }; };
@@ -164,6 +166,8 @@
 		1FB8355A1BC2CA8600FF86D1 /* MatchSetupInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchSetupInterfaceController.swift; sourceTree = "<group>"; };
 		1FBABC701BC4AEF7002A090D /* ReviewMatchInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewMatchInterfaceController.swift; sourceTree = "<group>"; };
 		1FBABC721BC4AF96002A090D /* ReviewMatchViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewMatchViewModel.swift; sourceTree = "<group>"; };
+		1FD2B02D1BD70DC200759122 /* RewindScoreInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RewindScoreInterfaceController.swift; sourceTree = "<group>"; };
+		1FD2B02F1BD70DEA00759122 /* RewindScoreViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RewindScoreViewModel.swift; sourceTree = "<group>"; };
 		1FE432B01B8742FC00231DEC /* KeepScore WatchKit App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "KeepScore WatchKit App.entitlements"; sourceTree = "<group>"; };
 		1FF340391B82CE650071CC46 /* HealthKitExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthKitExtensions.swift; sourceTree = "<group>"; };
 		1FF4D9591BD3EF2F0042DFC4 /* ScoreOrActivitySelectionInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreOrActivitySelectionInterfaceController.swift; sourceTree = "<group>"; };
@@ -314,6 +318,8 @@
 				1F3A16A71B82B9AA00120F80 /* ExtensionDelegate.swift */,
 				1FF340391B82CE650071CC46 /* HealthKitExtensions.swift */,
 				1FF4D95F1BD46F910042DFC4 /* MatchViewModel.swift */,
+				1FD2B02D1BD70DC200759122 /* RewindScoreInterfaceController.swift */,
+				1FD2B02F1BD70DEA00759122 /* RewindScoreViewModel.swift */,
 				1FF4D9591BD3EF2F0042DFC4 /* ScoreOrActivitySelectionInterfaceController.swift */,
 				1F65748C1B8407BD008D4B50 /* WatchKitExtensions.swift */,
 				1FB156FB1B855CD900E53002 /* WorkoutSessionManager.swift */,
@@ -692,12 +698,14 @@
 				1FBABC711BC4AEF7002A090D /* ReviewMatchInterfaceController.swift in Sources */,
 				1F65748D1B8407BD008D4B50 /* WatchKitExtensions.swift in Sources */,
 				1FB8355B1BC2CA8600FF86D1 /* MatchSetupInterfaceController.swift in Sources */,
+				1FD2B0301BD70DEA00759122 /* RewindScoreViewModel.swift in Sources */,
 				1FF4D9601BD46F910042DFC4 /* MatchViewModel.swift in Sources */,
 				1F3A16A81B82B9AA00120F80 /* ExtensionDelegate.swift in Sources */,
 				1FB835591BC2CA6A00FF86D1 /* ActivityTableRowController.swift in Sources */,
 				1FB835571BC2C9E900FF86D1 /* MatchSetupViewModel.swift in Sources */,
 				1FBABC731BC4AF96002A090D /* ReviewMatchViewModel.swift in Sources */,
 				1FB156FC1B855CD900E53002 /* WorkoutSessionManager.swift in Sources */,
+				1FD2B02E1BD70DC200759122 /* RewindScoreInterfaceController.swift in Sources */,
 				1FF3403A1B82CE650071CC46 /* HealthKitExtensions.swift in Sources */,
 				1FF4D95A1BD3EF2F0042DFC4 /* ScoreOrActivitySelectionInterfaceController.swift in Sources */,
 			);

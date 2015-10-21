@@ -176,6 +176,31 @@
             </objects>
             <point key="canvasLocation" x="606" y="570.75"/>
         </scene>
+        <!--RewindScoreInterfaceController-->
+        <scene sceneID="AVE-wW-k4E">
+            <objects>
+                <controller identifier="RewindScoreInterfaceController" hidesWhenLoading="NO" id="BAx-9Z-wdu" customClass="RewindScoreInterfaceController" customModule="KeepScore_WatchKit_Extension">
+                    <items>
+                        <picker width="1" height="100" alignment="center" focusStyle="stack" id="9XY-MH-p4W">
+                            <connections>
+                                <action selector="matchScorePickerItemSelected:" destination="BAx-9Z-wdu" id="7ka-6u-niO"/>
+                            </connections>
+                        </picker>
+                        <button width="1" alignment="center" title="Save" id="Xbn-qP-sza">
+                            <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                            <connections>
+                                <action selector="saveButtonTapped" destination="BAx-9Z-wdu" id="wA2-a7-DTQ"/>
+                            </connections>
+                        </button>
+                    </items>
+                    <connections>
+                        <outlet property="matchScorePicker" destination="9XY-MH-p4W" id="JDC-wR-WPO"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="826" y="561"/>
+        </scene>
     </scenes>
     <color key="tintColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
 </document>
