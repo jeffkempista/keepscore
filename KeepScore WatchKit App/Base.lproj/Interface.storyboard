@@ -181,12 +181,12 @@
             <objects>
                 <controller identifier="RewindScoreInterfaceController" hidesWhenLoading="NO" id="BAx-9Z-wdu" customClass="RewindScoreInterfaceController" customModule="KeepScore_WatchKit_Extension">
                     <items>
-                        <picker width="1" height="100" alignment="center" focusStyle="stack" id="9XY-MH-p4W">
+                        <picker width="1" height="60" alignment="center" verticalAlignment="center" focusStyle="stack" id="9XY-MH-p4W">
                             <connections>
                                 <action selector="matchScorePickerItemSelected:" destination="BAx-9Z-wdu" id="7ka-6u-niO"/>
                             </connections>
                         </picker>
-                        <button width="1" alignment="center" title="Save" id="Xbn-qP-sza">
+                        <button width="1" alignment="center" verticalAlignment="center" title="Save" id="Xbn-qP-sza">
                             <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
                             <connections>
