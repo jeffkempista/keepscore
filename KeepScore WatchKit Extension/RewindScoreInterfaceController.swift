@@ -30,6 +30,7 @@ class RewindScoreInterfaceController: WKInterfaceController {
     }
     
     @IBAction func matchScorePickerItemSelected(value: Int) {
+        WKInterfaceDevice.currentDevice().playHaptic(.Click)
         rewindScoreViewModel?.selectedMatchScoreIndex = value
     }
 
