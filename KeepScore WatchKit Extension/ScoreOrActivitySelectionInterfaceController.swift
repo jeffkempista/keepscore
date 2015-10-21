@@ -96,8 +96,8 @@ class ScoreOrActivitySelectionInterfaceController: WKInterfaceController, MatchS
     private func updateMenu() {
         self.clearAllMenuItems()
         if let _ = matchViewModel {
-            self.addMenuItemWithItemIcon(.Repeat, title: "Rewind Score", action: "rewindScoreItemTapped")
             self.addMenuItemWithItemIcon(.Decline, title: "End", action: "endMenuItemTapped")
+            self.addMenuItemWithItemIcon(.Repeat, title: "Rewind Score", action: "rewindScoreItemTapped")
         }
     }
     
