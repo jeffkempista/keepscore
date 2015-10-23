@@ -8,12 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		1F16C7451BA7508800D65436 /* KeepScoreKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F16C7441BA7508800D65436 /* KeepScoreKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1F16C74C1BA7508800D65436 /* KeepScoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F16C7421BA7508800D65436 /* KeepScoreKit.framework */; settings = {ASSET_TAGS = (); }; };
+		1F16C74C1BA7508800D65436 /* KeepScoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F16C7421BA7508800D65436 /* KeepScoreKit.framework */; };
 		1F16C7531BA7508800D65436 /* KeepScoreKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F16C7521BA7508800D65436 /* KeepScoreKitTests.swift */; };
 		1F16C7571BA7508800D65436 /* KeepScoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F16C7421BA7508800D65436 /* KeepScoreKit.framework */; };
 		1F16C7581BA7508800D65436 /* KeepScoreKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1F16C7421BA7508800D65436 /* KeepScoreKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		1F16C7621BA750FC00D65436 /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F16C7611BA750FC00D65436 /* Match.swift */; settings = {ASSET_TAGS = (); }; };
-		1F16C7651BA755BE00D65436 /* MatchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F16C7641BA755BE00D65436 /* MatchTests.swift */; settings = {ASSET_TAGS = (); }; };
+		1F16C7621BA750FC00D65436 /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F16C7611BA750FC00D65436 /* Match.swift */; };
+		1F16C7651BA755BE00D65436 /* MatchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F16C7641BA755BE00D65436 /* MatchTests.swift */; };
 		1F16C7671BA75D2200D65436 /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F16C7611BA750FC00D65436 /* Match.swift */; };
 		1F3A16781B82B9AA00120F80 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3A16771B82B9AA00120F80 /* AppDelegate.swift */; };
 		1F3A167A1B82B9AA00120F80 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3A16791B82B9AA00120F80 /* ViewController.swift */; };
@@ -31,19 +31,19 @@
 		1F3A16C61B82C1F200120F80 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F3A16C51B82C1F200120F80 /* HealthKit.framework */; };
 		1F65748D1B8407BD008D4B50 /* WatchKitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F65748C1B8407BD008D4B50 /* WatchKitExtensions.swift */; };
 		1FB156FC1B855CD900E53002 /* WorkoutSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB156FB1B855CD900E53002 /* WorkoutSessionManager.swift */; };
-		1FB8354E1BC2C72D00FF86D1 /* ActivityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB8354D1BC2C72D00FF86D1 /* ActivityType.swift */; settings = {ASSET_TAGS = (); }; };
+		1FB8354E1BC2C72D00FF86D1 /* ActivityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB8354D1BC2C72D00FF86D1 /* ActivityType.swift */; };
 		1FB835521BC2C88500FF86D1 /* ActivityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB8354D1BC2C72D00FF86D1 /* ActivityType.swift */; };
-		1FB835571BC2C9E900FF86D1 /* MatchSetupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB835561BC2C9E900FF86D1 /* MatchSetupViewModel.swift */; settings = {ASSET_TAGS = (); }; };
-		1FB835591BC2CA6A00FF86D1 /* ActivityTableRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB835581BC2CA6A00FF86D1 /* ActivityTableRowController.swift */; settings = {ASSET_TAGS = (); }; };
-		1FB8355B1BC2CA8600FF86D1 /* MatchSetupInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB8355A1BC2CA8600FF86D1 /* MatchSetupInterfaceController.swift */; settings = {ASSET_TAGS = (); }; };
-		1FBABC711BC4AEF7002A090D /* ReviewMatchInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FBABC701BC4AEF7002A090D /* ReviewMatchInterfaceController.swift */; settings = {ASSET_TAGS = (); }; };
-		1FBABC731BC4AF96002A090D /* ReviewMatchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FBABC721BC4AF96002A090D /* ReviewMatchViewModel.swift */; settings = {ASSET_TAGS = (); }; };
-		1FD2B02E1BD70DC200759122 /* RewindScoreInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD2B02D1BD70DC200759122 /* RewindScoreInterfaceController.swift */; settings = {ASSET_TAGS = (); }; };
-		1FD2B0301BD70DEA00759122 /* RewindScoreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD2B02F1BD70DEA00759122 /* RewindScoreViewModel.swift */; settings = {ASSET_TAGS = (); }; };
+		1FB835571BC2C9E900FF86D1 /* MatchSetupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB835561BC2C9E900FF86D1 /* MatchSetupViewModel.swift */; };
+		1FB835591BC2CA6A00FF86D1 /* ActivityTableRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB835581BC2CA6A00FF86D1 /* ActivityTableRowController.swift */; };
+		1FB8355B1BC2CA8600FF86D1 /* MatchSetupInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB8355A1BC2CA8600FF86D1 /* MatchSetupInterfaceController.swift */; };
+		1FBABC711BC4AEF7002A090D /* ReviewMatchInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FBABC701BC4AEF7002A090D /* ReviewMatchInterfaceController.swift */; };
+		1FBABC731BC4AF96002A090D /* ReviewMatchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FBABC721BC4AF96002A090D /* ReviewMatchViewModel.swift */; };
+		1FD2B02E1BD70DC200759122 /* RewindScoreInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD2B02D1BD70DC200759122 /* RewindScoreInterfaceController.swift */; };
+		1FD2B0301BD70DEA00759122 /* RewindScoreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD2B02F1BD70DEA00759122 /* RewindScoreViewModel.swift */; };
 		1FF3403A1B82CE650071CC46 /* HealthKitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF340391B82CE650071CC46 /* HealthKitExtensions.swift */; };
-		1FF4D95A1BD3EF2F0042DFC4 /* ScoreOrActivitySelectionInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF4D9591BD3EF2F0042DFC4 /* ScoreOrActivitySelectionInterfaceController.swift */; settings = {ASSET_TAGS = (); }; };
-		1FF4D95C1BD3EFF40042DFC4 /* ActivitySelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF4D95B1BD3EFF40042DFC4 /* ActivitySelectionViewModel.swift */; settings = {ASSET_TAGS = (); }; };
-		1FF4D9601BD46F910042DFC4 /* MatchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF4D95F1BD46F910042DFC4 /* MatchViewModel.swift */; settings = {ASSET_TAGS = (); }; };
+		1FF4D95A1BD3EF2F0042DFC4 /* ScoreOrActivitySelectionInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF4D9591BD3EF2F0042DFC4 /* ScoreOrActivitySelectionInterfaceController.swift */; };
+		1FF4D95C1BD3EFF40042DFC4 /* ActivitySelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF4D95B1BD3EFF40042DFC4 /* ActivitySelectionViewModel.swift */; };
+		1FF4D9601BD46F910042DFC4 /* MatchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF4D95F1BD46F910042DFC4 /* MatchViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
