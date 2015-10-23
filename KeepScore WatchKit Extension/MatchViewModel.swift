@@ -2,7 +2,7 @@ import Foundation
 import HealthKit
 import WatchConnectivity
 
-class MatchViewModel: NSObject, WorkoutSessionManagerDelegate {
+class MatchViewModel: NSObject, WorkoutSessionManagerDelegate, WorkoutSessionManagerQuantityUpdateDelegate, HKWorkoutSessionDelegate {
 
     var match: Match?
     var useHealthKit = false

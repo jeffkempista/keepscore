@@ -13,13 +13,14 @@ class ScoreOrActivitySelectionInterfaceController: WKInterfaceController, MatchS
     @IBOutlet var heartRateLabel: WKInterfaceLabel!
     @IBOutlet var distanceTravelledLabel: WKInterfaceLabel!
     
+    let healthStore = HKHealthStore()
+    
     var startDateContext = 0
     var heartRateContext = 0
     var distanceTravelledContext = 0
     var caloriesBurnedContext = 0
     var activitySelectionViewModel = ActivitySelectionViewModel()
     var matchViewModel: MatchViewModel?
-    var healthStore: HKHealthStore?
     var workoutSession: HKWorkoutSession?
     var workoutSessionManager: WorkoutSessionManager?
     var matchScoreWasRewound = false
@@ -110,7 +111,6 @@ class ScoreOrActivitySelectionInterfaceController: WKInterfaceController, MatchS
         debugPrint("Selected Activity = \(selectedActitity)")
         let matchSetupViewModel = MatchSetupViewModel(activityType: selectedActitity, healthStore: self.healthStore)
         matchSetupViewModel.delegate = self
-
         return matchSetupViewModel
     }
     
@@ -166,14 +166,13 @@ class ScoreOrActivitySelectionInterfaceController: WKInterfaceController, MatchS
             self.matchViewModel = MatchViewModel(match: match, useHealthKit: useHealthKit, workoutSessionManager: nil)
             return
         }
-        healthStore = HKHealthStore()
         workoutSession = HKWorkoutSession(activityType: match.activityType.getWorkoutActivityType(), locationType: .Unknown)
-        workoutSessionManager = WorkoutSessionManager(healthStore: healthStore!, workoutActivityType: match.activityType.getWorkoutActivityType(), workoutSession: workoutSession!)
+        workoutSessionManager = WorkoutSessionManager(healthStore: healthStore, workoutActivityType: match.activityType.getWorkoutActivityType(), workoutSession: workoutSession!)
         matchViewModel = MatchViewModel(match: match, useHealthKit: useHealthKit, workoutSessionManager: workoutSessionManager!)
 
         workoutSession?.delegate = matchViewModel
         workoutSessionManager?.delegate = matchViewModel
-        
+        workoutSessionManager?.quantityUpdateDelegate = matchViewModel
         matchViewModel?.startMatch()
     }
     
@@ -192,7 +191,6 @@ class ScoreOrActivitySelectionInterfaceController: WKInterfaceController, MatchS
         self.matchViewModel = nil
         self.workoutSessionManager = nil
         self.workoutSession = nil
-        self.healthStore = nil
         setGroupVisibility()
     }
     
@@ -200,7 +198,6 @@ class ScoreOrActivitySelectionInterfaceController: WKInterfaceController, MatchS
         self.matchViewModel = nil
         self.workoutSessionManager = nil
         self.workoutSession = nil
-        self.healthStore = nil
         setGroupVisibility()
     }
     

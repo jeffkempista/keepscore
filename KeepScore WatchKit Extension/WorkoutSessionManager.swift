@@ -1,9 +1,12 @@
 import HealthKit
 
-protocol WorkoutSessionManagerDelegate : HKWorkoutSessionDelegate {
+protocol WorkoutSessionManagerDelegate : class {
     
     func workoutSessionManager(workoutSessionManager: WorkoutSessionManager, didStartWorkoutWithDate startDate: NSDate)
     func workoutSessionManager(workoutSessionManager: WorkoutSessionManager, didStopWorkoutWithDate endDate: NSDate)
+}
+
+protocol WorkoutSessionManagerQuantityUpdateDelegate : class {
     
     func workoutSessionManager(workoutSessionManager: WorkoutSessionManager, didUpdateActiveEnergyQuantity activeEnergyQuantity: HKQuantity)
     func workoutSessionManager(workoutSessionManager: WorkoutSessionManager, didUpdateDistanceQuantity distanceQuantity: HKQuantity)
@@ -39,6 +42,7 @@ class WorkoutSessionManager: NSObject {
     var currentHeartRateSample: HKQuantitySample?
     
     weak var delegate: WorkoutSessionManagerDelegate?
+    weak var quantityUpdateDelegate: WorkoutSessionManagerQuantityUpdateDelegate?
     
     init(healthStore: HKHealthStore, workoutActivityType: HKWorkoutActivityType, workoutSession: HKWorkoutSession) {
         self.healthStore = healthStore
@@ -69,12 +73,12 @@ class WorkoutSessionManager: NSObject {
         for query in queries {
             self.healthStore.executeQuery(query)
         }
-        
+     
         self.delegate?.workoutSessionManager(self, didStartWorkoutWithDate: date)
     }
     
     func workoutDidEnd(date: NSDate) {
-        
+        self.workoutEndDate = date
         self.delegate?.workoutSessionManager(self, didStopWorkoutWithDate: date)
     }
     
@@ -91,19 +95,10 @@ class WorkoutSessionManager: NSObject {
         allSamples += self.heartRateSamples
         
         // Save the workout
-        self.healthStore.saveObject(workout) { [weak self] success, error in
-            if (!success) {
-                debugPrint(error?.localizedDescription)
+        self.healthStore.saveObject(workout) { (success, error: NSError?) in
+            if let error = error {
+                debugPrint(error.localizedDescription)
             }
-            
-            if success && allSamples.count > 0 {
-                self?.healthStore.saveObjects(allSamples, withCompletion: { (success, error) -> Void in
-                    if let error = error as NSError? {
-                        debugPrint(error.localizedDescription)
-                    }
-                })
-            }
-            
         }
     }
     
@@ -133,7 +128,7 @@ class WorkoutSessionManager: NSObject {
                 weakSelf.currentDistanceQuantity = weakSelf.currentDistanceQuantity.addQuantitiesFromSamples(distanceSamples, unit: weakSelf.distanceUnit)
                 weakSelf.distanceSamples += distanceSamples
                 
-                weakSelf.delegate?.workoutSessionManager(weakSelf, didUpdateDistanceQuantity: weakSelf.currentDistanceQuantity)
+                weakSelf.quantityUpdateDelegate?.workoutSessionManager(weakSelf, didUpdateDistanceQuantity: weakSelf.currentDistanceQuantity)
             }
         }
     }
@@ -162,7 +157,7 @@ class WorkoutSessionManager: NSObject {
                 weakSelf.currentActiveEnergyQuantity = weakSelf.currentActiveEnergyQuantity.addQuantitiesFromSamples(activeEnergySamples, unit: weakSelf.energyUnit)
                 weakSelf.activeEnergySamples += activeEnergySamples
                 
-                weakSelf.delegate?.workoutSessionManager(weakSelf, didUpdateActiveEnergyQuantity: weakSelf.currentActiveEnergyQuantity)
+                weakSelf.quantityUpdateDelegate?.workoutSessionManager(weakSelf, didUpdateActiveEnergyQuantity: weakSelf.currentActiveEnergyQuantity)
             }
         }
     }
@@ -191,7 +186,7 @@ class WorkoutSessionManager: NSObject {
                 
                 if let currentHeartRateSample = weakSelf.heartRateSamples.last {
                     weakSelf.currentHeartRateSample = currentHeartRateSample
-                    weakSelf.delegate?.workoutSessionManager(weakSelf, didUpdateHeartRateSample: currentHeartRateSample)
+                    weakSelf.quantityUpdateDelegate?.workoutSessionManager(weakSelf, didUpdateHeartRateSample: currentHeartRateSample)
                 }
             }
         }

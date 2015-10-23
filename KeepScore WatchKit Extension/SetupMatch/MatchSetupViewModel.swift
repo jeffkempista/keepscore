@@ -7,6 +7,8 @@ protocol MatchSetupDelegate: class {
 
 class MatchSetupViewModel: NSObject {
 
+    private let useHealthKitKey = "useHealthKit"
+    
     var healthStore: HKHealthStore?
     var activityType: ActivityType
     
@@ -15,11 +17,12 @@ class MatchSetupViewModel: NSObject {
     init(activityType: ActivityType, healthStore: HKHealthStore?) {
         self.activityType = activityType
         self.healthStore = healthStore
+        self.useHealthKit = NSUserDefaults.standardUserDefaults().boolForKey(useHealthKitKey)
     }
     
     dynamic var useHealthKit = false {
         didSet {
-            if (useHealthKit) {
+            if useHealthKit {
                 let hkAuthorizationStatus = healthStore?.authorizationStatusForType(HKObjectType.workoutType())
                 if (hkAuthorizationStatus == .SharingDenied) {
                     useHealthKit = false
@@ -32,11 +35,11 @@ class MatchSetupViewModel: NSObject {
                         HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierHeartRate)!
                         ])
                     
-                    self.healthStore?.requestAuthorizationToShareTypes(typesToShare, readTypes: typesToRead) { success, error in
-                        if (success) {
-                            let newAuthorizationStatus = self.healthStore?.authorizationStatusForType(HKObjectType.workoutType())
+                    self.healthStore?.requestAuthorizationToShareTypes(typesToShare, readTypes: typesToRead) { [weak self] success, error in
+                        if let weakSelf = self where success {
+                            let newAuthorizationStatus = weakSelf.healthStore?.authorizationStatusForType(HKObjectType.workoutType())
                             if (newAuthorizationStatus == HKAuthorizationStatus.SharingDenied) {
-                                self.useHealthKit = false
+                                weakSelf.useHealthKit = false
                             }
                         }
                         if let error = error {
@@ -45,6 +48,7 @@ class MatchSetupViewModel: NSObject {
                     }
                 }
             }
+            NSUserDefaults.standardUserDefaults().setBool(useHealthKit, forKey: useHealthKitKey)
         }
     }
     
