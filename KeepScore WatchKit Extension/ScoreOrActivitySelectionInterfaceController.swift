@@ -1,6 +1,7 @@
 import HealthKit
 import WatchKit
 import Foundation
+import KeepScoreKit
 
 class ScoreOrActivitySelectionInterfaceController: WKInterfaceController, MatchSetupDelegate, RewindScoreDelegate, ReviewMatchDelegate {
     
@@ -153,7 +154,6 @@ class ScoreOrActivitySelectionInterfaceController: WKInterfaceController, MatchS
     func matchSetupDidComplete(match: Match, useHealthKit: Bool) {
         debugPrint("matchSetupDidComplete(\(match))")
         createMatchViewModel(match, useHealthKit: useHealthKit)
-        
         if let matchViewModel = matchViewModel, let startDate = matchViewModel.startDate {
             self.matchRunningTimeTimer.setDate(startDate)
             self.matchRunningTimeTimer.setHidden(false)

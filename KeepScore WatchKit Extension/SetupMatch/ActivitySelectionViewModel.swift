@@ -1,4 +1,5 @@
-import WatchKit
+import Foundation
+import KeepScoreKit
 
 class ActivitySelectionViewModel: NSObject {
 

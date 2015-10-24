@@ -1,13 +1,14 @@
 import Foundation
 import HealthKit
+import KeepScoreKit
 
 protocol MatchSetupDelegate: class {
     func matchSetupDidComplete(match: Match, useHealthKit: Bool)
 }
 
-class MatchSetupViewModel: NSObject {
+private let useHealthKitKey = "useHealthKit"
 
-    private let useHealthKitKey = "useHealthKit"
+class MatchSetupViewModel: NSObject {
     
     var healthStore: HKHealthStore?
     var activityType: ActivityType
@@ -26,6 +27,7 @@ class MatchSetupViewModel: NSObject {
                 let hkAuthorizationStatus = healthStore?.authorizationStatusForType(HKObjectType.workoutType())
                 if (hkAuthorizationStatus == .SharingDenied) {
                     useHealthKit = false
+                    NSUserDefaults.standardUserDefaults().setBool(false, forKey: useHealthKitKey)
                 } else if (hkAuthorizationStatus == .NotDetermined) {
                     
                     let typesToShare = Set([HKObjectType.workoutType()])
@@ -40,6 +42,7 @@ class MatchSetupViewModel: NSObject {
                             let newAuthorizationStatus = weakSelf.healthStore?.authorizationStatusForType(HKObjectType.workoutType())
                             if (newAuthorizationStatus == HKAuthorizationStatus.SharingDenied) {
                                 weakSelf.useHealthKit = false
+                                NSUserDefaults.standardUserDefaults().setBool(false, forKey: useHealthKitKey)
                             }
                         }
                         if let error = error {
@@ -48,7 +51,7 @@ class MatchSetupViewModel: NSObject {
                     }
                 }
             }
-            NSUserDefaults.standardUserDefaults().setBool(useHealthKit, forKey: useHealthKitKey)
+            NSUserDefaults.standardUserDefaults().setBool(true, forKey: useHealthKitKey)
         }
     }
     

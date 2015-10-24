@@ -1,4 +1,5 @@
 import WatchKit
+import KeepScoreKit
 
 protocol RewindScoreDelegate: class {
     
@@ -26,12 +27,12 @@ class RewindScoreViewModel: NSObject {
     
     init(match: Match) {
         self.match = match
-        self.selectedMatchScoreIndex = match.matchScores.count-1
+        self.selectedMatchScoreIndex = 0
     }
     
     func rewindToSelectedMatchScoreIndex() {
-        let start = selectedMatchScoreIndex + 1
-        let end = matchScores.count
+        let start = 0
+        let end = selectedMatchScoreIndex
         self.match.matchScores.removeRange(Range(start: start, end: end))
         self.delegate?.matchScoreWasRewound(self)
     }

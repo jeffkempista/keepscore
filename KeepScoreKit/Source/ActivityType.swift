@@ -11,7 +11,7 @@ public enum ActivityType : String {
     case Volleyball
     case Other
     
-    func getTitle() -> String {
+    public func getTitle() -> String {
         switch (self) {
         case .Baseball:
             return "Baseball"
@@ -30,7 +30,7 @@ public enum ActivityType : String {
         }
     }
     
-    func getWorkoutActivityType() -> HKWorkoutActivityType {
+    public func getWorkoutActivityType() -> HKWorkoutActivityType {
         switch (self) {
         case .Baseball:
             return .Baseball

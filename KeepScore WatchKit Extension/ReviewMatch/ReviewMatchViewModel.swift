@@ -1,4 +1,5 @@
-import WatchKit
+import Foundation
+import KeepScoreKit
 
 protocol ReviewMatchDelegate: class {
     func matchReviewDidSave(match: Match)

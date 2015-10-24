@@ -8,31 +8,34 @@
 
 /* Begin PBXBuildFile section */
 		1F16C7451BA7508800D65436 /* KeepScoreKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F16C7441BA7508800D65436 /* KeepScoreKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1F16C74C1BA7508800D65436 /* KeepScoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F16C7421BA7508800D65436 /* KeepScoreKit.framework */; };
 		1F16C7531BA7508800D65436 /* KeepScoreKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F16C7521BA7508800D65436 /* KeepScoreKitTests.swift */; };
-		1F16C7571BA7508800D65436 /* KeepScoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F16C7421BA7508800D65436 /* KeepScoreKit.framework */; };
-		1F16C7581BA7508800D65436 /* KeepScoreKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1F16C7421BA7508800D65436 /* KeepScoreKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1F16C7621BA750FC00D65436 /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F16C7611BA750FC00D65436 /* Match.swift */; };
 		1F16C7651BA755BE00D65436 /* MatchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F16C7641BA755BE00D65436 /* MatchTests.swift */; };
-		1F16C7671BA75D2200D65436 /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F16C7611BA750FC00D65436 /* Match.swift */; };
 		1F3A16781B82B9AA00120F80 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3A16771B82B9AA00120F80 /* AppDelegate.swift */; };
 		1F3A167A1B82B9AA00120F80 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3A16791B82B9AA00120F80 /* ViewController.swift */; };
 		1F3A167D1B82B9AA00120F80 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F3A167B1B82B9AA00120F80 /* Main.storyboard */; };
 		1F3A167F1B82B9AA00120F80 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F3A167E1B82B9AA00120F80 /* Assets.xcassets */; };
 		1F3A16821B82B9AA00120F80 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F3A16801B82B9AA00120F80 /* LaunchScreen.storyboard */; };
 		1F3A168D1B82B9AA00120F80 /* KeepScoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3A168C1B82B9AA00120F80 /* KeepScoreTests.swift */; };
-		1F3A16921B82B9AA00120F80 /* KeepScore WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 1F3A16911B82B9AA00120F80 /* KeepScore WatchKit App.app */; };
 		1F3A16981B82B9AA00120F80 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F3A16961B82B9AA00120F80 /* Interface.storyboard */; };
 		1F3A169A1B82B9AA00120F80 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F3A16991B82B9AA00120F80 /* Assets.xcassets */; };
 		1F3A16A11B82B9AA00120F80 /* KeepScore WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 1F3A16A01B82B9AA00120F80 /* KeepScore WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		1F3A16A81B82B9AA00120F80 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3A16A71B82B9AA00120F80 /* ExtensionDelegate.swift */; };
 		1F3A16AA1B82B9AA00120F80 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F3A16A91B82B9AA00120F80 /* Assets.xcassets */; };
 		1F3A16C31B82C1D700120F80 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F3A16C21B82C1D700120F80 /* HealthKit.framework */; };
-		1F3A16C61B82C1F200120F80 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F3A16C51B82C1F200120F80 /* HealthKit.framework */; };
+		1F44331A1BDAFEC40014C432 /* ActivityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB8354D1BC2C72D00FF86D1 /* ActivityType.swift */; };
+		1F44331B1BDAFEC40014C432 /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F16C7611BA750FC00D65436 /* Match.swift */; };
+		1F44331E1BDAFEC40014C432 /* KeepScoreKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F16C7441BA7508800D65436 /* KeepScoreKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1F44332F1BDB01F70014C432 /* KeepScore WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 1F3A16911B82B9AA00120F80 /* KeepScore WatchKit App.app */; };
+		1F4433311BDB05A90014C432 /* KeepScoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F16C7421BA7508800D65436 /* KeepScoreKit.framework */; };
+		1F4433681BDB108F0014C432 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F4433671BDB108F0014C432 /* HealthKit.framework */; };
+		1F44336E1BDB14710014C432 /* KeepScoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F4433231BDAFEC40014C432 /* KeepScoreKit.framework */; };
+		1F44336F1BDB14710014C432 /* KeepScoreKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1F4433231BDAFEC40014C432 /* KeepScoreKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1F4433731BDB14930014C432 /* KeepScoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F16C7421BA7508800D65436 /* KeepScoreKit.framework */; };
+		1F4433741BDB14930014C432 /* KeepScoreKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1F16C7421BA7508800D65436 /* KeepScoreKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1F65748D1B8407BD008D4B50 /* WatchKitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F65748C1B8407BD008D4B50 /* WatchKitExtensions.swift */; };
 		1FB156FC1B855CD900E53002 /* WorkoutSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB156FB1B855CD900E53002 /* WorkoutSessionManager.swift */; };
 		1FB8354E1BC2C72D00FF86D1 /* ActivityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB8354D1BC2C72D00FF86D1 /* ActivityType.swift */; };
-		1FB835521BC2C88500FF86D1 /* ActivityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB8354D1BC2C72D00FF86D1 /* ActivityType.swift */; };
 		1FB835571BC2C9E900FF86D1 /* MatchSetupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB835561BC2C9E900FF86D1 /* MatchSetupViewModel.swift */; };
 		1FB835591BC2CA6A00FF86D1 /* ActivityTableRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB835581BC2CA6A00FF86D1 /* ActivityTableRowController.swift */; };
 		1FB8355B1BC2CA8600FF86D1 /* MatchSetupInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB8355A1BC2CA8600FF86D1 /* MatchSetupInterfaceController.swift */; };
@@ -54,20 +57,6 @@
 			remoteGlobalIDString = 1F16C7411BA7508800D65436;
 			remoteInfo = KeepScoreKit;
 		};
-		1F16C74F1BA7508800D65436 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1F3A166C1B82B9AA00120F80 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 1F3A16731B82B9AA00120F80;
-			remoteInfo = KeepScore;
-		};
-		1F16C7551BA7508800D65436 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1F3A166C1B82B9AA00120F80 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 1F16C7411BA7508800D65436;
-			remoteInfo = KeepScoreKit;
-		};
 		1F3A16891B82B9AA00120F80 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1F3A166C1B82B9AA00120F80 /* Project object */;
@@ -75,19 +64,33 @@
 			remoteGlobalIDString = 1F3A16731B82B9AA00120F80;
 			remoteInfo = KeepScore;
 		};
-		1F3A16931B82B9AA00120F80 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1F3A166C1B82B9AA00120F80 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 1F3A16901B82B9AA00120F80;
-			remoteInfo = "KeepScore WatchKit App";
-		};
 		1F3A16A21B82B9AA00120F80 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1F3A166C1B82B9AA00120F80 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 1F3A169F1B82B9AA00120F80;
 			remoteInfo = "KeepScore WatchKit Extension";
+		};
+		1F44332D1BDB01DA0014C432 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1F3A166C1B82B9AA00120F80 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1F3A16901B82B9AA00120F80;
+			remoteInfo = "KeepScore WatchKit App";
+		};
+		1F4433701BDB14710014C432 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1F3A166C1B82B9AA00120F80 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1F4433181BDAFEC40014C432;
+			remoteInfo = "KeepScoreKit watchOS";
+		};
+		1F4433751BDB14930014C432 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1F3A166C1B82B9AA00120F80 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1F16C7411BA7508800D65436;
+			remoteInfo = "KeepScoreKit iOS";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -98,7 +101,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				1F16C7581BA7508800D65436 /* KeepScoreKit.framework in Embed Frameworks */,
+				1F4433741BDB14930014C432 /* KeepScoreKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -120,9 +123,20 @@
 			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
 			dstSubfolderSpec = 16;
 			files = (
-				1F3A16921B82B9AA00120F80 /* KeepScore WatchKit App.app in Embed Watch Content */,
+				1F44332F1BDB01F70014C432 /* KeepScore WatchKit App.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1F4433721BDB14710014C432 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				1F44336F1BDB14710014C432 /* KeepScoreKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -131,7 +145,7 @@
 		1F16C7421BA7508800D65436 /* KeepScoreKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KeepScoreKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F16C7441BA7508800D65436 /* KeepScoreKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KeepScoreKit.h; sourceTree = "<group>"; };
 		1F16C7461BA7508800D65436 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1F16C74B1BA7508800D65436 /* KeepScoreKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KeepScoreKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F16C74B1BA7508800D65436 /* KeepScoreKit iOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "KeepScoreKit iOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F16C7521BA7508800D65436 /* KeepScoreKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeepScoreKitTests.swift; sourceTree = "<group>"; };
 		1F16C7541BA7508800D65436 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1F16C7611BA750FC00D65436 /* Match.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
@@ -155,7 +169,8 @@
 		1F3A16A91B82B9AA00120F80 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1F3A16AB1B82B9AA00120F80 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1F3A16C21B82C1D700120F80 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS2.0.sdk/System/Library/Frameworks/HealthKit.framework; sourceTree = DEVELOPER_DIR; };
-		1F3A16C51B82C1F200120F80 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
+		1F4433231BDAFEC40014C432 /* KeepScoreKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KeepScoreKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F4433671BDB108F0014C432 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		1F65748C1B8407BD008D4B50 /* WatchKitExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchKitExtensions.swift; sourceTree = "<group>"; };
 		1FADC5441B86A672001BE8E3 /* KeepScore.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = KeepScore.entitlements; sourceTree = "<group>"; };
 		1FADC5451B86A67F001BE8E3 /* KeepScore WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "KeepScore WatchKit Extension.entitlements"; sourceTree = "<group>"; };
@@ -187,7 +202,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1F16C74C1BA7508800D65436 /* KeepScoreKit.framework in Frameworks */,
+				1F4433311BDB05A90014C432 /* KeepScoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -195,8 +210,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1F3A16C61B82C1F200120F80 /* HealthKit.framework in Frameworks */,
-				1F16C7571BA7508800D65436 /* KeepScoreKit.framework in Frameworks */,
+				1F4433681BDB108F0014C432 /* HealthKit.framework in Frameworks */,
+				1F4433731BDB14930014C432 /* KeepScoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,6 +227,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F3A16C31B82C1D700120F80 /* HealthKit.framework in Frameworks */,
+				1F44336E1BDB14710014C432 /* KeepScoreKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1F44331C1BDAFEC40014C432 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -276,7 +299,8 @@
 				1F3A16911B82B9AA00120F80 /* KeepScore WatchKit App.app */,
 				1F3A16A01B82B9AA00120F80 /* KeepScore WatchKit Extension.appex */,
 				1F16C7421BA7508800D65436 /* KeepScoreKit.framework */,
-				1F16C74B1BA7508800D65436 /* KeepScoreKitTests.xctest */,
+				1F16C74B1BA7508800D65436 /* KeepScoreKit iOS Tests.xctest */,
+				1F4433231BDAFEC40014C432 /* KeepScoreKit.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -342,7 +366,7 @@
 		1F3A16C71B82C1F700120F80 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				1F3A16C51B82C1F200120F80 /* HealthKit.framework */,
+				1F4433671BDB108F0014C432 /* HealthKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -408,12 +432,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1F44331D1BDAFEC40014C432 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1F44331E1BDAFEC40014C432 /* KeepScoreKit.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		1F16C7411BA7508800D65436 /* KeepScoreKit */ = {
+		1F16C7411BA7508800D65436 /* KeepScoreKit iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1F16C75D1BA7508800D65436 /* Build configuration list for PBXNativeTarget "KeepScoreKit" */;
+			buildConfigurationList = 1F16C75D1BA7508800D65436 /* Build configuration list for PBXNativeTarget "KeepScoreKit iOS" */;
 			buildPhases = (
 				1F16C73D1BA7508800D65436 /* Sources */,
 				1F16C73E1BA7508800D65436 /* Frameworks */,
@@ -424,14 +456,14 @@
 			);
 			dependencies = (
 			);
-			name = KeepScoreKit;
+			name = "KeepScoreKit iOS";
 			productName = KeepScoreKit;
 			productReference = 1F16C7421BA7508800D65436 /* KeepScoreKit.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		1F16C74A1BA7508800D65436 /* KeepScoreKitTests */ = {
+		1F16C74A1BA7508800D65436 /* KeepScoreKit iOS Tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1F16C75F1BA7508800D65436 /* Build configuration list for PBXNativeTarget "KeepScoreKitTests" */;
+			buildConfigurationList = 1F16C75F1BA7508800D65436 /* Build configuration list for PBXNativeTarget "KeepScoreKit iOS Tests" */;
 			buildPhases = (
 				1F16C7471BA7508800D65436 /* Sources */,
 				1F16C7481BA7508800D65436 /* Frameworks */,
@@ -441,11 +473,10 @@
 			);
 			dependencies = (
 				1F16C74E1BA7508800D65436 /* PBXTargetDependency */,
-				1F16C7501BA7508800D65436 /* PBXTargetDependency */,
 			);
-			name = KeepScoreKitTests;
+			name = "KeepScoreKit iOS Tests";
 			productName = KeepScoreKitTests;
-			productReference = 1F16C74B1BA7508800D65436 /* KeepScoreKitTests.xctest */;
+			productReference = 1F16C74B1BA7508800D65436 /* KeepScoreKit iOS Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		1F3A16731B82B9AA00120F80 /* KeepScore */ = {
@@ -461,8 +492,8 @@
 			buildRules = (
 			);
 			dependencies = (
-				1F3A16941B82B9AA00120F80 /* PBXTargetDependency */,
-				1F16C7561BA7508800D65436 /* PBXTargetDependency */,
+				1F44332E1BDB01DA0014C432 /* PBXTargetDependency */,
+				1F4433761BDB14930014C432 /* PBXTargetDependency */,
 			);
 			name = KeepScore;
 			productName = KeepScore;
@@ -511,15 +542,35 @@
 				1F3A169C1B82B9AA00120F80 /* Sources */,
 				1F3A169D1B82B9AA00120F80 /* Frameworks */,
 				1F3A169E1B82B9AA00120F80 /* Resources */,
+				1F4433721BDB14710014C432 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				1F4433711BDB14710014C432 /* PBXTargetDependency */,
 			);
 			name = "KeepScore WatchKit Extension";
 			productName = "KeepScore WatchKit Extension";
 			productReference = 1F3A16A01B82B9AA00120F80 /* KeepScore WatchKit Extension.appex */;
 			productType = "com.apple.product-type.watchkit2-extension";
+		};
+		1F4433181BDAFEC40014C432 /* KeepScoreKit watchOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1F4433201BDAFEC40014C432 /* Build configuration list for PBXNativeTarget "KeepScoreKit watchOS" */;
+			buildPhases = (
+				1F4433191BDAFEC40014C432 /* Sources */,
+				1F44331C1BDAFEC40014C432 /* Frameworks */,
+				1F44331D1BDAFEC40014C432 /* Headers */,
+				1F44331F1BDAFEC40014C432 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "KeepScoreKit watchOS";
+			productName = KeepScoreKit;
+			productReference = 1F4433231BDAFEC40014C432 /* KeepScoreKit.framework */;
+			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
@@ -537,7 +588,6 @@
 					};
 					1F16C74A1BA7508800D65436 = {
 						CreatedOnToolsVersion = 7.0;
-						TestTargetID = 1F3A16731B82B9AA00120F80;
 					};
 					1F3A16731B82B9AA00120F80 = {
 						CreatedOnToolsVersion = 7.0;
@@ -576,6 +626,9 @@
 							};
 						};
 					};
+					1F4433181BDAFEC40014C432 = {
+						DevelopmentTeam = FJWYFCDC4M;
+					};
 				};
 			};
 			buildConfigurationList = 1F3A166F1B82B9AA00120F80 /* Build configuration list for PBXProject "KeepScore" */;
@@ -595,8 +648,9 @@
 				1F3A16871B82B9AA00120F80 /* KeepScoreTests */,
 				1F3A16901B82B9AA00120F80 /* KeepScore WatchKit App */,
 				1F3A169F1B82B9AA00120F80 /* KeepScore WatchKit Extension */,
-				1F16C7411BA7508800D65436 /* KeepScoreKit */,
-				1F16C74A1BA7508800D65436 /* KeepScoreKitTests */,
+				1F16C7411BA7508800D65436 /* KeepScoreKit iOS */,
+				1F4433181BDAFEC40014C432 /* KeepScoreKit watchOS */,
+				1F16C74A1BA7508800D65436 /* KeepScoreKit iOS Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -650,6 +704,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1F44331F1BDAFEC40014C432 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -692,8 +753,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1FB835521BC2C88500FF86D1 /* ActivityType.swift in Sources */,
-				1F16C7671BA75D2200D65436 /* Match.swift in Sources */,
 				1FF4D95C1BD3EFF40042DFC4 /* ActivitySelectionViewModel.swift in Sources */,
 				1FBABC711BC4AEF7002A090D /* ReviewMatchInterfaceController.swift in Sources */,
 				1F65748D1B8407BD008D4B50 /* WatchKitExtensions.swift in Sources */,
@@ -711,38 +770,47 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1F4433191BDAFEC40014C432 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1F44331A1BDAFEC40014C432 /* ActivityType.swift in Sources */,
+				1F44331B1BDAFEC40014C432 /* Match.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
 		1F16C74E1BA7508800D65436 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 1F16C7411BA7508800D65436 /* KeepScoreKit */;
+			target = 1F16C7411BA7508800D65436 /* KeepScoreKit iOS */;
 			targetProxy = 1F16C74D1BA7508800D65436 /* PBXContainerItemProxy */;
-		};
-		1F16C7501BA7508800D65436 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 1F3A16731B82B9AA00120F80 /* KeepScore */;
-			targetProxy = 1F16C74F1BA7508800D65436 /* PBXContainerItemProxy */;
-		};
-		1F16C7561BA7508800D65436 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 1F16C7411BA7508800D65436 /* KeepScoreKit */;
-			targetProxy = 1F16C7551BA7508800D65436 /* PBXContainerItemProxy */;
 		};
 		1F3A168A1B82B9AA00120F80 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 1F3A16731B82B9AA00120F80 /* KeepScore */;
 			targetProxy = 1F3A16891B82B9AA00120F80 /* PBXContainerItemProxy */;
 		};
-		1F3A16941B82B9AA00120F80 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 1F3A16901B82B9AA00120F80 /* KeepScore WatchKit App */;
-			targetProxy = 1F3A16931B82B9AA00120F80 /* PBXContainerItemProxy */;
-		};
 		1F3A16A31B82B9AA00120F80 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 1F3A169F1B82B9AA00120F80 /* KeepScore WatchKit Extension */;
 			targetProxy = 1F3A16A21B82B9AA00120F80 /* PBXContainerItemProxy */;
+		};
+		1F44332E1BDB01DA0014C432 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1F3A16901B82B9AA00120F80 /* KeepScore WatchKit App */;
+			targetProxy = 1F44332D1BDB01DA0014C432 /* PBXContainerItemProxy */;
+		};
+		1F4433711BDB14710014C432 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1F4433181BDAFEC40014C432 /* KeepScoreKit watchOS */;
+			targetProxy = 1F4433701BDB14710014C432 /* PBXContainerItemProxy */;
+		};
+		1F4433761BDB14930014C432 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1F16C7411BA7508800D65436 /* KeepScoreKit iOS */;
+			targetProxy = 1F4433751BDB14930014C432 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -786,11 +854,12 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = KeepScoreKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.fouram.KeepScoreKit;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = KeepScoreKit;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -811,11 +880,12 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = KeepScoreKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.fouram.KeepScoreKit;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = KeepScoreKit;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -830,7 +900,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.fouram.KeepScoreKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KeepScore.app/KeepScore";
 			};
 			name = Debug;
 		};
@@ -841,7 +910,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.fouram.KeepScoreKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KeepScore.app/KeepScore";
 			};
 			name = Release;
 		};
@@ -934,6 +1002,7 @@
 				CODE_SIGN_ENTITLEMENTS = "KeepScore WatchKit Extension/KeepScore WatchKit Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = "KeepScore WatchKit Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.fouram.KeepScore.watchkitapp.watchkitextension;
@@ -952,6 +1021,7 @@
 				CODE_SIGN_ENTITLEMENTS = "KeepScore WatchKit Extension/KeepScore WatchKit Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = "KeepScore WatchKit Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.fouram.KeepScore.watchkitapp.watchkitextension;
@@ -1062,10 +1132,65 @@
 			};
 			name = Release;
 		};
+		1F4433211BDAFEC40014C432 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				INFOPLIST_FILE = KeepScoreKit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.fouram.KeepScoreKit;
+				PRODUCT_NAME = KeepScoreKit;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		1F4433221BDAFEC40014C432 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				INFOPLIST_FILE = KeepScoreKit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.fouram.KeepScoreKit;
+				PRODUCT_NAME = KeepScoreKit;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1F16C75D1BA7508800D65436 /* Build configuration list for PBXNativeTarget "KeepScoreKit" */ = {
+		1F16C75D1BA7508800D65436 /* Build configuration list for PBXNativeTarget "KeepScoreKit iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1F16C7591BA7508800D65436 /* Debug */,
@@ -1074,7 +1199,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1F16C75F1BA7508800D65436 /* Build configuration list for PBXNativeTarget "KeepScoreKitTests" */ = {
+		1F16C75F1BA7508800D65436 /* Build configuration list for PBXNativeTarget "KeepScoreKit iOS Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1F16C75B1BA7508800D65436 /* Debug */,
@@ -1124,6 +1249,15 @@
 			buildConfigurations = (
 				1F3A16BA1B82B9AA00120F80 /* Debug */,
 				1F3A16BB1B82B9AA00120F80 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1F4433201BDAFEC40014C432 /* Build configuration list for PBXNativeTarget "KeepScoreKit watchOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1F4433211BDAFEC40014C432 /* Debug */,
+				1F4433221BDAFEC40014C432 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -1,6 +1,7 @@
 import Foundation
 import HealthKit
 import WatchConnectivity
+import KeepScoreKit
 
 class MatchViewModel: NSObject, WorkoutSessionManagerDelegate, WorkoutSessionManagerQuantityUpdateDelegate, HKWorkoutSessionDelegate {
 
@@ -90,26 +91,21 @@ class MatchViewModel: NSObject, WorkoutSessionManagerDelegate, WorkoutSessionMan
     }
     
     func workoutSessionManager(workoutSessionManager: WorkoutSessionManager, didStartWorkoutWithDate startDate: NSDate) {
-        debugPrint("workoutSessionManager-didStartWorkoutWithDate \(startDate)")
         self.startDate = startDate
     }
     
     func workoutSessionManager(workoutSessionManager: WorkoutSessionManager, didStopWorkoutWithDate endDate: NSDate) {
-        debugPrint("workoutSessionManager-didStopWorkoutWithDate \(endDate)")
     }
     
     func workoutSessionManager(workoutSessionManager: WorkoutSessionManager, didUpdateActiveEnergyQuantity activeEnergyQuantity: HKQuantity) {
-        debugPrint("didUpdateActiveEnergyQuantity")
         caloriesBurned = activeEnergyQuantity.doubleValueForUnit(workoutSessionManager.energyUnit)
     }
     
     func workoutSessionManager(workoutSessionManager: WorkoutSessionManager, didUpdateDistanceQuantity distanceQuantity: HKQuantity) {
-        debugPrint("didUpdateDistanceQuantity")
         distanceTravelled = distanceQuantity.doubleValueForUnit(workoutSessionManager.distanceUnit)
     }
     
     func workoutSessionManager(workoutSessionManager: WorkoutSessionManager, didUpdateHeartRateSample heartRateSample: HKQuantitySample) {
-        debugPrint("didUpdateHeartRateSample")
         heartRate = heartRateSample.quantity.doubleValueForUnit(workoutSessionManager.countPerMinuteUnit)
     }
     

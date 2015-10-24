@@ -1,12 +1,14 @@
 import HealthKit
 import WatchKit
 import Foundation
+import KeepScoreKit
 
 class MatchSetupInterfaceController: WKInterfaceController {
 
     private var useHealthKitContext = 0
     
-    @IBOutlet weak var useHealthKitSwitch: WKInterfaceSwitch!
+    @IBOutlet var useHealthKitSwitch: WKInterfaceSwitch!
+    @IBOutlet var startButton: WKInterfaceButton!
     
     var matchSetupViewModel: MatchSetupViewModel?
     
@@ -34,7 +36,6 @@ class MatchSetupInterfaceController: WKInterfaceController {
         super.didDeactivate()
         
         matchSetupViewModel?.removeObserver(self, forKeyPath: "useHealthKit", context: &useHealthKitContext)
-        matchSetupViewModel = nil
     }
     
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
