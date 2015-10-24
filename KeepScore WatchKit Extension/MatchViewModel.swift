@@ -1,10 +1,10 @@
 import Foundation
 import HealthKit
-import WatchConnectivity
 import KeepScoreKit
 
 class MatchViewModel: NSObject, WorkoutSessionManagerDelegate, WorkoutSessionManagerQuantityUpdateDelegate, HKWorkoutSessionDelegate {
 
+    let matchConnectivityManager = MatchConnectivityManager()
     var match: Match?
     var useHealthKit = false
     weak var workoutSessionManager: WorkoutSessionManager?
@@ -40,7 +40,7 @@ class MatchViewModel: NSObject, WorkoutSessionManagerDelegate, WorkoutSessionMan
             return 0
         }
         match.incrementHomeTeamScore()
-        sendScoreUpdateInfo()
+        matchConnectivityManager.sendScoreUpdateInfo(match)
         return match.homeTeamScore
     }
     
@@ -49,7 +49,7 @@ class MatchViewModel: NSObject, WorkoutSessionManagerDelegate, WorkoutSessionMan
             return 0
         }
         match.incrementAwayTeamScore()
-        sendScoreUpdateInfo()
+        matchConnectivityManager.sendScoreUpdateInfo(match)
         return match.awayTeamScore
     }
     
@@ -59,15 +59,18 @@ class MatchViewModel: NSObject, WorkoutSessionManagerDelegate, WorkoutSessionMan
         } else {
             startDate = NSDate()
         }
-        
-        sendScoreUpdateInfo()
+        if let match = match {
+            matchConnectivityManager.sendScoreUpdateInfo(match)
+        }
     }
     
     func endMatch() {
         if let workoutSessionManager = workoutSessionManager {
             workoutSessionManager.stopWorkout()
         }
-        sendScoreUpdateInfo()
+        if let match = match {
+            matchConnectivityManager.sendScoreUpdateInfo(match)
+        }
     }
     
     // MARK: Workout Session Manager Delegate
@@ -107,17 +110,6 @@ class MatchViewModel: NSObject, WorkoutSessionManagerDelegate, WorkoutSessionMan
     
     func workoutSessionManager(workoutSessionManager: WorkoutSessionManager, didUpdateHeartRateSample heartRateSample: HKQuantitySample) {
         heartRate = heartRateSample.quantity.doubleValueForUnit(workoutSessionManager.countPerMinuteUnit)
-    }
-    
-    // MARK: WCSession Stuff
-    
-    func sendScoreUpdateInfo() {
-        if let match = self.match where WCSession.defaultSession().reachable {
-            let requestValues = ["type": "ScoreUpdate", "homeTeamScore" : match.homeTeamScore, "awayTeamScore": match.awayTeamScore] as [String: AnyObject]
-            let session = WCSession.defaultSession()
-            
-            session.sendMessage(requestValues, replyHandler: nil, errorHandler: nil)
-        }
     }
     
 }

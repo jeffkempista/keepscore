@@ -9,6 +9,7 @@ protocol RewindScoreDelegate: class {
 
 class RewindScoreViewModel: NSObject {
 
+    let matchConnectivityManager = MatchConnectivityManager()
     var match: Match
     var selectedMatchScoreIndex: Int
     weak var delegate: RewindScoreDelegate?
@@ -34,6 +35,7 @@ class RewindScoreViewModel: NSObject {
         let start = 0
         let end = selectedMatchScoreIndex
         self.match.matchScores.removeRange(Range(start: start, end: end))
+        matchConnectivityManager.sendScoreUpdateInfo(match)
         self.delegate?.matchScoreWasRewound(self)
     }
     

@@ -10,10 +10,12 @@ class ViewController: UIViewController {
         
         let center = NSNotificationCenter.defaultCenter()
         center.addObserverForName("notification", object: nil, queue: nil) { notification in
-            let homeTeamScore = notification.userInfo?["homeTeamScore"] as! Int
-            let awayTeamScore = notification.userInfo?["awayTeamScore"] as! Int
-            self.homeScoreLabel.text = "\(homeTeamScore)"
-            self.awayScoreLabel.text = "\(awayTeamScore)"
+            dispatch_async(dispatch_get_main_queue()) {
+                let homeTeamScore = notification.userInfo?["homeTeamScore"] as! Int
+                let awayTeamScore = notification.userInfo?["awayTeamScore"] as! Int
+                self.homeScoreLabel.text = "\(homeTeamScore)"
+                self.awayScoreLabel.text = "\(awayTeamScore)"
+            }
         }
     }
     
@@ -26,7 +28,6 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
 
 }
 

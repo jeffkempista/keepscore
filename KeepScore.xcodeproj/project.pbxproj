@@ -34,6 +34,7 @@
 		1F4433731BDB14930014C432 /* KeepScoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F16C7421BA7508800D65436 /* KeepScoreKit.framework */; };
 		1F4433741BDB14930014C432 /* KeepScoreKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1F16C7421BA7508800D65436 /* KeepScoreKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1F65748D1B8407BD008D4B50 /* WatchKitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F65748C1B8407BD008D4B50 /* WatchKitExtensions.swift */; };
+		1F951F331BDBB15500E6C1FE /* MatchConnectivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F951F321BDBB15500E6C1FE /* MatchConnectivityManager.swift */; };
 		1FB156FC1B855CD900E53002 /* WorkoutSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB156FB1B855CD900E53002 /* WorkoutSessionManager.swift */; };
 		1FB8354E1BC2C72D00FF86D1 /* ActivityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB8354D1BC2C72D00FF86D1 /* ActivityType.swift */; };
 		1FB835571BC2C9E900FF86D1 /* MatchSetupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB835561BC2C9E900FF86D1 /* MatchSetupViewModel.swift */; };
@@ -172,6 +173,7 @@
 		1F4433231BDAFEC40014C432 /* KeepScoreKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KeepScoreKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F4433671BDB108F0014C432 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		1F65748C1B8407BD008D4B50 /* WatchKitExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchKitExtensions.swift; sourceTree = "<group>"; };
+		1F951F321BDBB15500E6C1FE /* MatchConnectivityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchConnectivityManager.swift; sourceTree = "<group>"; };
 		1FADC5441B86A672001BE8E3 /* KeepScore.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = KeepScore.entitlements; sourceTree = "<group>"; };
 		1FADC5451B86A67F001BE8E3 /* KeepScore WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "KeepScore WatchKit Extension.entitlements"; sourceTree = "<group>"; };
 		1FB156FB1B855CD900E53002 /* WorkoutSessionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutSessionManager.swift; sourceTree = "<group>"; };
@@ -341,6 +343,7 @@
 			children = (
 				1F3A16A71B82B9AA00120F80 /* ExtensionDelegate.swift */,
 				1FF340391B82CE650071CC46 /* HealthKitExtensions.swift */,
+				1F951F321BDBB15500E6C1FE /* MatchConnectivityManager.swift */,
 				1FF4D95F1BD46F910042DFC4 /* MatchViewModel.swift */,
 				1FD2B02D1BD70DC200759122 /* RewindScoreInterfaceController.swift */,
 				1FD2B02F1BD70DEA00759122 /* RewindScoreViewModel.swift */,
@@ -757,6 +760,7 @@
 				1FBABC711BC4AEF7002A090D /* ReviewMatchInterfaceController.swift in Sources */,
 				1F65748D1B8407BD008D4B50 /* WatchKitExtensions.swift in Sources */,
 				1FB8355B1BC2CA8600FF86D1 /* MatchSetupInterfaceController.swift in Sources */,
+				1F951F331BDBB15500E6C1FE /* MatchConnectivityManager.swift in Sources */,
 				1FD2B0301BD70DEA00759122 /* RewindScoreViewModel.swift in Sources */,
 				1FF4D9601BD46F910042DFC4 /* MatchViewModel.swift in Sources */,
 				1F3A16A81B82B9AA00120F80 /* ExtensionDelegate.swift in Sources */,

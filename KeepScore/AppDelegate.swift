@@ -39,13 +39,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
     }
     
     func session(session: WCSession, didReceiveMessage message: [String : AnyObject]) {
-        debugPrint("didReceiveMessage: \(message)")
         let center = NSNotificationCenter.defaultCenter()
         center.postNotification(NSNotification(name: "notification", object: nil, userInfo: message))
     }
 
     func session(session: WCSession, didReceiveMessage message: [String : AnyObject], replyHandler: ([String : AnyObject]) -> Void) {
-        debugPrint("didReceiveMessage: \(message)")
         let center = NSNotificationCenter.defaultCenter()
         center.postNotification(NSNotification(name: "notification", object: nil, userInfo: message))
     }
