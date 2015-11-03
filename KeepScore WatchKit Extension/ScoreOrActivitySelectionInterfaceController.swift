@@ -141,8 +141,6 @@ class ScoreOrActivitySelectionInterfaceController: WKInterfaceController, MatchS
         case &caloriesBurnedContext:
             if let newValue = change?[NSKeyValueChangeNewKey] as? Double where newValue > 0.0 {
                 debugPrint("Calories Burned updated: \(matchViewModel?.caloriesBurnedForDisplay)")
-                distanceTravelledLabel.setText(matchViewModel!.caloriesBurnedForDisplay)
-                distanceTravelledLabel.setHidden(false)
             }
         case &startDateContext:
             if let newValue = change?[NSKeyValueChangeNewKey] as? NSDate {
