@@ -39,7 +39,6 @@ class ReviewMatchInterfaceController: WKInterfaceController {
     }
 
     @IBAction func saveButtonTapped() {
-        debugPrint("saveButtonTapped")
         self.reviewMatchViewModel?.saveMatch()
         
         let alert = WKAlertAction(title: "OK", style: .Default) {
@@ -49,7 +48,6 @@ class ReviewMatchInterfaceController: WKInterfaceController {
     }
     
     @IBAction func discardButtonTapped() {
-        debugPrint("discardButtonTapped")
         self.reviewMatchViewModel?.discardMatch()
         dismissController()
     }

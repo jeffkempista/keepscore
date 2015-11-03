@@ -28,9 +28,15 @@ class MatchSetupViewModel: NSObject {
                 if (hkAuthorizationStatus == .SharingDenied) {
                     useHealthKit = false
                     NSUserDefaults.standardUserDefaults().setBool(false, forKey: useHealthKitKey)
+                    NSUserDefaults.standardUserDefaults().synchronize()
                 } else if (hkAuthorizationStatus == .NotDetermined) {
                     
-                    let typesToShare = Set([HKObjectType.workoutType()])
+                    let typesToShare = Set([
+                        HKObjectType.workoutType(),
+                        HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierActiveEnergyBurned)!,
+                        HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDistanceWalkingRunning)!,
+                        HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierHeartRate)!
+                        ])
                     let typesToRead = Set([
                         HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierActiveEnergyBurned)!,
                         HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDistanceWalkingRunning)!,
@@ -43,6 +49,7 @@ class MatchSetupViewModel: NSObject {
                             if (newAuthorizationStatus == HKAuthorizationStatus.SharingDenied) {
                                 weakSelf.useHealthKit = false
                                 NSUserDefaults.standardUserDefaults().setBool(false, forKey: useHealthKitKey)
+                                NSUserDefaults.standardUserDefaults().synchronize()
                             }
                         }
                         if let error = error {

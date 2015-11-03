@@ -86,6 +86,8 @@ class WorkoutSessionManager: NSObject {
         
         guard let startDate = self.workoutStartDate, endDate = self.workoutEndDate else { return }
         // create a workout sample
+        debugPrint("saving workout with startDate \(startDate) and endDate \(endDate)")
+        debugPrint("saving workout with energy = \(self.currentActiveEnergyQuantity.doubleValueForUnit(self.energyUnit)), distance = \(self.currentDistanceQuantity.doubleValueForUnit(self.distanceUnit))")
         let workout = HKWorkout(activityType: self.workoutActivityType, startDate: startDate, endDate: endDate, duration: endDate.timeIntervalSinceDate(startDate), totalEnergyBurned: self.currentActiveEnergyQuantity, totalDistance: self.currentDistanceQuantity, metadata: nil)
         
         // Create an array of all the samples to add to the workout
@@ -95,9 +97,16 @@ class WorkoutSessionManager: NSObject {
         allSamples += self.heartRateSamples
         
         // Save the workout
-        self.healthStore.saveObject(workout) { (success, error: NSError?) in
+        self.healthStore.saveObject(workout) { [weak self] (success, error: NSError?) in
             if let error = error {
                 debugPrint(error.localizedDescription)
+            }
+            if let weakSelf = self {
+                weakSelf.healthStore.addSamples(allSamples, toWorkout: workout, completion: { (success, error: NSError?) -> Void in
+                    if let error = error {
+                        debugPrint(error.localizedDescription)
+                    }
+                })
             }
         }
     }
@@ -122,15 +131,12 @@ class WorkoutSessionManager: NSObject {
     func addDistanceSamples(samples: [HKSample]?) {
         guard let distanceSamples = samples as? [HKQuantitySample] else { return }
         
-        dispatch_async(dispatch_get_main_queue()) { [weak self] in
-            
-            if let weakSelf = self {
-                weakSelf.currentDistanceQuantity = weakSelf.currentDistanceQuantity.addQuantitiesFromSamples(distanceSamples, unit: weakSelf.distanceUnit)
-                weakSelf.distanceSamples += distanceSamples
-                
-                weakSelf.quantityUpdateDelegate?.workoutSessionManager(weakSelf, didUpdateDistanceQuantity: weakSelf.currentDistanceQuantity)
-            }
+        for sample in distanceSamples {
+            debugPrint("Adding Distance Sample \(sample.quantity.doubleValueForUnit(self.distanceUnit))")
         }
+        self.currentDistanceQuantity = self.currentDistanceQuantity.addQuantitiesFromSamples(distanceSamples, unit: self.distanceUnit)
+        self.distanceSamples += distanceSamples
+        self.quantityUpdateDelegate?.workoutSessionManager(self, didUpdateDistanceQuantity: currentDistanceQuantity)
     }
     
     func createStreamingActiveEnergyQuery(workoutStartDate: NSDate) -> HKQuery {
@@ -151,15 +157,9 @@ class WorkoutSessionManager: NSObject {
     func addActiveEnergySamples(samples: [HKSample]?) {
         guard let activeEnergySamples = samples as? [HKQuantitySample] else { return }
         
-        dispatch_async(dispatch_get_main_queue()) { [weak self] in
-            
-            if let weakSelf = self {
-                weakSelf.currentActiveEnergyQuantity = weakSelf.currentActiveEnergyQuantity.addQuantitiesFromSamples(activeEnergySamples, unit: weakSelf.energyUnit)
-                weakSelf.activeEnergySamples += activeEnergySamples
-                
-                weakSelf.quantityUpdateDelegate?.workoutSessionManager(weakSelf, didUpdateActiveEnergyQuantity: weakSelf.currentActiveEnergyQuantity)
-            }
-        }
+        self.currentActiveEnergyQuantity = self.currentActiveEnergyQuantity.addQuantitiesFromSamples(activeEnergySamples, unit: self.energyUnit)
+        self.activeEnergySamples += activeEnergySamples
+        self.quantityUpdateDelegate?.workoutSessionManager(self, didUpdateActiveEnergyQuantity: self.currentActiveEnergyQuantity)
     }
     
     func createStreamingHeartRateQuery(workoutStartDate: NSDate) -> HKQuery {
@@ -179,16 +179,10 @@ class WorkoutSessionManager: NSObject {
     func addHeartRateSamples(samples: [HKSample]?) {
         guard let heartRateSamples = samples as? [HKQuantitySample] else { return }
         
-        dispatch_async(dispatch_get_main_queue()) { [weak self] in
-            
-            if let weakSelf = self {
-                weakSelf.heartRateSamples += heartRateSamples
-                
-                if let currentHeartRateSample = weakSelf.heartRateSamples.last {
-                    weakSelf.currentHeartRateSample = currentHeartRateSample
-                    weakSelf.quantityUpdateDelegate?.workoutSessionManager(weakSelf, didUpdateHeartRateSample: currentHeartRateSample)
-                }
-            }
+        self.heartRateSamples += heartRateSamples
+        if let currentHeartRateSample = self.heartRateSamples.last {
+            self.currentHeartRateSample = currentHeartRateSample
+            self.quantityUpdateDelegate?.workoutSessionManager(self,didUpdateHeartRateSample: currentHeartRateSample)
         }
     }
     

@@ -109,7 +109,6 @@ class ScoreOrActivitySelectionInterfaceController: WKInterfaceController, MatchS
         
         let supportedActivities = activitySelectionViewModel.supportedActivities
         let selectedActitity = supportedActivities[rowIndex]
-        debugPrint("Selected Activity = \(selectedActitity)")
         let matchSetupViewModel = MatchSetupViewModel(activityType: selectedActitity, healthStore: self.healthStore)
         matchSetupViewModel.delegate = self
         return matchSetupViewModel
@@ -129,17 +128,24 @@ class ScoreOrActivitySelectionInterfaceController: WKInterfaceController, MatchS
         switch (context) {
         case &distanceTravelledContext:
             if let newValue = change?[NSKeyValueChangeNewKey] as? Double where newValue > 0.0 {
+                debugPrint("Distance travelled updated: \(matchViewModel?.distanceTravelledForDisplay)")
                 distanceTravelledLabel.setText(matchViewModel!.distanceTravelledForDisplay)
                 distanceTravelledLabel.setHidden(false)
             }
         case &heartRateContext:
             if let newValue = change?[NSKeyValueChangeNewKey] as? Double where newValue > 0.0 {
+                debugPrint("Heart Rate updated: \(matchViewModel!.heartRateForDisplay)")
                 heartRateLabel.setText(matchViewModel!.heartRateForDisplay)
                 heartRateLabel.setHidden(false)
             }
+        case &caloriesBurnedContext:
+            if let newValue = change?[NSKeyValueChangeNewKey] as? Double where newValue > 0.0 {
+                debugPrint("Calories Burned updated: \(matchViewModel?.caloriesBurnedForDisplay)")
+                distanceTravelledLabel.setText(matchViewModel!.caloriesBurnedForDisplay)
+                distanceTravelledLabel.setHidden(false)
+            }
         case &startDateContext:
             if let newValue = change?[NSKeyValueChangeNewKey] as? NSDate {
-                
                 matchRunningTimeTimer.setDate(newValue)
                 matchRunningTimeTimer.setHidden(false)
                 matchRunningTimeTimer.start()
@@ -152,7 +158,6 @@ class ScoreOrActivitySelectionInterfaceController: WKInterfaceController, MatchS
     // MARK: Match Setup Delegate
     
     func matchSetupDidComplete(match: Match, useHealthKit: Bool) {
-        debugPrint("matchSetupDidComplete(\(match))")
         createMatchViewModel(match, useHealthKit: useHealthKit)
         if let matchViewModel = matchViewModel, let startDate = matchViewModel.startDate {
             self.matchRunningTimeTimer.setDate(startDate)

@@ -3,6 +3,7 @@ import Foundation
 public class Match {
     
     public var activityType = ActivityType.Other
+    public var id: String?
     public var homeTeamName = "Home"
     public var homeTeamScore: Int {
         get {

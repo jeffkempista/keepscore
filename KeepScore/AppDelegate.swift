@@ -1,6 +1,7 @@
 import UIKit
 import HealthKit
 import WatchConnectivity
+import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
@@ -10,6 +11,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 
+        debugPrint(Realm.Configuration.defaultConfiguration.path)
+        
         if (WCSession.isSupported()) {
             let session = WCSession.defaultSession()
             session.delegate = self
@@ -37,16 +40,43 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
             }
         }
     }
-    
-    func session(session: WCSession, didReceiveMessage message: [String : AnyObject]) {
-        let center = NSNotificationCenter.defaultCenter()
-        center.postNotification(NSNotification(name: "notification", object: nil, userInfo: message))
-    }
 
     func session(session: WCSession, didReceiveMessage message: [String : AnyObject], replyHandler: ([String : AnyObject]) -> Void) {
+        let realm = try! Realm()
+        
+        var match: Match?
+        var update = false
+        if let matchId = message["id"] as? String {
+            match = realm.objectForPrimaryKey(Match.self, key: matchId)
+        } else {
+            try! realm.write {
+                match = realm.create(Match.self)
+            }
+        }
+        
+        if match == nil {
+            match = Match()
+        } else {
+            update = true
+        }
+        if let match = match,
+            let homeTeamScore = message["homeTeamScore"] as? Int,
+            let homeTeamName = message["homeTeamName"] as? String,
+            let awayTeamScore = message["awayTeamScore"] as? Int,
+            let awayTeamName = message["awayTeamName"] as? String {
+            try! realm.write {
+                match.homeTeamScore = homeTeamScore
+                match.homeTeamName = homeTeamName
+                match.awayTeamScore = awayTeamScore
+                match.awayTeamName = awayTeamName
+                realm.add(match, update: update)
+            }
+            replyHandler(["id": match.id])
+        } else {
+            replyHandler(["id": ""])
+        }
         let center = NSNotificationCenter.defaultCenter()
         center.postNotification(NSNotification(name: "notification", object: nil, userInfo: message))
     }
     
 }
-
