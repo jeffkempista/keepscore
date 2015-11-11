@@ -8,6 +8,7 @@ protocol ReviewMatchDelegate: class {
 
 class ReviewMatchViewModel: NSObject, WorkoutSessionManagerDelegate {
 
+    let matchConnectivityManager = MatchConnectivityManager()
     var match: Match
     var workoutSessionManager: WorkoutSessionManager?
     var saveWorkout = false
@@ -24,6 +25,7 @@ class ReviewMatchViewModel: NSObject, WorkoutSessionManagerDelegate {
             workoutSessionManager.delegate = self
             workoutSessionManager.stopWorkout()
         } else {
+            matchConnectivityManager.saveMatch(match)
             delegate?.matchReviewDidSave(match)
         }
     }
@@ -41,6 +43,7 @@ class ReviewMatchViewModel: NSObject, WorkoutSessionManagerDelegate {
         if (saveWorkout) {
             saveWorkout = false
             workoutSessionManager.saveWorkout()
+            matchConnectivityManager.saveMatch(match)
         }
         delegate?.matchReviewDidSave(match)
     }

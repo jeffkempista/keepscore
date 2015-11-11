@@ -169,8 +169,9 @@ class ScoreOrActivitySelectionInterfaceController: WKInterfaceController, MatchS
             self.matchViewModel = MatchViewModel(match: match, useHealthKit: useHealthKit, workoutSessionManager: nil)
             return
         }
-        workoutSession = HKWorkoutSession(activityType: match.activityType.getWorkoutActivityType(), locationType: .Unknown)
-        workoutSessionManager = WorkoutSessionManager(healthStore: healthStore, workoutActivityType: match.activityType.getWorkoutActivityType(), workoutSession: workoutSession!)
+        let activityType = ActivityType(rawValue: match.activityType)!
+        workoutSession = HKWorkoutSession(activityType: activityType.getWorkoutActivityType(), locationType: .Unknown)
+        workoutSessionManager = WorkoutSessionManager(healthStore: healthStore, workoutActivityType: activityType.getWorkoutActivityType(), workoutSession: workoutSession!)
         matchViewModel = MatchViewModel(match: match, useHealthKit: useHealthKit, workoutSessionManager: workoutSessionManager!)
 
         workoutSession?.delegate = matchViewModel

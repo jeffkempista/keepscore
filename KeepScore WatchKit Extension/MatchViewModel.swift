@@ -4,7 +4,6 @@ import KeepScoreKit
 
 class MatchViewModel: NSObject, WorkoutSessionManagerDelegate, WorkoutSessionManagerQuantityUpdateDelegate, HKWorkoutSessionDelegate {
 
-    let matchConnectivityManager = MatchConnectivityManager()
     var match: Match?
     var useHealthKit = false
     weak var workoutSessionManager: WorkoutSessionManager?
@@ -40,7 +39,6 @@ class MatchViewModel: NSObject, WorkoutSessionManagerDelegate, WorkoutSessionMan
             return 0
         }
         match.incrementHomeTeamScore()
-        matchConnectivityManager.sendScoreUpdateInfo(match)
         return match.homeTeamScore
     }
     
@@ -49,7 +47,6 @@ class MatchViewModel: NSObject, WorkoutSessionManagerDelegate, WorkoutSessionMan
             return 0
         }
         match.incrementAwayTeamScore()
-        matchConnectivityManager.sendScoreUpdateInfo(match)
         return match.awayTeamScore
     }
     
@@ -59,18 +56,13 @@ class MatchViewModel: NSObject, WorkoutSessionManagerDelegate, WorkoutSessionMan
         } else {
             startDate = NSDate()
         }
-        if let match = match {
-            matchConnectivityManager.sendScoreUpdateInfo(match)
-        }
     }
     
     func endMatch() {
         if let workoutSessionManager = workoutSessionManager {
             workoutSessionManager.stopWorkout()
         }
-        if let match = match {
-            matchConnectivityManager.sendScoreUpdateInfo(match)
-        }
+        
     }
     
     // MARK: Workout Session Manager Delegate

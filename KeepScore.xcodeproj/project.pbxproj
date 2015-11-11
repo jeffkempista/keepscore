@@ -15,7 +15,7 @@
 		1F20DD8D1BE861FC00DAF31B /* KeepScoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F4433231BDAFEC40014C432 /* KeepScoreKit.framework */; };
 		1F20DD8E1BE861FC00DAF31B /* KeepScoreKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1F4433231BDAFEC40014C432 /* KeepScoreKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1F3A16781B82B9AA00120F80 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3A16771B82B9AA00120F80 /* AppDelegate.swift */; };
-		1F3A167A1B82B9AA00120F80 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3A16791B82B9AA00120F80 /* ViewController.swift */; };
+		1F3A167A1B82B9AA00120F80 /* MatchListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3A16791B82B9AA00120F80 /* MatchListViewController.swift */; };
 		1F3A167D1B82B9AA00120F80 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F3A167B1B82B9AA00120F80 /* Main.storyboard */; };
 		1F3A167F1B82B9AA00120F80 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F3A167E1B82B9AA00120F80 /* Assets.xcassets */; };
 		1F3A16821B82B9AA00120F80 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F3A16801B82B9AA00120F80 /* LaunchScreen.storyboard */; };
@@ -29,7 +29,6 @@
 		1F44331B1BDAFEC40014C432 /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F16C7611BA750FC00D65436 /* Match.swift */; };
 		1F44331E1BDAFEC40014C432 /* KeepScoreKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F16C7441BA7508800D65436 /* KeepScoreKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F44332F1BDB01F70014C432 /* KeepScore WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 1F3A16911B82B9AA00120F80 /* KeepScore WatchKit App.app */; };
-		1F4433311BDB05A90014C432 /* KeepScoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F16C7421BA7508800D65436 /* KeepScoreKit.framework */; };
 		1F4433681BDB108F0014C432 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F4433671BDB108F0014C432 /* HealthKit.framework */; };
 		1F4433731BDB14930014C432 /* KeepScoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F16C7421BA7508800D65436 /* KeepScoreKit.framework */; };
 		1F4433741BDB14930014C432 /* KeepScoreKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1F16C7421BA7508800D65436 /* KeepScoreKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -42,11 +41,20 @@
 		1FB8355B1BC2CA8600FF86D1 /* MatchSetupInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB8355A1BC2CA8600FF86D1 /* MatchSetupInterfaceController.swift */; };
 		1FBABC711BC4AEF7002A090D /* ReviewMatchInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FBABC701BC4AEF7002A090D /* ReviewMatchInterfaceController.swift */; };
 		1FBABC731BC4AF96002A090D /* ReviewMatchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FBABC721BC4AF96002A090D /* ReviewMatchViewModel.swift */; };
+		1FBC2F0D1BF3A1680000103E /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FBC2F0B1BF3A1680000103E /* Realm.framework */; };
+		1FBC2F0E1BF3A1680000103E /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FBC2F0C1BF3A1680000103E /* RealmSwift.framework */; };
+		1FBC2F101BF3A1950000103E /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FE5A6481BE2C943003DF57A /* Realm.framework */; };
+		1FBC2F111BF3A1950000103E /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FE5A6491BE2C943003DF57A /* RealmSwift.framework */; };
+		1FBC2F131BF3A3A30000103E /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1FBC2F0B1BF3A1680000103E /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1FBC2F141BF3A3A30000103E /* RealmSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1FBC2F0C1BF3A1680000103E /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1FBC2F151BF3A3C10000103E /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FBC2F0B1BF3A1680000103E /* Realm.framework */; };
+		1FBC2F161BF3A3C10000103E /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FBC2F0C1BF3A1680000103E /* RealmSwift.framework */; };
+		1FBC2F171BF3B8170000103E /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FE5A6481BE2C943003DF57A /* Realm.framework */; };
+		1FBC2F181BF3B81A0000103E /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FE5A6491BE2C943003DF57A /* RealmSwift.framework */; };
 		1FD2B02E1BD70DC200759122 /* RewindScoreInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD2B02D1BD70DC200759122 /* RewindScoreInterfaceController.swift */; };
 		1FD2B0301BD70DEA00759122 /* RewindScoreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD2B02F1BD70DEA00759122 /* RewindScoreViewModel.swift */; };
 		1FE5A64A1BE2C943003DF57A /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FE5A6481BE2C943003DF57A /* Realm.framework */; };
 		1FE5A64B1BE2C943003DF57A /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FE5A6491BE2C943003DF57A /* RealmSwift.framework */; };
-		1FE6A8631BE2CB5B00EFD18D /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE6A8621BE2CB5B00EFD18D /* Match.swift */; };
 		1FF3403A1B82CE650071CC46 /* HealthKitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF340391B82CE650071CC46 /* HealthKitExtensions.swift */; };
 		1FF4D95A1BD3EF2F0042DFC4 /* ScoreOrActivitySelectionInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF4D9591BD3EF2F0042DFC4 /* ScoreOrActivitySelectionInterfaceController.swift */; };
 		1FF4D95C1BD3EFF40042DFC4 /* ActivitySelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF4D95B1BD3EFF40042DFC4 /* ActivitySelectionViewModel.swift */; };
@@ -116,6 +124,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				1FBC2F131BF3A3A30000103E /* Realm.framework in Embed Frameworks */,
+				1FBC2F141BF3A3A30000103E /* RealmSwift.framework in Embed Frameworks */,
 				1F20DD8E1BE861FC00DAF31B /* KeepScoreKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -156,7 +166,7 @@
 		1F16C7641BA755BE00D65436 /* MatchTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchTests.swift; sourceTree = "<group>"; };
 		1F3A16741B82B9AA00120F80 /* KeepScore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KeepScore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F3A16771B82B9AA00120F80 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		1F3A16791B82B9AA00120F80 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		1F3A16791B82B9AA00120F80 /* MatchListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchListViewController.swift; sourceTree = "<group>"; };
 		1F3A167C1B82B9AA00120F80 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1F3A167E1B82B9AA00120F80 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1F3A16811B82B9AA00120F80 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -186,12 +196,13 @@
 		1FB8355A1BC2CA8600FF86D1 /* MatchSetupInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchSetupInterfaceController.swift; sourceTree = "<group>"; };
 		1FBABC701BC4AEF7002A090D /* ReviewMatchInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewMatchInterfaceController.swift; sourceTree = "<group>"; };
 		1FBABC721BC4AF96002A090D /* ReviewMatchViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewMatchViewModel.swift; sourceTree = "<group>"; };
+		1FBC2F0B1BF3A1680000103E /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/watchOS/Realm.framework; sourceTree = "<group>"; };
+		1FBC2F0C1BF3A1680000103E /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/watchOS/RealmSwift.framework; sourceTree = "<group>"; };
 		1FD2B02D1BD70DC200759122 /* RewindScoreInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RewindScoreInterfaceController.swift; sourceTree = "<group>"; };
 		1FD2B02F1BD70DEA00759122 /* RewindScoreViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RewindScoreViewModel.swift; sourceTree = "<group>"; };
 		1FE432B01B8742FC00231DEC /* KeepScore WatchKit App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "KeepScore WatchKit App.entitlements"; sourceTree = "<group>"; };
 		1FE5A6481BE2C943003DF57A /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = ../Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
 		1FE5A6491BE2C943003DF57A /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = ../Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
-		1FE6A8621BE2CB5B00EFD18D /* Match.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
 		1FF340391B82CE650071CC46 /* HealthKitExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthKitExtensions.swift; sourceTree = "<group>"; };
 		1FF4D9591BD3EF2F0042DFC4 /* ScoreOrActivitySelectionInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreOrActivitySelectionInterfaceController.swift; sourceTree = "<group>"; };
 		1FF4D95B1BD3EFF40042DFC4 /* ActivitySelectionViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivitySelectionViewModel.swift; sourceTree = "<group>"; };
@@ -203,6 +214,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FBC2F101BF3A1950000103E /* Realm.framework in Frameworks */,
+				1FBC2F111BF3A1950000103E /* RealmSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,7 +223,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1F4433311BDB05A90014C432 /* KeepScoreKit.framework in Frameworks */,
+				1FBC2F171BF3B8170000103E /* Realm.framework in Frameworks */,
+				1FBC2F181BF3B81A0000103E /* RealmSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -236,6 +250,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FBC2F151BF3A3C10000103E /* Realm.framework in Frameworks */,
+				1FBC2F161BF3A3C10000103E /* RealmSwift.framework in Frameworks */,
 				1F20DD8C1BE861B300DAF31B /* HealthKit.framework in Frameworks */,
 				1F20DD8D1BE861FC00DAF31B /* KeepScoreKit.framework in Frameworks */,
 			);
@@ -245,6 +261,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FBC2F0D1BF3A1680000103E /* Realm.framework in Frameworks */,
+				1FBC2F0E1BF3A1680000103E /* RealmSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -291,6 +309,7 @@
 		1F3A166B1B82B9AA00120F80 = {
 			isa = PBXGroup;
 			children = (
+				1F3A16C71B82C1F700120F80 /* Frameworks */,
 				1F3A16761B82B9AA00120F80 /* KeepScore */,
 				1F3A168B1B82B9AA00120F80 /* KeepScoreTests */,
 				1F3A16951B82B9AA00120F80 /* KeepScore WatchKit App */,
@@ -318,11 +337,9 @@
 		1F3A16761B82B9AA00120F80 /* KeepScore */ = {
 			isa = PBXGroup;
 			children = (
-				1F3A16C71B82C1F700120F80 /* Frameworks */,
 				1F3A16C81B82C21600120F80 /* Resources */,
-				1FE6A8611BE2CAC200EFD18D /* Model */,
 				1F3A16771B82B9AA00120F80 /* AppDelegate.swift */,
-				1F3A16791B82B9AA00120F80 /* ViewController.swift */,
+				1F3A16791B82B9AA00120F80 /* MatchListViewController.swift */,
 				1F3A167B1B82B9AA00120F80 /* Main.storyboard */,
 				1F3A16801B82B9AA00120F80 /* LaunchScreen.storyboard */,
 			);
@@ -378,11 +395,12 @@
 		1F3A16C71B82C1F700120F80 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1FBC2F121BF3A37E0000103E /* Frameworks-iOS */,
+				1FBC2F0F1BF3A1790000103E /* Frameworks-watchOS */,
 				1F4433671BDB108F0014C432 /* HealthKit.framework */,
-				1FE5A6481BE2C943003DF57A /* Realm.framework */,
-				1FE5A6491BE2C943003DF57A /* RealmSwift.framework */,
 			);
 			name = Frameworks;
+			path = KeepScore;
 			sourceTree = "<group>";
 		};
 		1F3A16C81B82C21600120F80 /* Resources */ = {
@@ -435,12 +453,23 @@
 			path = ReviewMatch;
 			sourceTree = "<group>";
 		};
-		1FE6A8611BE2CAC200EFD18D /* Model */ = {
+		1FBC2F0F1BF3A1790000103E /* Frameworks-watchOS */ = {
 			isa = PBXGroup;
 			children = (
-				1FE6A8621BE2CB5B00EFD18D /* Match.swift */,
+				1FBC2F0B1BF3A1680000103E /* Realm.framework */,
+				1FBC2F0C1BF3A1680000103E /* RealmSwift.framework */,
 			);
-			path = Model;
+			name = "Frameworks-watchOS";
+			path = ..;
+			sourceTree = "<group>";
+		};
+		1FBC2F121BF3A37E0000103E /* Frameworks-iOS */ = {
+			isa = PBXGroup;
+			children = (
+				1FE5A6481BE2C943003DF57A /* Realm.framework */,
+				1FE5A6491BE2C943003DF57A /* RealmSwift.framework */,
+			);
+			name = "Frameworks-iOS";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -490,6 +519,7 @@
 				1F16C7471BA7508800D65436 /* Sources */,
 				1F16C7481BA7508800D65436 /* Frameworks */,
 				1F16C7491BA7508800D65436 /* Resources */,
+				1FBC2F1A1BF3B89F0000103E /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -672,8 +702,8 @@
 				1F3A16901B82B9AA00120F80 /* KeepScore WatchKit App */,
 				1F3A169F1B82B9AA00120F80 /* KeepScore WatchKit Extension */,
 				1F16C7411BA7508800D65436 /* KeepScoreKit iOS */,
-				1F4433181BDAFEC40014C432 /* KeepScoreKit watchOS */,
 				1F16C74A1BA7508800D65436 /* KeepScoreKit iOS Tests */,
+				1F4433181BDAFEC40014C432 /* KeepScoreKit watchOS */,
 			);
 		};
 /* End PBXProject section */
@@ -737,6 +767,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		1FBC2F1A1BF3B89F0000103E /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Realm.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RealmSwift.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
 		1FE5A64C1BE2C96E003DF57A /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -777,9 +822,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1F3A167A1B82B9AA00120F80 /* ViewController.swift in Sources */,
+				1F3A167A1B82B9AA00120F80 /* MatchListViewController.swift in Sources */,
 				1F3A16781B82B9AA00120F80 /* AppDelegate.swift in Sources */,
-				1FE6A8631BE2CB5B00EFD18D /* Match.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -898,6 +942,10 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = KeepScoreKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -924,6 +972,10 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = KeepScoreKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -939,6 +991,10 @@
 		1F16C75B1BA7508800D65436 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = KeepScoreKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.fouram.KeepScoreKitTests;
@@ -949,6 +1005,10 @@
 		1F16C75C1BA7508800D65436 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = KeepScoreKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.fouram.KeepScoreKitTests;
@@ -1046,6 +1106,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/watchOS",
+				);
 				INFOPLIST_FILE = "KeepScore WatchKit Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.fouram.KeepScore.watchkitapp.watchkitextension;
@@ -1065,6 +1129,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/watchOS",
+				);
 				INFOPLIST_FILE = "KeepScore WatchKit Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.fouram.KeepScore.watchkitapp.watchkitextension;
@@ -1197,6 +1265,10 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/watchOS",
+				);
 				INFOPLIST_FILE = KeepScoreKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -1225,6 +1297,10 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/watchOS",
+				);
 				INFOPLIST_FILE = KeepScoreKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

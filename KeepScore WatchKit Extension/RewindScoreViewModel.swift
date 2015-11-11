@@ -32,10 +32,11 @@ class RewindScoreViewModel: NSObject {
     }
     
     func rewindToSelectedMatchScoreIndex() {
-        let start = 0
-        let end = selectedMatchScoreIndex
-        self.match.matchScores.removeRange(Range(start: start, end: end))
-        matchConnectivityManager.sendScoreUpdateInfo(match)
+        var end = selectedMatchScoreIndex
+        while (end > 0) {
+            self.match.revertLastScore()
+            end--
+        }
         self.delegate?.matchScoreWasRewound(self)
     }
     
