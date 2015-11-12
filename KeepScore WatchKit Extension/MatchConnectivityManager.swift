@@ -7,6 +7,7 @@ class MatchConnectivityManager: NSObject {
     func saveMatch(match: Match) {
         
         if WCSession.defaultSession().reachable {
+            match.startedOnWatch = true
             let requestValues = match.dictionary()
             
             let session = WCSession.defaultSession()

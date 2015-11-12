@@ -9,6 +9,7 @@ public class Match: Object {
     dynamic public var homeTeamScore = 0
     dynamic public var awayTeamName = "Away"
     dynamic public var awayTeamScore = 0
+    dynamic public var startedOnWatch = false
     dynamic public var startedAt = NSDate()
     dynamic public var endedAt: NSDate?
     
@@ -84,6 +85,7 @@ public class Match: Object {
         dictionary["awayTeamName"] = self.awayTeamName
         dictionary["awayTeamScore"] = self.awayTeamScore
         dictionary["startedAt"] = self.startedAt.timeIntervalSince1970
+        dictionary["startedOnWatch"] = self.startedOnWatch
         if let endedAtDate = self.endedAt {
             dictionary["endedAt"] = endedAtDate.timeIntervalSince1970
         }
@@ -96,7 +98,7 @@ public class Match: Object {
     
     public static func fromDictionary(dictionary: [String: AnyObject]) throws -> Match {
         
-        guard let id = dictionary["id"] as? String, let type = dictionary["type"] as? String, let homeTeamName = dictionary["homeTeamName"] as? String, let homeTeamScore = dictionary["homeTeamScore"] as? Int, let awayTeamName = dictionary["awayTeamName"] as? String, let awayTeamScore = dictionary["awayTeamScore"] as? Int, let startedAt = dictionary["startedAt"] as? NSTimeInterval else {
+        guard let id = dictionary["id"] as? String, let type = dictionary["type"] as? String, let homeTeamName = dictionary["homeTeamName"] as? String, let homeTeamScore = dictionary["homeTeamScore"] as? Int, let awayTeamName = dictionary["awayTeamName"] as? String, let awayTeamScore = dictionary["awayTeamScore"] as? Int, let startedAt = dictionary["startedAt"] as? NSTimeInterval, let startedOnWatch = dictionary["startedOnWatch"] as? Bool else {
             throw MatchError.IncompleteMatchInfo
         }
         let match = Match(activityType: ActivityType(rawValue: type)!, homeTeamName: homeTeamName, awayTeamName: awayTeamName)
@@ -104,6 +106,7 @@ public class Match: Object {
         match.homeTeamScore = homeTeamScore
         match.awayTeamScore = awayTeamScore
         match.startedAt = NSDate(timeIntervalSince1970: startedAt)
+        match.startedOnWatch = startedOnWatch
         if let endedAt = dictionary["endedAt"] as? NSTimeInterval {
             match.endedAt = NSDate(timeIntervalSince1970: endedAt)
         }

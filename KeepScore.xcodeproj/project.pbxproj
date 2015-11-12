@@ -33,6 +33,10 @@
 		1F4433731BDB14930014C432 /* KeepScoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F16C7421BA7508800D65436 /* KeepScoreKit.framework */; };
 		1F4433741BDB14930014C432 /* KeepScoreKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1F16C7421BA7508800D65436 /* KeepScoreKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1F65748D1B8407BD008D4B50 /* WatchKitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F65748C1B8407BD008D4B50 /* WatchKitExtensions.swift */; };
+		1F8E599E1BF3CF6F00941B89 /* MatchListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8E599D1BF3CF6F00941B89 /* MatchListViewModel.swift */; };
+		1F8E59A01BF3D17900941B89 /* NewMatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8E599F1BF3D17900941B89 /* NewMatchViewController.swift */; };
+		1F8E59A21BF3D67D00941B89 /* NewMatchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8E59A11BF3D67D00941B89 /* NewMatchViewModel.swift */; };
+		1F8E59A41BF42B2900941B89 /* LiveMatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8E59A31BF42B2900941B89 /* LiveMatchViewController.swift */; };
 		1F951F331BDBB15500E6C1FE /* MatchConnectivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F951F321BDBB15500E6C1FE /* MatchConnectivityManager.swift */; };
 		1FB156FC1B855CD900E53002 /* WorkoutSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB156FB1B855CD900E53002 /* WorkoutSessionManager.swift */; };
 		1FB8354E1BC2C72D00FF86D1 /* ActivityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB8354D1BC2C72D00FF86D1 /* ActivityType.swift */; };
@@ -186,6 +190,10 @@
 		1F4433231BDAFEC40014C432 /* KeepScoreKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KeepScoreKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F4433671BDB108F0014C432 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		1F65748C1B8407BD008D4B50 /* WatchKitExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchKitExtensions.swift; sourceTree = "<group>"; };
+		1F8E599D1BF3CF6F00941B89 /* MatchListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchListViewModel.swift; sourceTree = "<group>"; };
+		1F8E599F1BF3D17900941B89 /* NewMatchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewMatchViewController.swift; sourceTree = "<group>"; };
+		1F8E59A11BF3D67D00941B89 /* NewMatchViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewMatchViewModel.swift; sourceTree = "<group>"; };
+		1F8E59A31BF42B2900941B89 /* LiveMatchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveMatchViewController.swift; sourceTree = "<group>"; };
 		1F951F321BDBB15500E6C1FE /* MatchConnectivityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchConnectivityManager.swift; sourceTree = "<group>"; };
 		1FADC5441B86A672001BE8E3 /* KeepScore.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = KeepScore.entitlements; sourceTree = "<group>"; };
 		1FADC5451B86A67F001BE8E3 /* KeepScore WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "KeepScore WatchKit Extension.entitlements"; sourceTree = "<group>"; };
@@ -339,7 +347,11 @@
 			children = (
 				1F3A16C81B82C21600120F80 /* Resources */,
 				1F3A16771B82B9AA00120F80 /* AppDelegate.swift */,
+				1F8E59A31BF42B2900941B89 /* LiveMatchViewController.swift */,
+				1F8E599D1BF3CF6F00941B89 /* MatchListViewModel.swift */,
 				1F3A16791B82B9AA00120F80 /* MatchListViewController.swift */,
+				1F8E59A11BF3D67D00941B89 /* NewMatchViewModel.swift */,
+				1F8E599F1BF3D17900941B89 /* NewMatchViewController.swift */,
 				1F3A167B1B82B9AA00120F80 /* Main.storyboard */,
 				1F3A16801B82B9AA00120F80 /* LaunchScreen.storyboard */,
 			);
@@ -822,7 +834,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F8E59A21BF3D67D00941B89 /* NewMatchViewModel.swift in Sources */,
 				1F3A167A1B82B9AA00120F80 /* MatchListViewController.swift in Sources */,
+				1F8E59A01BF3D17900941B89 /* NewMatchViewController.swift in Sources */,
+				1F8E599E1BF3CF6F00941B89 /* MatchListViewModel.swift in Sources */,
+				1F8E59A41BF42B2900941B89 /* LiveMatchViewController.swift in Sources */,
 				1F3A16781B82B9AA00120F80 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="pF6-vC-7xP">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Matches-->
@@ -26,7 +27,7 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <animations/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="msQ-Zv-GSn">
@@ -48,17 +49,27 @@
                             <outlet property="delegate" destination="nan-7v-2E3" id="OKx-Vh-7ay"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Matches" id="9aY-ot-Sgr"/>
+                    <navigationItem key="navigationItem" title="Matches" id="9aY-ot-Sgr">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Kw0-yk-lOI">
+                            <connections>
+                                <segue destination="Usc-F8-Chq" kind="presentation" id="geT-Ck-9AH"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="jR3-cv-U6Z" kind="presentation" identifier="ShowLiveMatch" id="Lf1-pU-pAq"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J9m-Cq-bry" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="bpi-tI-0Lz" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1912" y="301"/>
         </scene>
-        <!--Matches-->
+        <!--Navigation Controller-->
         <scene sceneID="I8a-tf-w79">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="KFo-BY-v16" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Matches" id="aLE-33-dgV"/>
+                    <tabBarItem key="tabBarItem" systemItem="history" id="aLE-33-dgV"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="bHF-oG-1iB">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -91,6 +102,219 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="70b-Pz-01f" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="288" y="301"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="o0q-Vm-Wru">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Usc-F8-Chq" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="02u-7Y-xp2">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="IVa-cc-RPF" kind="relationship" relationship="rootViewController" id="d3W-Lq-OtZ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="a9M-zf-fMy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2610" y="301"/>
+        </scene>
+        <!--Live Match View Controller-->
+        <scene sceneID="FLt-Fr-Reh">
+            <objects>
+                <tableViewController id="gea-yH-IR2" customClass="LiveMatchViewController" customModule="KeepScore" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="38B-Rb-yYu">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MatchScoreCell" id="wdq-Un-KY7">
+                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wdq-Un-KY7" id="EKg-rk-yWG">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <animations/>
+                                </tableViewCellContentView>
+                                <animations/>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="gea-yH-IR2" id="RmB-Iu-0Nu"/>
+                            <outlet property="delegate" destination="gea-yH-IR2" id="bOJ-hr-1FP"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="gP7-2Z-Fyb">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="Afz-jY-TN5">
+                            <connections>
+                                <segue destination="262-vc-Wir" kind="unwind" unwindAction="liveMatchCancelled:" id="T8e-eN-FdS"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="mRT-I1-8vW">
+                            <connections>
+                                <action selector="saveButtonTapped:" destination="gea-yH-IR2" id="CeO-89-6Aa"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="262-vc-Wir" kind="unwind" identifier="LiveMatchSaved" unwindAction="liveMatchSaved:" id="LzI-gp-LI9"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="I3I-jZ-ebC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="262-vc-Wir" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="2610" y="1084"/>
+        </scene>
+        <!--New Match-->
+        <scene sceneID="zIc-mo-fcl">
+            <objects>
+                <tableViewController id="IVa-cc-RPF" customClass="NewMatchViewController" customModule="KeepScore" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="bpg-6R-0IA">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <sections>
+                            <tableViewSection id="YXT-TE-ldg">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="Fn5-2B-pa4">
+                                        <rect key="frame" x="0.0" y="99" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Fn5-2B-pa4" id="NEZ-t0-zyp">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Soccer" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jiY-Ch-bmo">
+                                                    <rect key="frame" x="15" y="0.0" width="577" height="43.5"/>
+                                                    <animations/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <animations/>
+                                            <constraints>
+                                                <constraint firstItem="jiY-Ch-bmo" firstAttribute="centerY" secondItem="NEZ-t0-zyp" secondAttribute="centerY" id="4j2-5n-fM9"/>
+                                                <constraint firstItem="jiY-Ch-bmo" firstAttribute="height" secondItem="NEZ-t0-zyp" secondAttribute="height" id="qpT-Aa-P2H"/>
+                                                <constraint firstItem="jiY-Ch-bmo" firstAttribute="leading" secondItem="NEZ-t0-zyp" secondAttribute="leadingMargin" constant="7" id="sIe-ri-pLY"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="jiY-Ch-bmo" secondAttribute="trailing" id="x74-TF-4qz"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <animations/>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="216" id="OWL-DJ-mGD">
+                                        <rect key="frame" x="0.0" y="143" width="600" height="216"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OWL-DJ-mGD" id="1B3-eX-Wac">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="215.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VKZ-zt-ZY6">
+                                                    <rect key="frame" x="8" y="0.0" width="584" height="215"/>
+                                                    <animations/>
+                                                </pickerView>
+                                            </subviews>
+                                            <animations/>
+                                            <constraints>
+                                                <constraint firstItem="VKZ-zt-ZY6" firstAttribute="leading" secondItem="1B3-eX-Wac" secondAttribute="leadingMargin" id="7dy-d4-RYd"/>
+                                                <constraint firstAttribute="bottom" secondItem="VKZ-zt-ZY6" secondAttribute="bottom" id="IVp-PD-eGi"/>
+                                                <constraint firstItem="VKZ-zt-ZY6" firstAttribute="top" secondItem="1B3-eX-Wac" secondAttribute="top" id="bOp-kj-d3x"/>
+                                                <constraint firstItem="VKZ-zt-ZY6" firstAttribute="trailing" secondItem="1B3-eX-Wac" secondAttribute="trailingMargin" id="fbJ-Gf-koL"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <animations/>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="Cpe-dS-L6g">
+                                        <rect key="frame" x="0.0" y="359" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Cpe-dS-L6g" id="x7h-z0-Pbo">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Home Team Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gkx-3v-MbU">
+                                                    <rect key="frame" x="15" y="-1" width="577" height="43.5"/>
+                                                    <animations/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                            <animations/>
+                                        </tableViewCellContentView>
+                                        <animations/>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="4PJ-QB-uBA">
+                                        <rect key="frame" x="0.0" y="403" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4PJ-QB-uBA" id="ug6-Fa-gjP">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Away Team Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Isu-3g-ls3">
+                                                    <rect key="frame" x="15" y="-1" width="577" height="43.5"/>
+                                                    <animations/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                            <animations/>
+                                        </tableViewCellContentView>
+                                        <animations/>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="IVa-cc-RPF" id="sj1-6b-bxa"/>
+                            <outlet property="delegate" destination="IVa-cc-RPF" id="Kwo-yy-t22"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="New Match" id="ZMX-am-RWv">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="tFd-8x-h4Q">
+                            <connections>
+                                <segue destination="bpi-tI-0Lz" kind="unwind" unwindAction="newMatchCancelled:" id="24u-sR-b5P"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Start" id="30J-tF-eEZ">
+                            <connections>
+                                <action selector="doneButtonTapped:" destination="IVa-cc-RPF" id="qP7-hT-fkn"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="activityTypePicker" destination="VKZ-zt-ZY6" id="tx1-7Y-0QG"/>
+                        <outlet property="awayTeamNameTextField" destination="Isu-3g-ls3" id="iTM-hP-dDU"/>
+                        <outlet property="doneBarButton" destination="30J-tF-eEZ" id="L74-d8-Flr"/>
+                        <outlet property="homeTeamNameTextField" destination="gkx-3v-MbU" id="vvS-fZ-nn9"/>
+                        <outlet property="selectedActivityLabel" destination="jiY-Ch-bmo" id="bMG-lM-HsM"/>
+                        <segue destination="bpi-tI-0Lz" kind="unwind" identifier="MatchCreatedSegue" unwindAction="newMatchCreated:" id="nbE-cu-F0D"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oo0-W9-w1u" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3331" y="301"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="8da-o6-lqc">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="jR3-cv-U6Z" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="6Tt-Er-3E7">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="gea-yH-IR2" kind="relationship" relationship="rootViewController" id="LOf-Jr-tv2"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pVq-rq-5Sx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1912" y="1084"/>
         </scene>
     </scenes>
     <color key="tintColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>

@@ -14,6 +14,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
 
         debugPrint(Realm.Configuration.defaultConfiguration.path)
         
+        UIView.appearance().tintColor = UIColor.orangeColor()
+        
         if (WCSession.isSupported()) {
             let session = WCSession.defaultSession()
             session.delegate = self
@@ -43,7 +45,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
     }
     
     func session(session: WCSession, didReceiveUserInfo userInfo: [String : AnyObject]) {
-        debugPrint("Save match: \(userInfo)")
         let realm = try! Realm()
         
         do {
