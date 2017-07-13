@@ -33,19 +33,19 @@ public enum ActivityType : String {
     public func getWorkoutActivityType() -> HKWorkoutActivityType {
         switch (self) {
         case .Baseball:
-            return .Baseball
+            return .baseball
         case .Basketball:
-            return .Basketball
+            return .basketball
         case .Hockey:
-            return .Hockey
+            return .hockey
         case .Soccer:
-            return .Soccer
+            return .soccer
         case .TableTennis:
-            return .TableTennis
+            return .tableTennis
         case .Volleyball:
-            return .Volleyball
+            return .volleyball
         default:
-            return .Other
+            return .other
         }
     }
     

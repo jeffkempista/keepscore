@@ -2,15 +2,15 @@ import HealthKit
 
 protocol WorkoutSessionManagerDelegate : class {
     
-    func workoutSessionManager(workoutSessionManager: WorkoutSessionManager, didStartWorkoutWithDate startDate: NSDate)
-    func workoutSessionManager(workoutSessionManager: WorkoutSessionManager, didStopWorkoutWithDate endDate: NSDate)
+    func workoutSessionManager(_ workoutSessionManager: WorkoutSessionManager, didStartWorkoutWithDate startDate: Date)
+    func workoutSessionManager(_ workoutSessionManager: WorkoutSessionManager, didStopWorkoutWithDate endDate: Date)
 }
 
 protocol WorkoutSessionManagerQuantityUpdateDelegate : class {
     
-    func workoutSessionManager(workoutSessionManager: WorkoutSessionManager, didUpdateActiveEnergyQuantity activeEnergyQuantity: HKQuantity)
-    func workoutSessionManager(workoutSessionManager: WorkoutSessionManager, didUpdateDistanceQuantity distanceQuantity: HKQuantity)
-    func workoutSessionManager(workoutSessionManager: WorkoutSessionManager, didUpdateHeartRateSample heartRateSample: HKQuantitySample)
+    func workoutSessionManager(_ workoutSessionManager: WorkoutSessionManager, didUpdateActiveEnergyQuantity activeEnergyQuantity: HKQuantity)
+    func workoutSessionManager(_ workoutSessionManager: WorkoutSessionManager, didUpdateDistanceQuantity distanceQuantity: HKQuantity)
+    func workoutSessionManager(_ workoutSessionManager: WorkoutSessionManager, didUpdateHeartRateSample heartRateSample: HKQuantitySample)
     
 }
 
@@ -18,10 +18,10 @@ class WorkoutSessionManager: NSObject {
 
     var healthStore: HKHealthStore
     weak var workoutSession: HKWorkoutSession!
-    var workoutActivityType: HKWorkoutActivityType = .Other
+    var workoutActivityType: HKWorkoutActivityType = .other
     
-    var workoutStartDate: NSDate?
-    var workoutEndDate: NSDate?
+    var workoutStartDate: Date?
+    var workoutEndDate: Date?
 
     var queries: [HKQuery] = []
     
@@ -29,16 +29,16 @@ class WorkoutSessionManager: NSObject {
     var distanceSamples: [HKQuantitySample] = []
     var heartRateSamples: [HKQuantitySample] = []
     
-    let energyUnit = HKUnit.calorieUnit()
-    let distanceUnit = HKUnit.meterUnit()
-    let countPerMinuteUnit = HKUnit(fromString: "count/min")
+    let energyUnit = HKUnit.calorie()
+    let distanceUnit = HKUnit.meter()
+    let countPerMinuteUnit = HKUnit(from: "count/min")
     
-    let activeEnergyType = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierActiveEnergyBurned)!
-    let heartRateType = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierHeartRate)!
-    let distanceType = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDistanceWalkingRunning)!
+    let activeEnergyType = HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.activeEnergyBurned)!
+    let heartRateType = HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.heartRate)!
+    let distanceType = HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.distanceWalkingRunning)!
     
-    var currentActiveEnergyQuantity: HKQuantity = HKQuantity(unit: HKUnit.calorieUnit(), doubleValue: 0.0)
-    var currentDistanceQuantity: HKQuantity = HKQuantity(unit: HKUnit.meterUnit(), doubleValue: 0.0)
+    var currentActiveEnergyQuantity: HKQuantity = HKQuantity(unit: HKUnit.calorie(), doubleValue: 0.0)
+    var currentDistanceQuantity: HKQuantity = HKQuantity(unit: HKUnit.meter(), doubleValue: 0.0)
     var currentHeartRateSample: HKQuantitySample?
     
     weak var delegate: WorkoutSessionManagerDelegate?
@@ -53,16 +53,16 @@ class WorkoutSessionManager: NSObject {
     }
     
     func startWorkout() {
-        healthStore.startWorkoutSession(workoutSession)
+        healthStore.start(workoutSession)
     }
     
     func stopWorkout() {
-        healthStore.endWorkoutSession(workoutSession)
+        healthStore.end(workoutSession)
     }
         
     // MARK: Internal
     
-    func workoutDidStart(date: NSDate) {
+    func workoutDidStart(_ date: Date) {
         self.workoutStartDate = date
         
         // Start queries for distance, energy, and heart rate
@@ -71,24 +71,24 @@ class WorkoutSessionManager: NSObject {
         queries.append(self.createStreamingHeartRateQuery(date))
         
         for query in queries {
-            self.healthStore.executeQuery(query)
+            self.healthStore.execute(query)
         }
      
         self.delegate?.workoutSessionManager(self, didStartWorkoutWithDate: date)
     }
     
-    func workoutDidEnd(date: NSDate) {
+    func workoutDidEnd(_ date: Date) {
         self.workoutEndDate = date
         self.delegate?.workoutSessionManager(self, didStopWorkoutWithDate: date)
     }
     
     func saveWorkout() {
         
-        guard let startDate = self.workoutStartDate, endDate = self.workoutEndDate else { return }
+        guard let startDate = self.workoutStartDate, let endDate = self.workoutEndDate else { return }
         // create a workout sample
         debugPrint("saving workout with startDate \(startDate) and endDate \(endDate)")
-        debugPrint("saving workout with energy = \(self.currentActiveEnergyQuantity.doubleValueForUnit(self.energyUnit)), distance = \(self.currentDistanceQuantity.doubleValueForUnit(self.distanceUnit))")
-        let workout = HKWorkout(activityType: self.workoutActivityType, startDate: startDate, endDate: endDate, duration: endDate.timeIntervalSinceDate(startDate), totalEnergyBurned: self.currentActiveEnergyQuantity, totalDistance: self.currentDistanceQuantity, metadata: nil)
+        debugPrint("saving workout with energy = \(self.currentActiveEnergyQuantity.doubleValue(for: self.energyUnit)), distance = \(self.currentDistanceQuantity.doubleValue(for: self.distanceUnit))")
+        let workout = HKWorkout(activityType: self.workoutActivityType, start: startDate, end: endDate, duration: endDate.timeIntervalSince(startDate), totalEnergyBurned: self.currentActiveEnergyQuantity, totalDistance: self.currentDistanceQuantity, metadata: nil)
         
         // Create an array of all the samples to add to the workout
         var allSamples: [HKQuantitySample] = []
@@ -97,12 +97,12 @@ class WorkoutSessionManager: NSObject {
         allSamples += self.heartRateSamples
         
         // Save the workout
-        self.healthStore.saveObject(workout) { [weak self] (success, error: NSError?) in
+        self.healthStore.save(workout) { [weak self] (success, error) in
             if let error = error {
                 debugPrint(error.localizedDescription)
             }
             if let weakSelf = self {
-                weakSelf.healthStore.addSamples(allSamples, toWorkout: workout, completion: { (success, error: NSError?) -> Void in
+                weakSelf.healthStore.add(allSamples, to: workout, completion: { (success, error) -> Void in
                     if let error = error {
                         debugPrint(error.localizedDescription)
                     }
@@ -113,9 +113,9 @@ class WorkoutSessionManager: NSObject {
     
     // MARK: Data Queries
     
-    func createStreamingDistanceQuery(workoutStartDate: NSDate) -> HKQuery {
+    func createStreamingDistanceQuery(_ workoutStartDate: Date) -> HKQuery {
         // Match samples with the start date after the workout start
-        let predicate = HKQuery.predicateForSamplesWithStartDate(workoutStartDate, endDate: nil, options: .None)
+        let predicate = HKQuery.predicateForSamples(withStart: workoutStartDate, end: nil, options: HKQueryOptions())
         
         let distanceQuery = HKAnchoredObjectQuery(type: self.distanceType, predicate: predicate, anchor: HKQueryAnchor(fromValue: 0), limit: 0) { [weak self] (query, samples, deletedSamples, anchor, error) -> Void in
             self?.addDistanceSamples(samples)
@@ -128,19 +128,19 @@ class WorkoutSessionManager: NSObject {
         return distanceQuery
     }
     
-    func addDistanceSamples(samples: [HKSample]?) {
+    func addDistanceSamples(_ samples: [HKSample]?) {
         guard let distanceSamples = samples as? [HKQuantitySample] else { return }
         
         for sample in distanceSamples {
-            debugPrint("Adding Distance Sample \(sample.quantity.doubleValueForUnit(self.distanceUnit))")
+            debugPrint("Adding Distance Sample \(sample.quantity.doubleValue(for: self.distanceUnit))")
         }
         self.currentDistanceQuantity = self.currentDistanceQuantity.addQuantitiesFromSamples(distanceSamples, unit: self.distanceUnit)
         self.distanceSamples += distanceSamples
         self.quantityUpdateDelegate?.workoutSessionManager(self, didUpdateDistanceQuantity: currentDistanceQuantity)
     }
     
-    func createStreamingActiveEnergyQuery(workoutStartDate: NSDate) -> HKQuery {
-        let predicate = HKQuery.predicateForSamplesWithStartDate(workoutStartDate, endDate: nil, options: .None)
+    func createStreamingActiveEnergyQuery(_ workoutStartDate: Date) -> HKQuery {
+        let predicate = HKQuery.predicateForSamples(withStart: workoutStartDate, end: nil, options: HKQueryOptions())
         
         let activeEnergyQuery = HKAnchoredObjectQuery(type: self.activeEnergyType, predicate: predicate, anchor: HKQueryAnchor(fromValue: 0), limit: 0) { [weak self] (query, samples, deletedObjects, anchor, error) -> Void in
             self?.addActiveEnergySamples(samples)
@@ -154,7 +154,7 @@ class WorkoutSessionManager: NSObject {
     }
     
     
-    func addActiveEnergySamples(samples: [HKSample]?) {
+    func addActiveEnergySamples(_ samples: [HKSample]?) {
         guard let activeEnergySamples = samples as? [HKQuantitySample] else { return }
         
         self.currentActiveEnergyQuantity = self.currentActiveEnergyQuantity.addQuantitiesFromSamples(activeEnergySamples, unit: self.energyUnit)
@@ -162,8 +162,8 @@ class WorkoutSessionManager: NSObject {
         self.quantityUpdateDelegate?.workoutSessionManager(self, didUpdateActiveEnergyQuantity: self.currentActiveEnergyQuantity)
     }
     
-    func createStreamingHeartRateQuery(workoutStartDate: NSDate) -> HKQuery {
-        let predicate = HKQuery.predicateForSamplesWithStartDate(workoutStartDate, endDate: nil, options: .None)
+    func createStreamingHeartRateQuery(_ workoutStartDate: Date) -> HKQuery {
+        let predicate = HKQuery.predicateForSamples(withStart: workoutStartDate, end: nil, options: HKQueryOptions())
         
         let heartRateQuery = HKAnchoredObjectQuery(type: self.heartRateType, predicate: predicate, anchor: HKQueryAnchor(fromValue: 0), limit: 0) { [weak self] (query, samples, deletedObjects, anchor, error) -> Void in
             self?.addHeartRateSamples(samples)
@@ -176,7 +176,7 @@ class WorkoutSessionManager: NSObject {
         return heartRateQuery
     }
     
-    func addHeartRateSamples(samples: [HKSample]?) {
+    func addHeartRateSamples(_ samples: [HKSample]?) {
         guard let heartRateSamples = samples as? [HKQuantitySample] else { return }
         
         self.heartRateSamples += heartRateSamples

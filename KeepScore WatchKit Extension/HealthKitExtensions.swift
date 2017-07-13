@@ -3,11 +3,11 @@ import Foundation
 
 extension HKQuantity {
     
-    func addQuantitiesFromSamples(samples: [HKQuantitySample], unit: HKUnit) -> HKQuantity {
+    func addQuantitiesFromSamples(_ samples: [HKQuantitySample], unit: HKUnit) -> HKQuantity {
         
         var total = 0.0
-        for (_, sample) in samples.enumerate() {
-            total += sample.quantity.doubleValueForUnit(unit)
+        for (_, sample) in samples.enumerated() {
+            total += sample.quantity.doubleValue(for: unit)
         }
         return HKQuantity(unit: unit, doubleValue: total)
     }
@@ -18,17 +18,17 @@ extension HKWorkoutActivityType {
     
     func getTitle() -> String {
         switch (self) {
-        case .Baseball:
+        case .baseball:
             return "Baseball"
-        case .Basketball:
+        case .basketball:
             return "Basketball"
-        case .Hockey:
+        case .hockey:
             return "Hockey"
-        case .Soccer:
+        case .soccer:
             return "Soccer"
-        case .TableTennis:
+        case .tableTennis:
             return "Table Tennis"
-        case .Volleyball:
+        case .volleyball:
             return "Volleyball"
         default:
             return "Other"

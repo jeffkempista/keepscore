@@ -3,7 +3,7 @@ import KeepScoreKit
 
 protocol RewindScoreDelegate: class {
     
-    func matchScoreWasRewound(rewindScoreViewModel: RewindScoreViewModel)
+    func matchScoreWasRewound(_ rewindScoreViewModel: RewindScoreViewModel)
     
 }
 
@@ -35,7 +35,7 @@ class RewindScoreViewModel: NSObject {
         var end = selectedMatchScoreIndex
         while (end > 0) {
             self.match.revertLastScore()
-            end--
+            end -= 1
         }
         self.delegate?.matchScoreWasRewound(self)
     }

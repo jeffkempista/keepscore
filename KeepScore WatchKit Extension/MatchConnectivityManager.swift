@@ -4,12 +4,12 @@ import KeepScoreKit
 
 class MatchConnectivityManager: NSObject {
 
-    func saveMatch(match: Match) {
+    func saveMatch(_ match: Match) {
         
-        if WCSession.defaultSession().reachable {
+        if WCSession.default().isReachable {
             let requestValues = match.dictionary()
             
-            let session = WCSession.defaultSession()
+            let session = WCSession.default()
             session.transferUserInfo(requestValues)
         }
         

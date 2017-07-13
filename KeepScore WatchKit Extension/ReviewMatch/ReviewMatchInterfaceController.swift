@@ -11,8 +11,8 @@ class ReviewMatchInterfaceController: WKInterfaceController {
 
     var reviewMatchViewModel: ReviewMatchViewModel?
     
-    override func awakeWithContext(context: AnyObject?) {
-        super.awakeWithContext(context)
+    override func awake(withContext context: Any?) {
+        super.awake(withContext: context)
         
         // Configure interface objects here.
         if let reviewMatchViewModel = context as? ReviewMatchViewModel {
@@ -41,15 +41,15 @@ class ReviewMatchInterfaceController: WKInterfaceController {
     @IBAction func saveButtonTapped() {
         self.reviewMatchViewModel?.saveMatch()
         
-        let alert = WKAlertAction(title: "OK", style: .Default) {
-            self.dismissController()
+        let alert = WKAlertAction(title: "OK", style: .default) {
+            self.dismiss()
         }
-        presentAlertControllerWithTitle("Match Saved", message: "Huzzah!", preferredStyle: .Alert, actions: [alert])
+        presentAlert(withTitle: "Match Saved", message: "Huzzah!", preferredStyle: .alert, actions: [alert])
     }
     
     @IBAction func discardButtonTapped() {
         self.reviewMatchViewModel?.discardMatch()
-        dismissController()
+        dismiss()
     }
     
 }

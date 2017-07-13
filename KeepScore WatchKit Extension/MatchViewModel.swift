@@ -7,7 +7,7 @@ class MatchViewModel: NSObject, WorkoutSessionManagerDelegate, WorkoutSessionMan
     var match: Match?
     var useHealthKit = false
     weak var workoutSessionManager: WorkoutSessionManager?
-    dynamic var startDate: NSDate?
+    dynamic var startDate: Date?
     dynamic var distanceTravelled: Double = 0.0
     dynamic var caloriesBurned: Double = 0.0
     dynamic var heartRate: Double = 0.0
@@ -54,7 +54,7 @@ class MatchViewModel: NSObject, WorkoutSessionManagerDelegate, WorkoutSessionMan
         if let workoutSessionManager = workoutSessionManager {
             workoutSessionManager.startWorkout()
         } else {
-            startDate = NSDate()
+            startDate = Date()
         }
     }
     
@@ -67,13 +67,13 @@ class MatchViewModel: NSObject, WorkoutSessionManagerDelegate, WorkoutSessionMan
     
     // MARK: Workout Session Manager Delegate
     
-    func workoutSession(workoutSession: HKWorkoutSession, didChangeToState toState: HKWorkoutSessionState, fromState: HKWorkoutSessionState, date: NSDate) {
+    func workoutSession(_ workoutSession: HKWorkoutSession, didChangeTo toState: HKWorkoutSessionState, from fromState: HKWorkoutSessionState, date: Date) {
         
-        dispatch_async(dispatch_get_main_queue()) { [weak self] in
+        DispatchQueue.main.async { [weak self] in
             switch toState {
-            case .Running:
+            case .running:
                 self?.workoutSessionManager?.workoutDidStart(date)
-            case .Ended:
+            case .ended:
                 self?.workoutSessionManager?.workoutDidEnd(date)
             default:
                 NSLog("Unexpected workout session state \(toState)")
@@ -81,27 +81,27 @@ class MatchViewModel: NSObject, WorkoutSessionManagerDelegate, WorkoutSessionMan
         }
     }
     
-    func workoutSession(workoutSession: HKWorkoutSession, didFailWithError error: NSError) {
+    func workoutSession(_ workoutSession: HKWorkoutSession, didFailWithError error: Error) {
         
     }
     
-    func workoutSessionManager(workoutSessionManager: WorkoutSessionManager, didStartWorkoutWithDate startDate: NSDate) {
+    func workoutSessionManager(_ workoutSessionManager: WorkoutSessionManager, didStartWorkoutWithDate startDate: Date) {
         self.startDate = startDate
     }
     
-    func workoutSessionManager(workoutSessionManager: WorkoutSessionManager, didStopWorkoutWithDate endDate: NSDate) {
+    func workoutSessionManager(_ workoutSessionManager: WorkoutSessionManager, didStopWorkoutWithDate endDate: Date) {
     }
     
-    func workoutSessionManager(workoutSessionManager: WorkoutSessionManager, didUpdateActiveEnergyQuantity activeEnergyQuantity: HKQuantity) {
-        caloriesBurned = activeEnergyQuantity.doubleValueForUnit(workoutSessionManager.energyUnit)
+    func workoutSessionManager(_ workoutSessionManager: WorkoutSessionManager, didUpdateActiveEnergyQuantity activeEnergyQuantity: HKQuantity) {
+        caloriesBurned = activeEnergyQuantity.doubleValue(for: workoutSessionManager.energyUnit)
     }
     
-    func workoutSessionManager(workoutSessionManager: WorkoutSessionManager, didUpdateDistanceQuantity distanceQuantity: HKQuantity) {
-        distanceTravelled = distanceQuantity.doubleValueForUnit(workoutSessionManager.distanceUnit)
+    func workoutSessionManager(_ workoutSessionManager: WorkoutSessionManager, didUpdateDistanceQuantity distanceQuantity: HKQuantity) {
+        distanceTravelled = distanceQuantity.doubleValue(for: workoutSessionManager.distanceUnit)
     }
     
-    func workoutSessionManager(workoutSessionManager: WorkoutSessionManager, didUpdateHeartRateSample heartRateSample: HKQuantitySample) {
-        heartRate = heartRateSample.quantity.doubleValueForUnit(workoutSessionManager.countPerMinuteUnit)
+    func workoutSessionManager(_ workoutSessionManager: WorkoutSessionManager, didUpdateHeartRateSample heartRateSample: HKQuantitySample) {
+        heartRate = heartRateSample.quantity.doubleValue(for: workoutSessionManager.countPerMinuteUnit)
     }
     
 }

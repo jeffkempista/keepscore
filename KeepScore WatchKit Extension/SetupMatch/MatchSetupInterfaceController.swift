@@ -5,15 +5,15 @@ import KeepScoreKit
 
 class MatchSetupInterfaceController: WKInterfaceController {
 
-    private var useHealthKitContext = 0
+    fileprivate var useHealthKitContext = 0
     
     @IBOutlet var useHealthKitSwitch: WKInterfaceSwitch!
     @IBOutlet var startButton: WKInterfaceButton!
     
     var matchSetupViewModel: MatchSetupViewModel?
     
-    override func awakeWithContext(context: AnyObject?) {
-        super.awakeWithContext(context)
+    override func awake(withContext context: Any?) {
+        super.awake(withContext: context)
         
         // Configure interface objects here.
         if let matchSetupViewModel = context as? MatchSetupViewModel {
@@ -28,7 +28,7 @@ class MatchSetupInterfaceController: WKInterfaceController {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
     
-        matchSetupViewModel?.addObserver(self, forKeyPath: "useHealthKit", options: .New, context: &useHealthKitContext)
+        matchSetupViewModel?.addObserver(self, forKeyPath: "useHealthKit", options: .new, context: &useHealthKitContext)
     }
 
     override func didDeactivate() {
@@ -38,18 +38,18 @@ class MatchSetupInterfaceController: WKInterfaceController {
         matchSetupViewModel?.removeObserver(self, forKeyPath: "useHealthKit", context: &useHealthKitContext)
     }
     
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if context == &useHealthKitContext {
-            if let newValue = change?[NSKeyValueChangeNewKey] as? Bool, let matchSetupViewModel = matchSetupViewModel {
+            if let newValue = change?[NSKeyValueChangeKey.newKey] as? Bool, let matchSetupViewModel = matchSetupViewModel {
                 useHealthKitSwitch.setOn(newValue)
                 useHealthKitSwitch.setEnabled(matchSetupViewModel.canSelectHealthKit)
             }
         } else {
-            super.observeValueForKeyPath(keyPath, ofObject: object, change: change, context: context)
+            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
         }
     }
     
-    @IBAction func useHealthKitSwitchChanged(value: Bool) {
+    @IBAction func useHealthKitSwitchChanged(_ value: Bool) {
         if let matchSetupViewModel = self.matchSetupViewModel {
             matchSetupViewModel.useHealthKit = value
         }

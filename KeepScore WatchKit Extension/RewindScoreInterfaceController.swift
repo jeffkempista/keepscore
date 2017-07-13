@@ -7,8 +7,8 @@ class RewindScoreInterfaceController: WKInterfaceController {
     
     var rewindScoreViewModel: RewindScoreViewModel?
     
-    override func awakeWithContext(context: AnyObject?) {
-        super.awakeWithContext(context)
+    override func awake(withContext context: Any?) {
+        super.awake(withContext: context)
         
         // Configure interface objects here.
         if let rewindScoreViewModel = context as? RewindScoreViewModel {
@@ -29,14 +29,14 @@ class RewindScoreInterfaceController: WKInterfaceController {
         }
     }
     
-    @IBAction func matchScorePickerItemSelected(value: Int) {
-        WKInterfaceDevice.currentDevice().playHaptic(.Click)
+    @IBAction func matchScorePickerItemSelected(_ value: Int) {
+        WKInterfaceDevice.current().play(.click)
         rewindScoreViewModel?.selectedMatchScoreIndex = value
     }
 
     @IBAction func saveButtonTapped() {
         rewindScoreViewModel?.rewindToSelectedMatchScoreIndex()
-        dismissController()
+        dismiss()
     }
     
 }

@@ -3,7 +3,7 @@ import HealthKit
 import KeepScoreKit
 
 protocol MatchSetupDelegate: class {
-    func matchSetupDidComplete(match: Match, useHealthKit: Bool)
+    func matchSetupDidComplete(_ match: Match, useHealthKit: Bool)
 }
 
 private let useHealthKitKey = "useHealthKit"
@@ -18,53 +18,53 @@ class MatchSetupViewModel: NSObject {
     init(activityType: ActivityType, healthStore: HKHealthStore?) {
         self.activityType = activityType
         self.healthStore = healthStore
-        self.useHealthKit = NSUserDefaults.standardUserDefaults().boolForKey(useHealthKitKey)
+        self.useHealthKit = UserDefaults.standard.bool(forKey: useHealthKitKey)
     }
     
     dynamic var useHealthKit = false {
         didSet {
             if useHealthKit {
-                let hkAuthorizationStatus = healthStore?.authorizationStatusForType(HKObjectType.workoutType())
-                if (hkAuthorizationStatus == .SharingDenied) {
+                let hkAuthorizationStatus = healthStore?.authorizationStatus(for: HKObjectType.workoutType())
+                if (hkAuthorizationStatus == .sharingDenied) {
                     useHealthKit = false
-                    NSUserDefaults.standardUserDefaults().setBool(false, forKey: useHealthKitKey)
-                    NSUserDefaults.standardUserDefaults().synchronize()
-                } else if (hkAuthorizationStatus == .NotDetermined) {
+                    UserDefaults.standard.set(false, forKey: useHealthKitKey)
+                    UserDefaults.standard.synchronize()
+                } else if (hkAuthorizationStatus == .notDetermined) {
                     
                     let typesToShare = Set([
                         HKObjectType.workoutType(),
-                        HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierActiveEnergyBurned)!,
-                        HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDistanceWalkingRunning)!,
-                        HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierHeartRate)!
+                        HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.activeEnergyBurned)!,
+                        HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.distanceWalkingRunning)!,
+                        HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.heartRate)!
                         ])
                     let typesToRead = Set([
-                        HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierActiveEnergyBurned)!,
-                        HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDistanceWalkingRunning)!,
-                        HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierHeartRate)!
+                        HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.activeEnergyBurned)!,
+                        HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.distanceWalkingRunning)!,
+                        HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.heartRate)!
                         ])
                     
-                    self.healthStore?.requestAuthorizationToShareTypes(typesToShare, readTypes: typesToRead) { [weak self] success, error in
-                        if let weakSelf = self where success {
-                            let newAuthorizationStatus = weakSelf.healthStore?.authorizationStatusForType(HKObjectType.workoutType())
-                            if (newAuthorizationStatus == HKAuthorizationStatus.SharingDenied) {
+                    self.healthStore?.requestAuthorization(toShare: typesToShare, read: typesToRead) { [weak self] success, error in
+                        if let weakSelf = self, success {
+                            let newAuthorizationStatus = weakSelf.healthStore?.authorizationStatus(for: HKObjectType.workoutType())
+                            if (newAuthorizationStatus == HKAuthorizationStatus.sharingDenied) {
                                 weakSelf.useHealthKit = false
-                                NSUserDefaults.standardUserDefaults().setBool(false, forKey: useHealthKitKey)
-                                NSUserDefaults.standardUserDefaults().synchronize()
+                                UserDefaults.standard.set(false, forKey: useHealthKitKey)
+                                UserDefaults.standard.synchronize()
                             }
                         }
                         if let error = error {
-                            debugPrint(error.debugDescription)
+                            debugPrint(error.localizedDescription)
                         }
                     }
                 }
             }
-            NSUserDefaults.standardUserDefaults().setBool(true, forKey: useHealthKitKey)
+            UserDefaults.standard.set(true, forKey: useHealthKitKey)
         }
     }
     
     dynamic var canSelectHealthKit: Bool {
         get {
-            return healthStore?.authorizationStatusForType(HKObjectType.workoutType()) != .SharingDenied
+            return healthStore?.authorizationStatus(for: HKObjectType.workoutType()) != .sharingDenied
         }
     }
     

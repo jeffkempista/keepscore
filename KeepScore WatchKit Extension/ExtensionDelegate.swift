@@ -3,11 +3,15 @@ import WatchConnectivity
 
 class ExtensionDelegate: NSObject, WKExtensionDelegate, WCSessionDelegate {
 
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+        
+    }
+    
     func applicationDidFinishLaunching() {
         if (WCSession.isSupported()) {
-            let session = WCSession.defaultSession()
+            let session = WCSession.default()
             session.delegate = self
-            session.activateSession()
+            session.activate()
         }
     }
 

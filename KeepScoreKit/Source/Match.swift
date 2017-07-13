@@ -1,20 +1,20 @@
 import Foundation
 import RealmSwift
 
-public class Match: Object {
+open class Match: Object {
     
-    dynamic public var id = NSUUID().UUIDString
-    dynamic public var activityType = ActivityType.Other.rawValue
-    dynamic public var homeTeamName = "Home"
-    dynamic public var homeTeamScore = 0
-    dynamic public var awayTeamName = "Away"
-    dynamic public var awayTeamScore = 0
-    dynamic public var startedAt = NSDate()
-    dynamic public var endedAt: NSDate?
+    dynamic open var id = UUID().uuidString
+    dynamic open var activityType = ActivityType.Other.rawValue
+    dynamic open var homeTeamName = "Home"
+    dynamic open var homeTeamScore = 0
+    dynamic open var awayTeamName = "Away"
+    dynamic open var awayTeamScore = 0
+    dynamic open var startedAt = Date()
+    dynamic open var endedAt: Date?
     
     var matchScoreList = List<MatchScore>()
 
-    public var matchScores: [MatchScore] {
+    open var matchScores: [MatchScore] {
         get {
             var scores = [MatchScore]()
             for matchScore in matchScoreList {
@@ -24,7 +24,7 @@ public class Match: Object {
         }
     }
     
-    override public static func primaryKey() -> String? {
+    override open static func primaryKey() -> String? {
         return "id"
     }
     
@@ -33,30 +33,30 @@ public class Match: Object {
         self.activityType = activityType.rawValue
         self.homeTeamName = homeTeamName
         self.awayTeamName = awayTeamName
-        self.matchScoreList.insert(MatchScore(homeTeamScore: 0, awayTeamScore: 0, createdAt: NSDate()), atIndex: 0)
+        self.matchScoreList.insert(MatchScore(homeTeamScore: 0, awayTeamScore: 0, createdAt: Date()), at: 0)
         self.homeTeamScore = 0
         self.awayTeamScore = 0
     }
     
-    public func incrementHomeTeamScore() {
+    open func incrementHomeTeamScore() {
         if let lastScore = matchScoreList.first {
             let newHomeTeamScore = lastScore.homeTeamScore + 1
-            let newScore = MatchScore(homeTeamScore: newHomeTeamScore, awayTeamScore: lastScore.awayTeamScore, createdAt: NSDate())
-            matchScoreList.insert(newScore, atIndex: 0)
+            let newScore = MatchScore(homeTeamScore: newHomeTeamScore, awayTeamScore: lastScore.awayTeamScore, createdAt: Date())
+            matchScoreList.insert(newScore, at: 0)
             homeTeamScore = newScore.homeTeamScore
         }
     }
     
-    public func incrementAwayTeamScore() {
+    open func incrementAwayTeamScore() {
         if let lastScore = matchScoreList.first {
             let newAwayTeamScore = lastScore.awayTeamScore + 1
-            let newScore = MatchScore(homeTeamScore: lastScore.homeTeamScore, awayTeamScore: newAwayTeamScore, createdAt: NSDate())
-            matchScoreList.insert(newScore, atIndex: 0)
+            let newScore = MatchScore(homeTeamScore: lastScore.homeTeamScore, awayTeamScore: newAwayTeamScore, createdAt: Date())
+            matchScoreList.insert(newScore, at: 0)
             awayTeamScore = newScore.awayTeamScore
         }
     }
     
-    public func revertLastScore() {
+    open func revertLastScore() {
         if (matchScoreList.count != 1) {
             matchScoreList.removeFirst()
             if let newScore = matchScoreList.first {
@@ -66,46 +66,46 @@ public class Match: Object {
         }
     }
     
-    public func reset() {
-        let newScore = MatchScore(homeTeamScore: 0, awayTeamScore: 0, createdAt: NSDate())
-        matchScoreList.insert(newScore, atIndex: 0)
+    open func reset() {
+        let newScore = MatchScore(homeTeamScore: 0, awayTeamScore: 0, createdAt: Date())
+        matchScoreList.insert(newScore, at: 0)
         self.homeTeamScore = 0
         self.awayTeamScore = 0
     }
     
-    public func dictionary() -> [String: AnyObject] {
+    open func dictionary() -> [String: AnyObject] {
         
         var dictionary = [String: AnyObject]()
         
-        dictionary["id"] = self.id
-        dictionary["type"] = self.activityType
-        dictionary["homeTeamName"] = self.homeTeamName
-        dictionary["homeTeamScore"] = self.homeTeamScore
-        dictionary["awayTeamName"] = self.awayTeamName
-        dictionary["awayTeamScore"] = self.awayTeamScore
-        dictionary["startedAt"] = self.startedAt.timeIntervalSince1970
+        dictionary["id"] = self.id as AnyObject
+        dictionary["type"] = self.activityType as AnyObject
+        dictionary["homeTeamName"] = self.homeTeamName as AnyObject
+        dictionary["homeTeamScore"] = self.homeTeamScore as AnyObject
+        dictionary["awayTeamName"] = self.awayTeamName as AnyObject
+        dictionary["awayTeamScore"] = self.awayTeamScore as AnyObject
+        dictionary["startedAt"] = self.startedAt.timeIntervalSince1970 as AnyObject
         if let endedAtDate = self.endedAt {
-            dictionary["endedAt"] = endedAtDate.timeIntervalSince1970
+            dictionary["endedAt"] = endedAtDate.timeIntervalSince1970 as AnyObject
         }
-        dictionary["matchScoreList"] = self.matchScoreList.map({ (matchScore: MatchScore) -> [String: AnyObject] in
+        dictionary["matchScoreList"] = self.matchScoreList.map { (matchScore) -> [String: AnyObject] in
             return matchScore.dictionary()
-        })
+        } as AnyObject
         
         return dictionary
     }
     
-    public static func fromDictionary(dictionary: [String: AnyObject]) throws -> Match {
+    open static func fromDictionary(_ dictionary: [String: AnyObject]) throws -> Match {
         
-        guard let id = dictionary["id"] as? String, let type = dictionary["type"] as? String, let homeTeamName = dictionary["homeTeamName"] as? String, let homeTeamScore = dictionary["homeTeamScore"] as? Int, let awayTeamName = dictionary["awayTeamName"] as? String, let awayTeamScore = dictionary["awayTeamScore"] as? Int, let startedAt = dictionary["startedAt"] as? NSTimeInterval else {
-            throw MatchError.IncompleteMatchInfo
+        guard let id = dictionary["id"] as? String, let type = dictionary["type"] as? String, let homeTeamName = dictionary["homeTeamName"] as? String, let homeTeamScore = dictionary["homeTeamScore"] as? Int, let awayTeamName = dictionary["awayTeamName"] as? String, let awayTeamScore = dictionary["awayTeamScore"] as? Int, let startedAt = dictionary["startedAt"] as? TimeInterval else {
+            throw MatchError.incompleteMatchInfo
         }
         let match = Match(activityType: ActivityType(rawValue: type)!, homeTeamName: homeTeamName, awayTeamName: awayTeamName)
         match.id = id
         match.homeTeamScore = homeTeamScore
         match.awayTeamScore = awayTeamScore
-        match.startedAt = NSDate(timeIntervalSince1970: startedAt)
-        if let endedAt = dictionary["endedAt"] as? NSTimeInterval {
-            match.endedAt = NSDate(timeIntervalSince1970: endedAt)
+        match.startedAt = Date(timeIntervalSince1970: startedAt)
+        if let endedAt = dictionary["endedAt"] as? TimeInterval {
+            match.endedAt = Date(timeIntervalSince1970: endedAt)
         }
         if let matchScoreList = dictionary["matchScoreList"] as? [[String: AnyObject]] {
             
@@ -119,13 +119,13 @@ public class Match: Object {
     
 }
 
-public class MatchScore: Object {
+open class MatchScore: Object {
     
-    dynamic public var homeTeamScore: Int = 0
-    dynamic public var awayTeamScore: Int = 0
-    dynamic public var createdAt = NSDate()
+    dynamic open var homeTeamScore: Int = 0
+    dynamic open var awayTeamScore: Int = 0
+    dynamic open var createdAt = Date()
     
-    convenience init(homeTeamScore: Int, awayTeamScore: Int, createdAt: NSDate) {
+    convenience init(homeTeamScore: Int, awayTeamScore: Int, createdAt: Date) {
         self.init()
         self.homeTeamScore = homeTeamScore
         self.awayTeamScore = awayTeamScore
@@ -136,23 +136,23 @@ public class MatchScore: Object {
         
         var dictionary = [String: AnyObject]()
         
-        dictionary["homeTeamScore"] = self.homeTeamScore
-        dictionary["awayTeamScore"] = self.awayTeamScore
-        dictionary["createdAt"] = self.createdAt.timeIntervalSince1970
+        dictionary["homeTeamScore"] = self.homeTeamScore as AnyObject
+        dictionary["awayTeamScore"] = self.awayTeamScore as AnyObject
+        dictionary["createdAt"] = self.createdAt.timeIntervalSince1970 as AnyObject
         
         return dictionary
     }
     
-    static func fromDictionary(dictionary: [String: AnyObject]) throws -> MatchScore {
+    static func fromDictionary(_ dictionary: [String: AnyObject]) throws -> MatchScore {
         
-        guard let homeTeamScore = dictionary["homeTeamScore"] as? Int, let awayTeamScore = dictionary["awayTeamScore"] as? Int, let createdAt = dictionary["createdAt"] as? NSTimeInterval else {
-            throw MatchError.IncompleteMatchInfo
+        guard let homeTeamScore = dictionary["homeTeamScore"] as? Int, let awayTeamScore = dictionary["awayTeamScore"] as? Int, let createdAt = dictionary["createdAt"] as? TimeInterval else {
+            throw MatchError.incompleteMatchInfo
         }
-        return MatchScore(homeTeamScore: homeTeamScore, awayTeamScore: awayTeamScore, createdAt: NSDate(timeIntervalSince1970: createdAt))
+        return MatchScore(homeTeamScore: homeTeamScore, awayTeamScore: awayTeamScore, createdAt: Date(timeIntervalSince1970: createdAt))
     }
     
 }
 
-public enum MatchError: ErrorType {
-    case IncompleteMatchInfo
+public enum MatchError: Error {
+    case incompleteMatchInfo
 }

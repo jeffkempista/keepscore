@@ -3,7 +3,7 @@ import KeepScoreKit
 
 class ActivitySelectionViewModel: NSObject {
 
-    private let _supportedActivities: [ActivityType] = [.Baseball, .Basketball, .Hockey, .Soccer, .TableTennis, .Volleyball, .Other]
+    fileprivate let _supportedActivities: [ActivityType] = [.Baseball, .Basketball, .Hockey, .Soccer, .TableTennis, .Volleyball, .Other]
  
     var selectedActivityType = ActivityType.Other
     

@@ -16,18 +16,18 @@ class ScoreOrActivitySelectionInterfaceController: WKInterfaceController, MatchS
     
     let healthStore = HKHealthStore()
     
-    var startDateContext = 0
-    var heartRateContext = 0
-    var distanceTravelledContext = 0
-    var caloriesBurnedContext = 0
+    var startDateKeyPath = "startDate"
+    var heartRateKeyPath = "heartRate"
+    var distanceTravelledKeyPath = "distanceTravelled"
+    var caloriesBurnedKeyPath = "caloriesBurned"
     var activitySelectionViewModel = ActivitySelectionViewModel()
     var matchViewModel: MatchViewModel?
     var workoutSession: HKWorkoutSession?
     var workoutSessionManager: WorkoutSessionManager?
     var matchScoreWasRewound = false
     
-    override func awakeWithContext(context: AnyObject?) {
-        super.awakeWithContext(context)
+    override func awake(withContext context: Any?) {
+        super.awake(withContext: context)
         
         setGroupVisibility()
     }
@@ -39,7 +39,7 @@ class ScoreOrActivitySelectionInterfaceController: WKInterfaceController, MatchS
         if let matchViewModel = matchViewModel {
             addObservers()
             
-            if let homeTeamScore = matchViewModel.match?.homeTeamScore, let awayTeamScore = matchViewModel.match?.awayTeamScore where matchScoreWasRewound {
+            if let homeTeamScore = matchViewModel.match?.homeTeamScore, let awayTeamScore = matchViewModel.match?.awayTeamScore, matchScoreWasRewound {
                 self.homeTeamScoreButton.setTitle("\(homeTeamScore)")
                 self.awayTeamScoreButton.setTitle("\(awayTeamScore)")
             }
@@ -54,7 +54,7 @@ class ScoreOrActivitySelectionInterfaceController: WKInterfaceController, MatchS
         }
     }
     
-    private func setGroupVisibility() {
+    fileprivate func setGroupVisibility() {
         if let _ = matchViewModel {
             scoreGroup.setHidden(false)
             activityGroup.setHidden(true)
@@ -67,26 +67,26 @@ class ScoreOrActivitySelectionInterfaceController: WKInterfaceController, MatchS
         updateMenu()
     }
 
-    private func loadSupportedActivities() {
+    fileprivate func loadSupportedActivities() {
         let supportedActivities = activitySelectionViewModel.supportedActivities
         activityTable.setNumberOfRows(supportedActivities.count, withRowType: "ActivityTableRowController")
         
-        for (index, activityType) in supportedActivities.enumerate() {
-            let row = activityTable.rowControllerAtIndex(index) as! ActivityTableRowController
+        for (index, activityType) in supportedActivities.enumerated() {
+            let row = activityTable.rowController(at: index) as! ActivityTableRowController
             row.titleLabel.setText(activityType.getTitle())
         }
     }
     
-    private func addObservers() {
+    fileprivate func addObservers() {
         if let matchViewModel = matchViewModel {
-            matchViewModel.addObserver(self, forKeyPath: "startDate", options: [.Initial, .New], context: &startDateContext)
-            matchViewModel.addObserver(self, forKeyPath: "distanceTravelled", options: [.Initial, .New], context: &distanceTravelledContext)
-            matchViewModel.addObserver(self, forKeyPath: "heartRate", options: [.Initial, .New], context: &heartRateContext)
-            matchViewModel.addObserver(self, forKeyPath: "caloriesBurned", options: [.Initial, .New], context: &caloriesBurnedContext)
+            matchViewModel.addObserver(self, forKeyPath: startDateKeyPath, options: [.initial, .new], context: nil)
+            matchViewModel.addObserver(self, forKeyPath: distanceTravelledKeyPath, options: [.initial, .new], context: nil)
+            matchViewModel.addObserver(self, forKeyPath: heartRateKeyPath, options: [.initial, .new], context: nil)
+            matchViewModel.addObserver(self, forKeyPath: caloriesBurnedKeyPath, options: [.initial, .new], context: nil)
         }
     }
     
-    private func removeObservers() {
+    fileprivate func removeObservers() {
         if let matchViewModel = matchViewModel {
             matchViewModel.removeObserver(self, forKeyPath: "startDate")
             matchViewModel.removeObserver(self, forKeyPath: "distanceTravelled")
@@ -95,15 +95,15 @@ class ScoreOrActivitySelectionInterfaceController: WKInterfaceController, MatchS
         }
     }
     
-    private func updateMenu() {
+    fileprivate func updateMenu() {
         self.clearAllMenuItems()
         if let _ = matchViewModel {
-            self.addMenuItemWithItemIcon(.Decline, title: "End", action: "endMenuItemTapped")
-            self.addMenuItemWithItemIcon(.Repeat, title: "Rewind Score", action: "rewindScoreItemTapped")
+            self.addMenuItem(with: .decline, title: "End", action: #selector(ScoreOrActivitySelectionInterfaceController.endMenuItemTapped))
+            self.addMenuItem(with: .repeat, title: "Rewind Score", action: #selector(ScoreOrActivitySelectionInterfaceController.rewindScoreItemTapped))
         }
     }
     
-    override func contextForSegueWithIdentifier(segueIdentifier: String, inTable table: WKInterfaceTable, rowIndex: Int) -> AnyObject? {
+    override func contextForSegue(withIdentifier segueIdentifier: String, in table: WKInterfaceTable, rowIndex: Int) -> Any? {
         
         resetMatchInfo()
         
@@ -124,53 +124,65 @@ class ScoreOrActivitySelectionInterfaceController: WKInterfaceController, MatchS
     
     // MARK: KVO
     
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
-        switch (context) {
-        case &distanceTravelledContext:
-            if let newValue = change?[NSKeyValueChangeNewKey] as? Double where newValue > 0.0 {
-                debugPrint("Distance travelled updated: \(matchViewModel?.distanceTravelledForDisplay)")
-                distanceTravelledLabel.setText(matchViewModel!.distanceTravelledForDisplay)
-                distanceTravelledLabel.setHidden(false)
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if let keyPath = keyPath {
+            switch (keyPath) {
+            case distanceTravelledKeyPath:
+                if let newValue = change?[NSKeyValueChangeKey.newKey] as? Double, newValue > 0.0 {
+                    debugPrint("Distance travelled updated: \(matchViewModel?.distanceTravelledForDisplay ?? "")")
+                    distanceTravelledLabel.setText(matchViewModel!.distanceTravelledForDisplay)
+                    distanceTravelledLabel.setHidden(false)
+                }
+            case heartRateKeyPath:
+                if let newValue = change?[NSKeyValueChangeKey.newKey] as? Double, newValue > 0.0 {
+                    debugPrint("Heart Rate updated: \(matchViewModel!.heartRateForDisplay)")
+                    heartRateLabel.setText(matchViewModel!.heartRateForDisplay)
+                    heartRateLabel.setHidden(false)
+                }
+            case caloriesBurnedKeyPath:
+                if let newValue = change?[NSKeyValueChangeKey.newKey] as? Double, newValue > 0.0 {
+                    debugPrint("Calories Burned updated: \(matchViewModel?.caloriesBurnedForDisplay ?? "")")
+                }
+            case startDateKeyPath:
+                if let newValue = change?[NSKeyValueChangeKey.newKey] as? Date {
+                    matchRunningTimeTimer.setDate(newValue)
+                    matchRunningTimeTimer.setHidden(false)
+                    matchRunningTimeTimer.start()
+                }
+            default:
+                break;
             }
-        case &heartRateContext:
-            if let newValue = change?[NSKeyValueChangeNewKey] as? Double where newValue > 0.0 {
-                debugPrint("Heart Rate updated: \(matchViewModel!.heartRateForDisplay)")
-                heartRateLabel.setText(matchViewModel!.heartRateForDisplay)
-                heartRateLabel.setHidden(false)
-            }
-        case &caloriesBurnedContext:
-            if let newValue = change?[NSKeyValueChangeNewKey] as? Double where newValue > 0.0 {
-                debugPrint("Calories Burned updated: \(matchViewModel?.caloriesBurnedForDisplay)")
-            }
-        case &startDateContext:
-            if let newValue = change?[NSKeyValueChangeNewKey] as? NSDate {
-                matchRunningTimeTimer.setDate(newValue)
-                matchRunningTimeTimer.setHidden(false)
-                matchRunningTimeTimer.start()
-            }
-        default:
-            break;
         }
     }
     
     // MARK: Match Setup Delegate
     
-    func matchSetupDidComplete(match: Match, useHealthKit: Bool) {
+    func matchSetupDidComplete(_ match: Match, useHealthKit: Bool) {
         createMatchViewModel(match, useHealthKit: useHealthKit)
         if let matchViewModel = matchViewModel, let startDate = matchViewModel.startDate {
-            self.matchRunningTimeTimer.setDate(startDate)
+            self.matchRunningTimeTimer.setDate(startDate as Date)
             self.matchRunningTimeTimer.setHidden(false)
         }
         setGroupVisibility()
     }
     
-    func createMatchViewModel(match: Match, useHealthKit: Bool) {
+    func createMatchViewModel(_ match: Match, useHealthKit: Bool) {
         guard useHealthKit else {
             self.matchViewModel = MatchViewModel(match: match, useHealthKit: useHealthKit, workoutSessionManager: nil)
             return
         }
         let activityType = ActivityType(rawValue: match.activityType)!
-        workoutSession = HKWorkoutSession(activityType: activityType.getWorkoutActivityType(), locationType: .Unknown)
+        
+        let configuration = HKWorkoutConfiguration()
+        configuration.activityType = activityType.getWorkoutActivityType()
+        configuration.locationType = .unknown
+        do {
+            try workoutSession = HKWorkoutSession(configuration: configuration)
+        } catch {
+            debugPrint(error)
+            return
+        }
+        
         workoutSessionManager = WorkoutSessionManager(healthStore: healthStore, workoutActivityType: activityType.getWorkoutActivityType(), workoutSession: workoutSession!)
         matchViewModel = MatchViewModel(match: match, useHealthKit: useHealthKit, workoutSessionManager: workoutSessionManager!)
 
@@ -182,7 +194,7 @@ class ScoreOrActivitySelectionInterfaceController: WKInterfaceController, MatchS
     
     // MARK: Rewind Score Delegate {
     
-    func matchScoreWasRewound(rewindScoreViewModel: RewindScoreViewModel) {
+    func matchScoreWasRewound(_ rewindScoreViewModel: RewindScoreViewModel) {
         if let matchViewModel = matchViewModel {
             matchViewModel.match = rewindScoreViewModel.match
             matchScoreWasRewound = true
@@ -191,14 +203,14 @@ class ScoreOrActivitySelectionInterfaceController: WKInterfaceController, MatchS
     
     // MARK: Review Match Delegate
     
-    func matchReviewDidSave(match: Match) {
+    func matchReviewDidSave(_ match: Match) {
         self.matchViewModel = nil
         self.workoutSessionManager = nil
         self.workoutSession = nil
         setGroupVisibility()
     }
     
-    func matchReviewDidDiscard(match: Match) {
+    func matchReviewDidDiscard(_ match: Match) {
         self.matchViewModel = nil
         self.workoutSessionManager = nil
         self.workoutSession = nil
@@ -208,13 +220,13 @@ class ScoreOrActivitySelectionInterfaceController: WKInterfaceController, MatchS
     // MARK: IB Actions
     
     @IBAction func homeTeamScoreButtonTapped() {
-        WKInterfaceDevice.currentDevice().playHaptic(.DirectionUp)
+        WKInterfaceDevice.current().play(.directionUp)
         let newScore = matchViewModel!.incrementHomeTeamScore()
         homeTeamScoreButton.setTitle("\(newScore)")
     }
     
     @IBAction func awayTeamScoreButtonTapped() {
-        WKInterfaceDevice.currentDevice().playHaptic(.DirectionDown)
+        WKInterfaceDevice.current().play(.directionDown)
         let newScore = matchViewModel!.incrementAwayTeamScore()
         awayTeamScoreButton.setTitle("\(newScore)")
     }
@@ -224,7 +236,7 @@ class ScoreOrActivitySelectionInterfaceController: WKInterfaceController, MatchS
         if let matchViewModel = matchViewModel, let match = matchViewModel.match {
             let rewindScoreViewModel = RewindScoreViewModel(match: match)
             rewindScoreViewModel.delegate = self
-            presentControllerWithName("RewindScoreInterfaceController", context: rewindScoreViewModel)
+            presentController(withName: "RewindScoreInterfaceController", context: rewindScoreViewModel)
         }
     }
     
@@ -235,7 +247,7 @@ class ScoreOrActivitySelectionInterfaceController: WKInterfaceController, MatchS
         if let matchViewModel = matchViewModel {
             let reviewMatchViewModel = ReviewMatchViewModel(match: matchViewModel.match!, workoutSessionManager: workoutSessionManager)
             reviewMatchViewModel.delegate = self
-            presentControllerWithName("ReviewMatchInterfaceController", context: reviewMatchViewModel)
+            presentController(withName: "ReviewMatchInterfaceController", context: reviewMatchViewModel)
         }
     }
     

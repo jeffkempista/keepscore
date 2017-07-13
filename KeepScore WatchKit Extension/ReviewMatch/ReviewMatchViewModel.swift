@@ -2,8 +2,8 @@ import Foundation
 import KeepScoreKit
 
 protocol ReviewMatchDelegate: class {
-    func matchReviewDidSave(match: Match)
-    func matchReviewDidDiscard(match: Match)
+    func matchReviewDidSave(_ match: Match)
+    func matchReviewDidDiscard(_ match: Match)
 }
 
 class ReviewMatchViewModel: NSObject, WorkoutSessionManagerDelegate {
@@ -37,9 +37,9 @@ class ReviewMatchViewModel: NSObject, WorkoutSessionManagerDelegate {
     
     // MARK: Workout Session Manager Delegate
     
-    func workoutSessionManager(workoutSessionManager: WorkoutSessionManager, didStartWorkoutWithDate startDate: NSDate) { }
+    func workoutSessionManager(_ workoutSessionManager: WorkoutSessionManager, didStartWorkoutWithDate startDate: Date) { }
     
-    func workoutSessionManager(workoutSessionManager: WorkoutSessionManager, didStopWorkoutWithDate endDate: NSDate) {
+    func workoutSessionManager(_ workoutSessionManager: WorkoutSessionManager, didStopWorkoutWithDate endDate: Date) {
         if (saveWorkout) {
             saveWorkout = false
             workoutSessionManager.saveWorkout()
